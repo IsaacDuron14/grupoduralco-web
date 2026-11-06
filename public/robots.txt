@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://grupoduralco.com/sitemap.xml
+Sitemap: https://www.grupoduralco.com/sitemap.xml
