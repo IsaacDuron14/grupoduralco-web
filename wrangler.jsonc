@@ -1,0 +1,8 @@
+{
+  // Worker que sirve www.grupoduralco.com
+  "name": "muddy-sea-6c08",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./public"
+  }
+}

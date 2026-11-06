@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>html,body{margin:0;height:100%;background:#0B1D30;overflow:hidden}svg{display:block;width:100%;height:100%}</style>
+</head><body><svg id="m"></svg>
+<script>
+const SEDE='340', ACT={'320':'Guatemala','222':'El Salvador','558':'Nicaragua','340':'Honduras'};
+const LABEL={'340':[-86.9,14.75],'320':[-90.6,15.6],'222':[-89.0,13.72],'558':[-85.1,12.75]};
+const svg=d3.select('#m');
+function draw(topo){
+  const W=innerWidth,H=innerHeight; svg.selectAll('*').remove(); svg.attr('viewBox',`0 0 ${W} ${H}`);
+  const all=topojson.feature(topo,topo.objects.countries).features;
+  const focus={type:'FeatureCollection',features:all.filter(f=>ACT[f.id])};
+  const proj=d3.geoMercator().fitExtent([[W*.08,H*.1],[W*.92,H*.9]],focus), path=d3.geoPath(proj);
+  const g=svg.append('g');
+  const grat=d3.geoGraticule().step([2,2]);
+  g.append('path').attr('d',path(grat())).attr('fill','none').attr('stroke','rgba(184,192,198,.08)');
+  g.selectAll('path.c').data(all).join('path').attr('d',path)
+    .attr('fill',d=>d.id===SEDE?'#C99A2E':ACT[d.id]?'#1F4466':'#132A40')
+    .attr('stroke',d=>ACT[d.id]?'#0B1D30':'rgba(184,192,198,.18)').attr('stroke-width',1.2);
+  const hub=proj([-87.2,14.9]);
+  Object.keys(ACT).filter(k=>k!==SEDE).forEach(k=>{
+    const p=proj(LABEL[k]), mx=(hub[0]+p[0])/2, my=Math.min(hub[1],p[1])-Math.abs(hub[0]-p[0])*.25;
+    g.append('path').attr('d',`M${hub}Q${mx},${my} ${p}`).attr('fill','none').attr('stroke','#C99A2E').attr('stroke-width',1.4).attr('stroke-dasharray','4 5').attr('opacity',.85);
+    g.append('circle').attr('cx',p[0]).attr('cy',p[1]).attr('r',5).attr('fill','#F5F7F8');
+  });
+  g.append('circle').attr('cx',hub[0]).attr('cy',hub[1]).attr('r',16).attr('fill','none').attr('stroke','#F5F7F8').attr('stroke-width',1.5);
+  g.append('circle').attr('cx',hub[0]).attr('cy',hub[1]).attr('r',6).attr('fill','#F5F7F8');
+  const fs=Math.max(11,Math.min(15,W/60)); const sede0=k=>k===SEDE?[proj([-86.6,14.9])[0],hub[1]]:proj(LABEL[k]);
+  Object.entries(ACT).forEach(([k,n])=>{
+    const p=sede0(k), sede=k===SEDE, dy=sede?34:k==='222'?22:-14;
+    g.append('text').attr('x',p[0]).attr('y',p[1]+dy).attr('text-anchor','middle').attr('fill',sede?'#071626':'#F5F7F8')
+      .attr('font-family','Manrope,sans-serif').attr('font-weight',700).attr('font-size',sede?fs+3:fs).text(n.toUpperCase());
+    if(sede) g.append('text').attr('x',p[0]).attr('y',p[1]+dy+fs+2).attr('text-anchor','middle').attr('fill','#071626')
+      .attr('font-family','JetBrains Mono,monospace').attr('font-size',fs-3).attr('letter-spacing','.12em').text('SEDE PRINCIPAL');
+  });
+}
+fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json').then(r=>r.json()).then(t=>{draw(t);addEventListener('resize',()=>draw(t));});
+</script></body></html>
