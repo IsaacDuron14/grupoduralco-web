@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url><loc>https://grupoduralco.com/</loc><lastmod>2026-10-05</lastmod><xhtml:link rel="alternate" hreflang="es" href="https://grupoduralco.com/"/><xhtml:link rel="alternate" hreflang="en" href="https://grupoduralco.com/en"/></url>
-  <url><loc>https://grupoduralco.com/en</loc><lastmod>2026-10-05</lastmod><xhtml:link rel="alternate" hreflang="es" href="https://grupoduralco.com/"/><xhtml:link rel="alternate" hreflang="en" href="https://grupoduralco.com/en"/></url>
-  <url><loc>https://grupoduralco.com/nosotros</loc><lastmod>2026-10-05</lastmod><xhtml:link rel="alternate" hreflang="es" href="https://grupoduralco.com/nosotros"/><xhtml:link rel="alternate" hreflang="en" href="https://grupoduralco.com/nosotros-en"/></url>
-  <url><loc>https://grupoduralco.com/nosotros-en</loc><lastmod>2026-10-05</lastmod><xhtml:link rel="alternate" hreflang="es" href="https://grupoduralco.com/nosotros"/><xhtml:link rel="alternate" hreflang="en" href="https://grupoduralco.com/nosotros-en"/></url>
+  <url><loc>https://www.grupoduralco.com/</loc><lastmod>2026-10-05</lastmod><xhtml:link rel="alternate" hreflang="es" href="https://www.grupoduralco.com/"/><xhtml:link rel="alternate" hreflang="en" href="https://www.grupoduralco.com/en"/></url>
+  <url><loc>https://www.grupoduralco.com/en</loc><lastmod>2026-10-05</lastmod><xhtml:link rel="alternate" hreflang="es" href="https://www.grupoduralco.com/"/><xhtml:link rel="alternate" hreflang="en" href="https://www.grupoduralco.com/en"/></url>
+  <url><loc>https://www.grupoduralco.com/nosotros</loc><lastmod>2026-10-05</lastmod><xhtml:link rel="alternate" hreflang="es" href="https://www.grupoduralco.com/nosotros"/><xhtml:link rel="alternate" hreflang="en" href="https://www.grupoduralco.com/nosotros-en"/></url>
+  <url><loc>https://www.grupoduralco.com/nosotros-en</loc><lastmod>2026-10-05</lastmod><xhtml:link rel="alternate" hreflang="es" href="https://www.grupoduralco.com/nosotros"/><xhtml:link rel="alternate" hreflang="en" href="https://www.grupoduralco.com/nosotros-en"/></url>
+  <url><loc>https://www.grupoduralco.com/pernos-de-anclaje</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.grupoduralco.com/estructuras-metalicas</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.grupoduralco.com/mecanizado-cnc</loc><lastmod>2026-11-06</lastmod></url>
 </urlset>
