@@ -521,11 +521,8 @@ a:hover{color:inherit;opacity:.8}
             </div>
           </div>
           <div style="display:flex;flex-direction:column;gap:10px">
-            <button type="submit" value="web" disabled="{{ sending }}" style="height:56px;border:0;background:#C99A2E;color:#071626;font-family:Manrope,sans-serif;font-weight:700;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px" style-hover="background:#E0B447"><span>{{ sendLabel }}</span><span>→</span></button>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px">
-            <button type="submit" value="wa" style="height:52px;border:1px solid #071626;background:transparent;color:#071626;font-family:Manrope,sans-serif;font-weight:700;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px" style-hover="background:#E4E9ED"><span>Send via WhatsApp</span></button>
+            <button type="submit" value="wa" style="height:56px;border:0;background:#25D366;color:#071626;font-family:Manrope,sans-serif;font-weight:700;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px" style-hover="background:#3BE07A"><span>Send via WhatsApp</span><span>→</span></button>
             <button type="submit" value="mail" style="height:52px;border:1px solid #071626;background:transparent;color:#071626;font-family:Manrope,sans-serif;font-weight:700;font-size:15px;cursor:pointer" style-hover="background:#E4E9ED">Send via email</button>
-            </div>
           </div>
         </form>
       </sc-if>
@@ -874,7 +871,7 @@ class Component extends DCLogic {
       doneText: this.state.sentVia === 'web' ? 'We received your project details at ventas@grupoduralco.com.' : ('We opened ' + (this.state.sentVia === 'mail' ? 'your email app' : 'WhatsApp') + ' with your project details. Just press send.'),
       submit: e => {
         e.preventDefault();
-        const via = e.nativeEvent?.submitter?.value || 'web';
+        const via = e.nativeEvent?.submitter?.value || 'wa';
         const fid = (this.props.formspreeId ?? '').trim();
         if (via === 'web') {
           if (!fid) { this.setState({ sendError: true }); alert('Direct sending is not configured yet. Please use WhatsApp or email for now.'); return; }
