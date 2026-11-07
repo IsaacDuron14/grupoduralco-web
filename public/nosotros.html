@@ -198,5 +198,31 @@ class Component extends DCLogic {
   }
 }
 </script>
+
+<!-- Botón flotante de WhatsApp con código QR -->
+<div id="wa-float" style="position:fixed;right:clamp(16px,2.4vw,32px);bottom:clamp(16px,2.4vw,32px);z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:14px;font-family:Inter,system-ui,sans-serif">
+  <div id="wa-panel" style="display:none;width:min(300px,calc(100vw - 32px));max-height:calc(100vh - 110px);overflow:auto;background:#FFFFFF;color:#071626;box-shadow:0 20px 50px rgba(7,22,38,.35);flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;background:#071626;color:#F5F7F8">
+      <div style="display:flex;flex-direction:column;gap:2px"><span style="font-family:Manrope,sans-serif;font-weight:700;font-size:16px">Grupo Duralco</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#8C99A4">WHATSAPP BUSINESS · VENTAS</span></div>
+      <button id="wa-close" type="button" aria-label="Cerrar" style="width:32px;height:32px;border:0;background:transparent;color:#F5F7F8;font-size:22px;line-height:1;cursor:pointer">×</button>
+    </div>
+    <div style="padding:16px 18px;display:flex;flex-direction:column;align-items:center;gap:12px">
+      <img src="/assets/qr-whatsapp.png" alt="Código QR de WhatsApp de Grupo Duralco" width="200" height="200" loading="lazy" style="width:min(200px,28vh);height:min(200px,28vh);flex:none;display:block;image-rendering:pixelated">
+      <span style="font-size:13px;line-height:1.45;color:#4E5C68;text-align:center">Escanee con su teléfono o escríbanos directamente</span>
+      <a href="https://wa.me/50494405644" target="_blank" rel="noopener" style="font-family:Manrope,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.01em;color:#071626;text-decoration:none">+504 9440-5644</a>
+      <a href="https://wa.me/50494405644?text=Hola%20Grupo%20Duralco%2C%20quisiera%20informaci%C3%B3n%20sobre%20un%20proyecto." target="_blank" rel="noopener" style="align-self:stretch;height:48px;display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366;color:#071626;font-family:Manrope,sans-serif;font-weight:700;font-size:15px;text-decoration:none"><span>Abrir chat</span><span>→</span></a>
+    </div>
+  </div>
+  <button id="wa-btn" type="button" aria-label="WhatsApp Grupo Duralco" aria-expanded="false" style="width:64px;height:64px;padding:0;border:0;border-radius:50%;background:transparent;cursor:pointer;filter:drop-shadow(0 8px 18px rgba(7,22,38,.35))"><img src="/assets/whatsapp.svg" alt="WhatsApp" width="64" height="64" style="width:64px;height:64px;display:block"></button>
+</div>
+<script>
+(function(){
+  var p=document.getElementById('wa-panel'),b=document.getElementById('wa-btn'),c=document.getElementById('wa-close');
+  if(!p||!b)return;
+  function set(o){p.style.display=o?'flex':'none';b.setAttribute('aria-expanded',o?'true':'false');}
+  b.addEventListener('click',function(){set(p.style.display==='none');});
+  if(c)c.addEventListener('click',function(){set(false);});
+})();
+</script>
 </body>
 </html>
