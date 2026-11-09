@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Encuesta de satisfacción | Grupo Duralco</title>
+<meta name="description" content="Cuéntenos cómo fue su experiencia con Grupo Duralco. Su opinión nos ayuda a mejorar.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://www.grupoduralco.com/encuesta">
+<meta name="theme-color" content="#071626">
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#F5F7F8;color:#071626;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
+a{color:inherit;text-decoration:none}
+header{background:#071626;color:#F5F7F8}
+.bar{max-width:1120px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.bar img{height:36px;width:auto;display:block}
+.bar nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
+.bar nav a{opacity:.8}
+.bar nav a:hover{opacity:1;color:#C99A2E}
+.hero{background:#071626;color:#F5F7F8;padding:48px 20px 56px}
+.wrap{max-width:1120px;margin:0 auto}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:#C99A2E;margin:0 0 14px}
+h1{font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(30px,5vw,56px);letter-spacing:-.03em;line-height:1.05;margin:0 0 20px;max-width:20ch}
+.lead{font-size:clamp(16px,2vw,19px);max-width:62ch;color:#C9D1D8;margin:0 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;height:50px;padding:0 24px;font-family:Manrope,sans-serif;font-weight:700;font-size:15px}
+.btn.wa{background:#25D366;color:#071626}
+.btn.wa:hover{background:#3BE07A}
+.btn.ghost{border:1px solid rgba(245,247,248,.4);color:#F5F7F8}
+main{padding:48px 20px}
+.media{max-width:1120px;margin:0 auto 40px}
+.media img{width:100%;height:auto;max-height:520px;object-fit:cover;display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.card{background:#fff;border:1px solid #DDE3E8;padding:26px}
+.card h2{font-family:Manrope,sans-serif;font-weight:700;font-size:20px;margin:0 0 14px;letter-spacing:-.01em}
+.card ul{margin:0;padding-left:20px;color:#26323C}
+.card li{margin-bottom:8px}
+.more{max-width:1120px;margin:48px auto 0}
+.more h2{font-family:Manrope,sans-serif;font-size:22px;margin:0 0 14px}
+.more a{display:inline-block;margin:0 10px 10px 0;padding:12px 18px;border:1px solid #071626;font-weight:600;font-size:14px}
+.more a:hover{background:#071626;color:#F5F7F8;opacity:1}
+footer{background:#071626;color:#8C99A4;padding:32px 20px;font-size:14px}
+footer .wrap{display:flex;gap:16px 32px;flex-wrap:wrap;justify-content:space-between}
+footer a{color:#F5F7F8}
+.gal{max-width:1120px;margin:48px auto 0}.gal h2{font-family:Manrope,sans-serif;font-size:22px;margin:0 0 6px}.gal p{margin:0 0 18px;color:#4E5C68}.gal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}.gal a{display:block;background:#fff;border:1px solid #DDE3E8;padding:10px}.gal img{width:100%;height:auto;display:block}
+.form{max-width:760px;margin:0 auto}
+.q{background:#fff;border:1px solid #DDE3E8;padding:22px;margin:0 0 16px;min-width:0}
+.q legend,.q .lab{font-family:Manrope,sans-serif;font-weight:700;font-size:17px;padding:0;margin:0 0 4px;display:block}
+.q legend{float:left;width:100%}.q legend+*{clear:both}.q .hint{font-size:13px;color:#4E5C68;margin:0 0 14px}
+.q input[type=text],.q select,.q textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1px solid #B9C3CC;background:#fff;color:#071626;border-radius:0}
+.q textarea{min-height:96px;resize:vertical}
+.q input:focus,.q select:focus,.q textarea:focus{outline:2px solid #C99A2E;outline-offset:1px}
+.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.scale{display:flex;gap:8px;flex-wrap:wrap}
+.scale label{position:relative;flex:1 1 44px;min-width:44px}
+.scale input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0}
+.scale span{display:flex;align-items:center;justify-content:center;height:48px;border:1px solid #B9C3CC;background:#fff;font-family:Manrope,sans-serif;font-weight:700;font-size:16px}
+.scale input:checked+span{background:#071626;color:#C99A2E;border-color:#071626}
+.scale input:focus-visible+span{outline:2px solid #C99A2E;outline-offset:2px}
+.ends{display:flex;justify-content:space-between;font-size:12px;color:#4E5C68;margin-top:6px}
+.err{display:none;color:#B3261E;font-size:14px;margin:10px 0 0}
+.err.on{display:block}
+.send{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.send button{height:54px;padding:0 26px;font-family:Manrope,sans-serif;font-weight:700;font-size:15px;cursor:pointer;border:0}
+.send .wa{background:#25D366;color:#071626}
+.send .mail{background:transparent;border:1px solid #071626;color:#071626}
+.note{font-size:13px;color:#4E5C68;margin-top:14px}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<a href="/"><img src="/assets/logo-grupo-duralco.png" alt="Grupo Duralco"></a>
+<nav><a href="/pernos-de-anclaje">Pernos de anclaje</a><a href="/estructuras-metalicas">Estructuras metálicas</a><a href="/mecanizado-cnc">Mecanizado CNC</a><a href="/repuestos-industriales">Repuestos industriales</a><a href="/mobiliario-urbano">Mobiliario urbano</a><a href="/nosotros">Nosotros</a><a href="/#contacto">Contacto</a><a href="/cnc-machining" hreflang="en">EN</a></nav>
+</div></header>
+<section class="hero"><div class="wrap">
+<p class="kicker">SU OPINIÓN IMPORTA</p>
+<h1>Encuesta de satisfacción</h1>
+<p class="lead">Nos toma menos de dos minutos. Sus respuestas nos ayudan a mejorar el servicio de cada una de nuestras divisiones.</p>
+</div></section>
+
+<main>
+<form class="form" id="enc" novalidate>
+<div class="q"><span class="lab">Sobre usted <span style="font-weight:400;color:#4E5C68">(opcional)</span></span>
+<p class="hint">Puede dejar estos datos en blanco si prefiere responder de forma anónima.</p>
+<div class="row2"><input type="text" id="nombre" placeholder="Nombre" autocomplete="name" maxlength="80"><input type="text" id="empresa" placeholder="Empresa" autocomplete="organization" maxlength="80"></div></div>
+
+<div class="q"><label class="lab" for="servicio">¿Qué servicio o producto recibió?</label>
+<select id="servicio" required><option value="">Seleccione una opción</option>
+<option>Estructuras metálicas y obra civil (Duralco Constructores)</option>
+<option>Pernos de anclaje (Corebolt)</option>
+<option>Mecanizado CNC (Mecatechn)</option>
+<option>Repuestos y equipos industriales (Alidpart)</option>
+<option>Mobiliario urbano y playgrounds (Guacamaya Design)</option>
+<option>Otro</option></select></div>
+
+<fieldset class="q" data-name="calidad" data-label="Calidad del trabajo o producto"><legend>Calidad del trabajo o producto</legend><div class="scale"><label><input type="radio" name="calidad" value="1" required><span>1</span></label><label><input type="radio" name="calidad" value="2" required><span>2</span></label><label><input type="radio" name="calidad" value="3" required><span>3</span></label><label><input type="radio" name="calidad" value="4" required><span>4</span></label><label><input type="radio" name="calidad" value="5" required><span>5</span></label></div><div class="ends"><span>1 = Muy malo</span><span>5 = Excelente</span></div></fieldset>
+<fieldset class="q" data-name="tiempos" data-label="Cumplimiento de los tiempos de entrega"><legend>Cumplimiento de los tiempos de entrega</legend><div class="scale"><label><input type="radio" name="tiempos" value="1" required><span>1</span></label><label><input type="radio" name="tiempos" value="2" required><span>2</span></label><label><input type="radio" name="tiempos" value="3" required><span>3</span></label><label><input type="radio" name="tiempos" value="4" required><span>4</span></label><label><input type="radio" name="tiempos" value="5" required><span>5</span></label></div><div class="ends"><span>1 = Muy malo</span><span>5 = Excelente</span></div></fieldset>
+<fieldset class="q" data-name="atencion" data-label="Atención y comunicación"><legend>Atención y comunicación</legend><div class="scale"><label><input type="radio" name="atencion" value="1" required><span>1</span></label><label><input type="radio" name="atencion" value="2" required><span>2</span></label><label><input type="radio" name="atencion" value="3" required><span>3</span></label><label><input type="radio" name="atencion" value="4" required><span>4</span></label><label><input type="radio" name="atencion" value="5" required><span>5</span></label></div><div class="ends"><span>1 = Muy malo</span><span>5 = Excelente</span></div></fieldset>
+<fieldset class="q" data-name="valor" data-label="Relación entre precio y calidad"><legend>Relación entre precio y calidad</legend><div class="scale"><label><input type="radio" name="valor" value="1" required><span>1</span></label><label><input type="radio" name="valor" value="2" required><span>2</span></label><label><input type="radio" name="valor" value="3" required><span>3</span></label><label><input type="radio" name="valor" value="4" required><span>4</span></label><label><input type="radio" name="valor" value="5" required><span>5</span></label></div><div class="ends"><span>1 = Muy malo</span><span>5 = Excelente</span></div></fieldset>
+
+<fieldset class="q" data-name="nps" data-label="Recomendación (0 a 10)"><legend>¿Qué tan probable es que recomiende Grupo Duralco a otra empresa?</legend><div class="scale"><label><input type="radio" name="nps" value="0" required><span>0</span></label><label><input type="radio" name="nps" value="1" required><span>1</span></label><label><input type="radio" name="nps" value="2" required><span>2</span></label><label><input type="radio" name="nps" value="3" required><span>3</span></label><label><input type="radio" name="nps" value="4" required><span>4</span></label><label><input type="radio" name="nps" value="5" required><span>5</span></label><label><input type="radio" name="nps" value="6" required><span>6</span></label><label><input type="radio" name="nps" value="7" required><span>7</span></label><label><input type="radio" name="nps" value="8" required><span>8</span></label><label><input type="radio" name="nps" value="9" required><span>9</span></label><label><input type="radio" name="nps" value="10" required><span>10</span></label></div><div class="ends"><span>0 = Nada probable</span><span>10 = Muy probable</span></div></fieldset>
+
+<div class="q"><label class="lab" for="bien">¿Qué hicimos bien?</label><textarea id="bien" maxlength="600" placeholder="Cuéntenos lo que más valoró"></textarea></div>
+<div class="q"><label class="lab" for="mejorar">¿Qué podemos mejorar?</label><textarea id="mejorar" maxlength="600" placeholder="Sus comentarios nos ayudan a mejorar"></textarea></div>
+<div class="q"><label class="lab" style="display:flex;gap:10px;align-items:flex-start;font-weight:600;font-size:15px"><input type="checkbox" id="contacto" style="margin-top:4px;width:18px;height:18px;flex:none"><span>Autorizo que me contacten para dar seguimiento a mis comentarios.</span></label></div>
+
+<p class="err" id="err" role="alert">Falta responder: <span id="faltan"></span></p>
+<div class="send">
+<button type="button" class="wa" id="bwa">Enviar por WhatsApp →</button>
+<button type="button" class="mail" id="bml">Enviar por correo</button>
+</div>
+<p class="note">Se abrirá WhatsApp (o su correo) con sus respuestas ya escritas. Solo falta presionar enviar. Gracias por su tiempo.</p>
+</form>
+</main>
+<script>
+(function(){
+  var WA='50494405644',MAIL='ventas@grupoduralco.com';
+  var f=document.getElementById('enc');
+  function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
+  function pick(n){var c=f.querySelector('input[name="'+n+'"]:checked');return c?c.value:'';}
+  function build(){
+    var l=['Encuesta de satisfacción — Grupo Duralco',''];
+    if(val('nombre'))l.push('Nombre: '+val('nombre'));
+    if(val('empresa'))l.push('Empresa: '+val('empresa'));
+    l.push('Servicio: '+val('servicio'),'');
+    l.push('Calidad: '+pick('calidad')+'/5');
+    l.push('Tiempos de entrega: '+pick('tiempos')+'/5');
+    l.push('Atención y comunicación: '+pick('atencion')+'/5');
+    l.push('Precio y calidad: '+pick('valor')+'/5');
+    l.push('Recomendaría (0-10): '+pick('nps'),'');
+    if(val('bien'))l.push('Lo que hicimos bien: '+val('bien'));
+    if(val('mejorar'))l.push('Lo que podemos mejorar: '+val('mejorar'));
+    l.push('','Autoriza contacto: '+(document.getElementById('contacto').checked?'Sí':'No'));
+    return l.join('\n');
+  }
+  function check(){
+    var miss=[];
+    if(!val('servicio'))miss.push('servicio recibido');
+    f.querySelectorAll('fieldset[data-name]').forEach(function(s){if(!pick(s.getAttribute('data-name')))miss.push(s.getAttribute('data-label').toLowerCase());});
+    var e=document.getElementById('err');
+    document.getElementById('faltan').textContent=miss.join(', ');
+    e.className='err'+(miss.length?' on':'');
+    if(miss.length)e.scrollIntoView({behavior:'smooth',block:'center'});
+    return !miss.length;
+  }
+  document.getElementById('bwa').addEventListener('click',function(){
+    if(!check())return;
+    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(build()),'_blank','noopener');
+  });
+  document.getElementById('bml').addEventListener('click',function(){
+    if(!check())return;
+    location.href='mailto:'+MAIL+'?subject='+encodeURIComponent('Encuesta de satisfacción')+'&body='+encodeURIComponent(build());
+  });
+})();
+</script>
+
+<footer><div class="wrap">
+<span>© 2026 Grupo Duralco · San Pedro Sula, Honduras</span>
+<span><a href="mailto:ventas@grupoduralco.com">ventas@grupoduralco.com</a> · <a href="https://wa.me/50494405644" target="_blank" rel="noopener">WhatsApp +504 9440-5644</a></span>
+</div></footer>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d0ade7acc1494fb68388a378ce63b9bd"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
