@@ -178,17 +178,19 @@ main{padding:0 20px 56px}
 
 <p class="err" id="err" role="alert"><b>Falta responder:</b> <span id="faltan"></span></p>
 <div class="send">
-<button type="button" class="wa" id="bwa">Enviar por WhatsApp <span>→</span></button>
-<button type="button" class="mail" id="bml">Enviar por correo</button>
+<button type="button" class="next" id="bsend">Enviar encuesta <span>→</span></button>
+<button type="button" class="wa" id="bwa" hidden>Enviar por WhatsApp <span>→</span></button>
+<button type="button" class="mail" id="bml" hidden>Enviar por correo</button>
 </div>
-<p class="note">Se abrirá WhatsApp (o su correo) con sus respuestas ya escritas. Solo falta presionar enviar.</p>
-<div class="thanks" id="thanks" role="status"><h2>¡Gracias por su opinión!</h2><p>Ya tiene sus respuestas listas en el mensaje. Solo falta presionar enviar. Con su ayuda mejoramos cada día.</p></div>
+<p class="note" id="note">Al presionar enviar, sus respuestas llegan directamente a nuestro equipo.</p>
+<p class="err" id="errsend" role="alert"><b>No se pudo enviar.</b> Revise su conexión e intente de nuevo, o use una de estas opciones:</p>
+<div class="thanks" id="thanks" role="status"><h2>¡Gracias por su opinión!</h2><p id="thanksp">Recibimos sus respuestas. Con su ayuda mejoramos cada día.</p></div>
 </section>
 </form>
 </main>
 <script>
 (function(){
-  var WA='50494405644',MAIL='ventas@grupoduralco.com';
+  var WA='50494405644',MAIL='ventas@grupoduralco.com',API='';
   var f=document.getElementById('enc'),sets=f.querySelectorAll('fieldset[data-name]');
   function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
   function picks(n){return Array.prototype.map.call(f.querySelectorAll('input[name="'+n+'"]:checked'),function(c){return c.value;});}
@@ -230,6 +232,24 @@ main{padding:0 20px 56px}
     if(miss.length)e.scrollIntoView({behavior:'smooth',block:'center'});
     return !miss.length;
   }
+  function payload(){
+    var r=[];sets.forEach(function(s){var p=picks(s.getAttribute('data-name'));r.push({q:s.getAttribute('data-label'),a:p.length?p.join(', '):'(sin respuesta)'});});
+    return {nombre:val('nombre'),empresa:val('empresa'),correo:val('correo'),proyecto:val('proyecto'),servicio:val('servicio'),respuestas:r,comentarios:val('comentarios'),contacto:document.getElementById('contacto').checked?'Sí':'No'};
+  }
+  var bs=document.getElementById('bsend');
+  function fallback(){document.getElementById('bwa').hidden=false;document.getElementById('bml').hidden=false;}
+  if(!API){bs.hidden=true;fallback();document.getElementById('note').textContent='Se abrirá WhatsApp (o su correo) con sus respuestas ya escritas. Solo falta presionar enviar.';}
+  bs.addEventListener('click',function(){
+    if(!check())return;
+    document.getElementById('errsend').className='err';
+    bs.disabled=true;bs.firstChild.textContent='Enviando… ';
+    fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload())}).then(function(){
+      bs.hidden=true;document.getElementById('note').hidden=true;thanks();
+    }).catch(function(){
+      bs.disabled=false;bs.firstChild.textContent='Enviar encuesta ';
+      document.getElementById('errsend').className='err on';fallback();
+    });
+  });
   function thanks(){var t=document.getElementById('thanks');t.className='thanks on';t.scrollIntoView({behavior:'smooth',block:'center'});}
   document.getElementById('bwa').addEventListener('click',function(){
     if(!check())return;
