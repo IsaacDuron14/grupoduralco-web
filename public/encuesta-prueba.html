@@ -103,6 +103,19 @@ main{padding:0 20px 56px}
 .thanks.on{display:block}
 .thanks h2{font-family:Manrope,sans-serif;font-weight:800;font-size:22px;margin:0 0 8px;color:#E4C16B}
 .thanks p{margin:0;color:#C9D1D8}
+
+[hidden]{display:none!important}
+.steps{max-width:760px;margin:30px auto 24px;display:flex;align-items:center;gap:12px}
+.steps .st{display:flex;align-items:center;gap:10px;font-family:Manrope,sans-serif;font-weight:700;font-size:14px;color:#8C99A4}
+.steps .st b{width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:#DDE3E8;color:#5B6873;font-size:14px}
+.steps .st.on{color:#071626}.steps .st.on b{background:#071626;color:#E4C16B}
+.steps .st.done{color:#1F8A4C}.steps .st.done b{background:#1F8A4C;color:#fff}
+.steps .ln{flex:1;height:2px;background:#C5CED6}
+.q .req{color:#C0392B;font-weight:800}
+.q label.f{display:block;font-family:Manrope,sans-serif;font-weight:700;font-size:14px;color:#26323C;margin:0 0 6px}
+.next{height:58px;width:100%;border:0;background:#071626;color:#E4C16B;font-family:Manrope,sans-serif;font-weight:800;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 12px 24px -14px rgba(7,22,38,.8);transition:transform .12s,background .15s}
+.next:hover{background:#0B2238;transform:translateY(-1px)}
+.back{background:none;border:0;color:#4E5C68;font-family:Manrope,sans-serif;font-weight:700;font-size:14px;cursor:pointer;padding:0;margin:0 0 18px;text-decoration:underline}
 @media(min-width:640px){.send{grid-template-columns:1fr 1fr}.q{padding:26px 28px 28px}}
 </style>
 </head>
@@ -115,25 +128,37 @@ main{padding:0 20px 56px}
 <p class="kicker">SU OPINIÓN IMPORTA</p>
 <h1>Encuesta de satisfacción</h1>
 <p class="lead">Evalúe el servicio que recibió de nuestro equipo de trabajo y díganos qué podemos mejorar.</p>
-<div class="chips"><span>Menos de 2 minutos</span><span>10 preguntas</span><span>Nombre opcional</span></div>
+<div class="chips"><span>Menos de 2 minutos</span><span>2 pasos</span><span>10 preguntas</span></div>
 </div></section>
 <main>
-<div class="prog" aria-live="polite"><div class="in"><div class="t"><span>Su progreso</span><span><b id="pn">0</b> de 10 respondidas</span></div><div class="bar2"><i id="pb"></i></div></div></div>
+<div class="steps" id="steps"><div class="st on" id="s1"><b>1</b> Sus datos</div><div class="ln"></div><div class="st" id="s2"><b>2</b> Encuesta</div></div>
 <form class="form" id="enc" novalidate>
-<div class="q"><span class="lab">Sobre usted <span style="font-weight:500;color:#5B6873;font-size:15px">(opcional)</span></span>
-<p class="hint" style="margin:0 0 14px">Puede dejar estos datos en blanco si prefiere responder de forma anónima. Si anota su correo, podemos darle seguimiento.</p>
-<div class="row2"><input type="text" id="nombre" placeholder="Nombre" autocomplete="name" maxlength="80"><input type="text" id="empresa" placeholder="Empresa" autocomplete="organization" maxlength="80"></div>
-<div class="row2" style="margin-top:14px"><input type="email" id="correo" placeholder="Correo electrónico" autocomplete="email" inputmode="email" maxlength="100"><input type="text" id="proyecto" placeholder="Proyecto o pedido" maxlength="100"></div></div>
-
-<div class="q"><label class="lab" for="servicio">¿Qué servicio o producto recibió?</label>
-<select id="servicio" required style="margin-top:10px"><option value="">Seleccione una opción</option>
+<section id="paso1">
+<div class="q"><span class="lab">Cuéntenos quién es usted</span>
+<p class="hint" style="margin:0 0 16px">Los usamos solo para dar seguimiento a su opinión. Los campos con <span class="req">*</span> son obligatorios.</p>
+<div class="row2">
+<div><label class="f" for="nombre">Nombre <span class="req">*</span></label><input type="text" id="nombre" placeholder="Su nombre" autocomplete="name" maxlength="80"></div>
+<div><label class="f" for="empresa">Empresa <span class="req">*</span></label><input type="text" id="empresa" placeholder="Nombre de la empresa" autocomplete="organization" maxlength="80"></div>
+</div>
+<div class="row2" style="margin-top:14px">
+<div><label class="f" for="correo">Correo electrónico <span class="req">*</span></label><input type="email" id="correo" placeholder="nombre@empresa.com" autocomplete="email" inputmode="email" maxlength="100"></div>
+<div><label class="f" for="proyecto">Proyecto o pedido</label><input type="text" id="proyecto" placeholder="Opcional" maxlength="100"></div>
+</div>
+<div style="margin-top:14px"><label class="f" for="servicio">¿Qué servicio o producto recibió? <span class="req">*</span></label>
+<select id="servicio" required><option value="">Seleccione una opción</option>
 <option>Estructuras metálicas y obra civil (Duralco Constructores)</option>
 <option>Pernos de anclaje (Corebolt)</option>
 <option>Mecanizado CNC (Mecatechn)</option>
 <option>Repuestos y equipos industriales (Alidpart)</option>
 <option>Mobiliario urbano y playgrounds (Guacamaya Design)</option>
 <option>Otro</option></select></div>
-
+</div>
+<p class="err" id="err1" role="alert"><b>Falta completar:</b> <span id="faltan1"></span></p>
+<button type="button" class="next" id="bnext">Continuar a la encuesta <span>→</span></button>
+</section>
+<section id="paso2" hidden>
+<button type="button" class="back" id="bback">← Volver a mis datos</button>
+<div class="prog" aria-live="polite"><div class="in"><div class="t"><span>Su progreso</span><span><b id="pn">0</b> de 10 respondidas</span></div><div class="bar2"><i id="pb"></i></div></div></div>
 <p class="sec">Califique a nuestro equipo de trabajo</p>
 <fieldset class="q" data-name="supervision" data-type="single" data-label="1. Supervisión durante la ejecución del trabajo"><div class="qh"><div class="num"><span>1</span></div><div><legend class="ttl">Supervisión durante la ejecución del trabajo</legend><p class="hint">Presencia, orden y control del equipo en obra o taller.</p></div></div><div class="opts"><label data-lv="ex"><input type="radio" name="supervision" value="Excelente"><span>Excelente</span></label><label data-lv="bu"><input type="radio" name="supervision" value="Bueno"><span>Bueno</span></label><label data-lv="re"><input type="radio" name="supervision" value="Regular"><span>Regular</span></label><label data-lv="de"><input type="radio" name="supervision" value="Deficiente"><span>Deficiente</span></label><label data-lv="na"><input type="radio" name="supervision" value="No aplica"><span>No aplica</span></label></div></fieldset>
 <fieldset class="q" data-name="calidad" data-type="single" data-label="2. Calidad del trabajo o producto entregado"><div class="qh"><div class="num"><span>2</span></div><div><legend class="ttl">Calidad del trabajo o producto entregado</legend></div></div><div class="opts"><label data-lv="ex"><input type="radio" name="calidad" value="Excelente"><span>Excelente</span></label><label data-lv="bu"><input type="radio" name="calidad" value="Bueno"><span>Bueno</span></label><label data-lv="re"><input type="radio" name="calidad" value="Regular"><span>Regular</span></label><label data-lv="de"><input type="radio" name="calidad" value="Deficiente"><span>Deficiente</span></label></div></fieldset>
@@ -158,6 +183,7 @@ main{padding:0 20px 56px}
 </div>
 <p class="note">Se abrirá WhatsApp (o su correo) con sus respuestas ya escritas. Solo falta presionar enviar.</p>
 <div class="thanks" id="thanks" role="status"><h2>¡Gracias por su opinión!</h2><p>Ya tiene sus respuestas listas en el mensaje. Solo falta presionar enviar. Con su ayuda mejoramos cada día.</p></div>
+</section>
 </form>
 </main>
 <script>
@@ -213,6 +239,26 @@ main{padding:0 20px 56px}
     if(!check())return;
     thanks();location.href='mailto:'+MAIL+'?subject='+encodeURIComponent('Encuesta de satisfacción')+'&body='+encodeURIComponent(build());
   });
+  var p1=document.getElementById('paso1'),p2=document.getElementById('paso2');
+  function go(n){
+    p1.hidden=n!==1;p2.hidden=n!==2;
+    document.getElementById('s1').className='st'+(n===1?' on':' done');
+    document.getElementById('s2').className='st'+(n===2?' on':'');
+    window.scrollTo({top:document.getElementById('steps').getBoundingClientRect().top+window.scrollY-12,behavior:'smooth'});
+  }
+  document.getElementById('bnext').addEventListener('click',function(){
+    var m=[];
+    if(!val('nombre'))m.push('nombre');
+    if(!val('empresa'))m.push('empresa');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val('correo')))m.push('correo electrónico válido');
+    if(!val('servicio'))m.push('servicio recibido');
+    var e=document.getElementById('err1');
+    document.getElementById('faltan1').textContent=m.join(', ');
+    e.className='err'+(m.length?' on':'');
+    if(m.length){e.scrollIntoView({behavior:'smooth',block:'center'});return;}
+    go(2);
+  });
+  document.getElementById('bback').addEventListener('click',function(){go(1);});
   progress();
 })();
 </script>
