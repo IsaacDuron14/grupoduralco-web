@@ -70,7 +70,7 @@ footer a{color:#F5F7F8}
 .send .wa{background:#25D366;color:#071626}
 .send .mail{background:transparent;border:1px solid #071626;color:#071626}
 .note{font-size:13px;color:#4E5C68;margin-top:14px}
-</style>
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}.opts label{position:relative}.opts input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0}.opts span{display:flex;align-items:center;justify-content:center;height:48px;border:1px solid #B9C3CC;background:#fff;font-family:Manrope,sans-serif;font-weight:600;font-size:15px;text-align:center;padding:0 8px}.opts input:checked+span{background:#071626;color:#C99A2E;border-color:#071626}.opts input:focus-visible+span{outline:2px solid #C99A2E;outline-offset:2px}.sec{font-family:Manrope,sans-serif;font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#4E5C68;margin:28px 0 14px}</style>
 </head>
 <body>
 <header><div class="bar">
@@ -80,14 +80,15 @@ footer a{color:#F5F7F8}
 <section class="hero"><div class="wrap">
 <p class="kicker">SU OPINIÓN IMPORTA</p>
 <h1>Encuesta de satisfacción</h1>
-<p class="lead">Nos toma menos de dos minutos. Sus respuestas nos ayudan a mejorar el servicio de cada una de nuestras divisiones.</p>
+<p class="lead">Evalúe el servicio que recibió de nuestro equipo de trabajo y díganos qué podemos mejorar. Toma menos de dos minutos.</p>
 </div></section>
 
 <main>
 <form class="form" id="enc" novalidate>
 <div class="q"><span class="lab">Sobre usted <span style="font-weight:400;color:#4E5C68">(opcional)</span></span>
 <p class="hint">Puede dejar estos datos en blanco si prefiere responder de forma anónima.</p>
-<div class="row2"><input type="text" id="nombre" placeholder="Nombre" autocomplete="name" maxlength="80"><input type="text" id="empresa" placeholder="Empresa" autocomplete="organization" maxlength="80"></div></div>
+<div class="row2"><input type="text" id="nombre" placeholder="Nombre" autocomplete="name" maxlength="80"><input type="text" id="empresa" placeholder="Empresa" autocomplete="organization" maxlength="80"></div>
+<input type="text" id="proyecto" placeholder="Proyecto o pedido (opcional)" maxlength="100" style="margin-top:14px"></div>
 
 <div class="q"><label class="lab" for="servicio">¿Qué servicio o producto recibió?</label>
 <select id="servicio" required><option value="">Seleccione una opción</option>
@@ -98,16 +99,17 @@ footer a{color:#F5F7F8}
 <option>Mobiliario urbano y playgrounds (Guacamaya Design)</option>
 <option>Otro</option></select></div>
 
-<fieldset class="q" data-name="calidad" data-label="Calidad del trabajo o producto"><legend>Calidad del trabajo o producto</legend><div class="scale"><label><input type="radio" name="calidad" value="1" required><span>1</span></label><label><input type="radio" name="calidad" value="2" required><span>2</span></label><label><input type="radio" name="calidad" value="3" required><span>3</span></label><label><input type="radio" name="calidad" value="4" required><span>4</span></label><label><input type="radio" name="calidad" value="5" required><span>5</span></label></div><div class="ends"><span>1 = Muy malo</span><span>5 = Excelente</span></div></fieldset>
-<fieldset class="q" data-name="tiempos" data-label="Cumplimiento de los tiempos de entrega"><legend>Cumplimiento de los tiempos de entrega</legend><div class="scale"><label><input type="radio" name="tiempos" value="1" required><span>1</span></label><label><input type="radio" name="tiempos" value="2" required><span>2</span></label><label><input type="radio" name="tiempos" value="3" required><span>3</span></label><label><input type="radio" name="tiempos" value="4" required><span>4</span></label><label><input type="radio" name="tiempos" value="5" required><span>5</span></label></div><div class="ends"><span>1 = Muy malo</span><span>5 = Excelente</span></div></fieldset>
-<fieldset class="q" data-name="atencion" data-label="Atención y comunicación"><legend>Atención y comunicación</legend><div class="scale"><label><input type="radio" name="atencion" value="1" required><span>1</span></label><label><input type="radio" name="atencion" value="2" required><span>2</span></label><label><input type="radio" name="atencion" value="3" required><span>3</span></label><label><input type="radio" name="atencion" value="4" required><span>4</span></label><label><input type="radio" name="atencion" value="5" required><span>5</span></label></div><div class="ends"><span>1 = Muy malo</span><span>5 = Excelente</span></div></fieldset>
-<fieldset class="q" data-name="valor" data-label="Relación entre precio y calidad"><legend>Relación entre precio y calidad</legend><div class="scale"><label><input type="radio" name="valor" value="1" required><span>1</span></label><label><input type="radio" name="valor" value="2" required><span>2</span></label><label><input type="radio" name="valor" value="3" required><span>3</span></label><label><input type="radio" name="valor" value="4" required><span>4</span></label><label><input type="radio" name="valor" value="5" required><span>5</span></label></div><div class="ends"><span>1 = Muy malo</span><span>5 = Excelente</span></div></fieldset>
+<p class="sec">Califique el servicio de nuestro equipo de trabajo</p>
+<fieldset class="q" data-name="supervision" data-label="Supervisión durante la ejecución del trabajo"><legend>Supervisión durante la ejecución del trabajo</legend><p class="hint">Presencia, orden y control del equipo en obra o taller.</p><div class="opts"><label><input type="radio" name="supervision" value="Excelente"><span>Excelente</span></label><label><input type="radio" name="supervision" value="Bueno"><span>Bueno</span></label><label><input type="radio" name="supervision" value="Regular"><span>Regular</span></label><label><input type="radio" name="supervision" value="Deficiente"><span>Deficiente</span></label><label><input type="radio" name="supervision" value="No aplica"><span>No aplica</span></label></div></fieldset>
+<fieldset class="q" data-name="calidad" data-label="Calidad del trabajo o producto entregado"><legend>Calidad del trabajo o producto entregado</legend><div class="opts"><label><input type="radio" name="calidad" value="Excelente"><span>Excelente</span></label><label><input type="radio" name="calidad" value="Bueno"><span>Bueno</span></label><label><input type="radio" name="calidad" value="Regular"><span>Regular</span></label><label><input type="radio" name="calidad" value="Deficiente"><span>Deficiente</span></label></div></fieldset>
+<fieldset class="q" data-name="coordinador" data-label="Atención del coordinador del proyecto"><legend>Atención del coordinador del proyecto</legend><p class="hint">Comunicación, disponibilidad y seguimiento.</p><div class="opts"><label><input type="radio" name="coordinador" value="Excelente"><span>Excelente</span></label><label><input type="radio" name="coordinador" value="Bueno"><span>Bueno</span></label><label><input type="radio" name="coordinador" value="Regular"><span>Regular</span></label><label><input type="radio" name="coordinador" value="Deficiente"><span>Deficiente</span></label><label><input type="radio" name="coordinador" value="No aplica"><span>No aplica</span></label></div></fieldset>
+<fieldset class="q" data-name="respuesta" data-label="Tiempo de respuesta a sus solicitudes y consultas"><legend>Tiempo de respuesta a sus solicitudes y consultas</legend><div class="opts"><label><input type="radio" name="respuesta" value="Excelente"><span>Excelente</span></label><label><input type="radio" name="respuesta" value="Bueno"><span>Bueno</span></label><label><input type="radio" name="respuesta" value="Regular"><span>Regular</span></label><label><input type="radio" name="respuesta" value="Deficiente"><span>Deficiente</span></label></div></fieldset>
+<fieldset class="q" data-name="servicio_gral" data-label="Calidad del servicio en general"><legend>Calidad del servicio en general</legend><div class="opts"><label><input type="radio" name="servicio_gral" value="Excelente"><span>Excelente</span></label><label><input type="radio" name="servicio_gral" value="Bueno"><span>Bueno</span></label><label><input type="radio" name="servicio_gral" value="Regular"><span>Regular</span></label><label><input type="radio" name="servicio_gral" value="Deficiente"><span>Deficiente</span></label></div></fieldset>
 
-<fieldset class="q" data-name="nps" data-label="Recomendación (0 a 10)"><legend>¿Qué tan probable es que recomiende Grupo Duralco a otra empresa?</legend><div class="scale"><label><input type="radio" name="nps" value="0" required><span>0</span></label><label><input type="radio" name="nps" value="1" required><span>1</span></label><label><input type="radio" name="nps" value="2" required><span>2</span></label><label><input type="radio" name="nps" value="3" required><span>3</span></label><label><input type="radio" name="nps" value="4" required><span>4</span></label><label><input type="radio" name="nps" value="5" required><span>5</span></label><label><input type="radio" name="nps" value="6" required><span>6</span></label><label><input type="radio" name="nps" value="7" required><span>7</span></label><label><input type="radio" name="nps" value="8" required><span>8</span></label><label><input type="radio" name="nps" value="9" required><span>9</span></label><label><input type="radio" name="nps" value="10" required><span>10</span></label></div><div class="ends"><span>0 = Nada probable</span><span>10 = Muy probable</span></div></fieldset>
-
-<div class="q"><label class="lab" for="bien">¿Qué hicimos bien?</label><textarea id="bien" maxlength="600" placeholder="Cuéntenos lo que más valoró"></textarea></div>
-<div class="q"><label class="lab" for="mejorar">¿Qué podemos mejorar?</label><textarea id="mejorar" maxlength="600" placeholder="Sus comentarios nos ayudan a mejorar"></textarea></div>
 <div class="q"><label class="lab" style="display:flex;gap:10px;align-items:flex-start;font-weight:600;font-size:15px"><input type="checkbox" id="contacto" style="margin-top:4px;width:18px;height:18px;flex:none"><span>Autorizo que me contacten para dar seguimiento a mis comentarios.</span></label></div>
+
+<div class="q"><label class="lab" for="comentarios">Deje sus comentarios que nos ayuden a mejorar</label>
+<textarea id="comentarios" maxlength="800" placeholder="Cuéntenos qué hicimos bien y qué podemos mejorar"></textarea></div>
 
 <p class="err" id="err" role="alert">Falta responder: <span id="faltan"></span></p>
 <div class="send">
@@ -127,14 +129,12 @@ footer a{color:#F5F7F8}
     var l=['Encuesta de satisfacción — Grupo Duralco',''];
     if(val('nombre'))l.push('Nombre: '+val('nombre'));
     if(val('empresa'))l.push('Empresa: '+val('empresa'));
+    if(val('proyecto'))l.push('Proyecto o pedido: '+val('proyecto'));
     l.push('Servicio: '+val('servicio'),'');
-    l.push('Calidad: '+pick('calidad')+'/5');
-    l.push('Tiempos de entrega: '+pick('tiempos')+'/5');
-    l.push('Atención y comunicación: '+pick('atencion')+'/5');
-    l.push('Precio y calidad: '+pick('valor')+'/5');
-    l.push('Recomendaría (0-10): '+pick('nps'),'');
-    if(val('bien'))l.push('Lo que hicimos bien: '+val('bien'));
-    if(val('mejorar'))l.push('Lo que podemos mejorar: '+val('mejorar'));
+    f.querySelectorAll('fieldset[data-name]').forEach(function(s){
+      l.push(s.getAttribute('data-label')+': '+pick(s.getAttribute('data-name')));
+    });
+    if(val('comentarios'))l.push('','Comentarios: '+val('comentarios'));
     l.push('','Autoriza contacto: '+(document.getElementById('contacto').checked?'Sí':'No'));
     return l.join('\n');
   }
@@ -143,7 +143,7 @@ footer a{color:#F5F7F8}
     if(!val('servicio'))miss.push('servicio recibido');
     f.querySelectorAll('fieldset[data-name]').forEach(function(s){if(!pick(s.getAttribute('data-name')))miss.push(s.getAttribute('data-label').toLowerCase());});
     var e=document.getElementById('err');
-    document.getElementById('faltan').textContent=miss.join(', ');
+    document.getElementById('faltan').textContent=miss.join('; ');
     e.className='err'+(miss.length?' on':'');
     if(miss.length)e.scrollIntoView({behavior:'smooth',block:'center'});
     return !miss.length;
@@ -158,7 +158,6 @@ footer a{color:#F5F7F8}
   });
 })();
 </script>
-
 <footer><div class="wrap">
 <span>© 2026 Grupo Duralco · San Pedro Sula, Honduras</span>
 <span><a href="mailto:ventas@grupoduralco.com">ventas@grupoduralco.com</a> · <a href="https://wa.me/50494405644" target="_blank" rel="noopener">WhatsApp +504 9440-5644</a></span>
