@@ -70,7 +70,7 @@ main{padding:0 20px 56px}
 .q .ttl{font-family:Manrope,sans-serif;font-weight:800;font-size:18px;line-height:1.3;letter-spacing:-.01em;margin:0;padding:0;float:none;width:auto;display:block}
 .q .hint{font-size:13px;color:#5B6873;margin:4px 0 0}
 .q .lab{font-family:Manrope,sans-serif;font-weight:800;font-size:18px;letter-spacing:-.01em;display:block;margin:0 0 4px}
-.q input[type=text],.q select,.q textarea{width:100%;font:inherit;font-size:16px;padding:14px 16px;border:1px solid #B9C3CC;background:#FBFCFD;color:#071626;border-radius:0;transition:border-color .2s,box-shadow .2s}
+.q input[type=text],.q input[type=email],.q select,.q textarea{width:100%;font:inherit;font-size:16px;padding:14px 16px;border:1px solid #B9C3CC;background:#FBFCFD;color:#071626;border-radius:0;transition:border-color .2s,box-shadow .2s}
 .q textarea{min-height:110px;resize:vertical}
 .q input:focus,.q select:focus,.q textarea:focus{outline:none;border-color:#C99A2E;box-shadow:0 0 0 3px rgba(201,154,46,.25)}
 .row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
@@ -121,9 +121,9 @@ main{padding:0 20px 56px}
 <div class="prog" aria-live="polite"><div class="in"><div class="t"><span>Su progreso</span><span><b id="pn">0</b> de 10 respondidas</span></div><div class="bar2"><i id="pb"></i></div></div></div>
 <form class="form" id="enc" novalidate>
 <div class="q"><span class="lab">Sobre usted <span style="font-weight:500;color:#5B6873;font-size:15px">(opcional)</span></span>
-<p class="hint" style="margin:0 0 14px">Puede dejar estos datos en blanco si prefiere responder de forma anónima.</p>
+<p class="hint" style="margin:0 0 14px">Puede dejar estos datos en blanco si prefiere responder de forma anónima. Si anota su correo, podemos darle seguimiento.</p>
 <div class="row2"><input type="text" id="nombre" placeholder="Nombre" autocomplete="name" maxlength="80"><input type="text" id="empresa" placeholder="Empresa" autocomplete="organization" maxlength="80"></div>
-<input type="text" id="proyecto" placeholder="Proyecto o pedido (opcional)" maxlength="100" style="margin-top:14px"></div>
+<div class="row2" style="margin-top:14px"><input type="email" id="correo" placeholder="Correo electrónico" autocomplete="email" inputmode="email" maxlength="100"><input type="text" id="proyecto" placeholder="Proyecto o pedido" maxlength="100"></div></div>
 
 <div class="q"><label class="lab" for="servicio">¿Qué servicio o producto recibió?</label>
 <select id="servicio" required style="margin-top:10px"><option value="">Seleccione una opción</option>
@@ -183,6 +183,7 @@ main{padding:0 20px 56px}
     var l=['Encuesta de satisfacción — Grupo Duralco',''];
     if(val('nombre'))l.push('Nombre: '+val('nombre'));
     if(val('empresa'))l.push('Empresa: '+val('empresa'));
+    if(val('correo'))l.push('Correo: '+val('correo'));
     if(val('proyecto'))l.push('Proyecto o pedido: '+val('proyecto'));
     l.push('Servicio: '+val('servicio'),'');
     sets.forEach(function(s){
