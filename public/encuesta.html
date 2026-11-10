@@ -48,29 +48,76 @@ footer{background:#071626;color:#8C99A4;padding:32px 20px;font-size:14px}
 footer .wrap{display:flex;gap:16px 32px;flex-wrap:wrap;justify-content:space-between}
 footer a{color:#F5F7F8}
 .gal{max-width:1120px;margin:48px auto 0}.gal h2{font-family:Manrope,sans-serif;font-size:22px;margin:0 0 6px}.gal p{margin:0 0 18px;color:#4E5C68}.gal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}.gal a{display:block;background:#fff;border:1px solid #DDE3E8;padding:10px}.gal img{width:100%;height:auto;display:block}
+.hero{background:radial-gradient(1200px 400px at 85% -10%,rgba(201,154,46,.22),transparent 60%),linear-gradient(180deg,#071626 0%,#0B2238 100%);position:relative;padding-bottom:64px}
+.hero:after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#C99A2E,#E4C16B 50%,#C99A2E)}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.chips span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#E4C16B;border:1px solid rgba(228,193,107,.45);padding:7px 12px}
+main{padding:0 20px 56px}
+.prog{position:sticky;top:0;z-index:30;background:rgba(245,247,248,.96);backdrop-filter:blur(6px);margin:0 -20px 26px;padding:12px 20px;border-bottom:1px solid #DDE3E8}
+.prog .in{max-width:760px;margin:0 auto}
+.prog .t{display:flex;justify-content:space-between;font-family:Manrope,sans-serif;font-weight:700;font-size:13px;color:#26323C;margin-bottom:8px}
+.prog .t b{color:#1F8A4C}
+.prog .bar2{height:8px;background:#DDE3E8;overflow:hidden}
+.prog .bar2 i{display:block;height:100%;width:0;background:linear-gradient(90deg,#C99A2E,#1F8A4C);transition:width .35s ease}
 .form{max-width:760px;margin:0 auto}
-.q{background:#fff;border:1px solid #DDE3E8;padding:22px;margin:0 0 16px;min-width:0}
-.q legend,.q .lab{font-family:Manrope,sans-serif;font-weight:700;font-size:17px;padding:0;margin:0 0 4px;display:block}
-.q legend{float:left;width:100%}.q legend+*{clear:both}.q .hint{font-size:13px;color:#4E5C68;margin:0 0 14px}
-.q input[type=text],.q select,.q textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1px solid #B9C3CC;background:#fff;color:#071626;border-radius:0}
-.q textarea{min-height:96px;resize:vertical}
-.q input:focus,.q select:focus,.q textarea:focus{outline:2px solid #C99A2E;outline-offset:1px}
+.q{position:relative;background:#fff;border:1px solid #DDE3E8;border-left:4px solid #C99A2E;padding:22px 22px 24px;margin:0 0 18px;min-width:0;box-shadow:0 2px 0 rgba(7,22,38,.03),0 10px 24px -16px rgba(7,22,38,.25);transition:border-color .25s,box-shadow .25s}
+.q.done{border-left-color:#1F8A4C}
+.q .qh{display:flex;gap:14px;align-items:flex-start;margin:0 0 14px}
+.q .num{flex:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:#071626;color:#E4C16B;font-family:Manrope,sans-serif;font-weight:800;font-size:15px;transition:background .25s,color .25s}
+.q.done .num{background:#1F8A4C;color:#fff}
+.q.done .num span{display:none}.q .num:after{content:""}
+.q.done .num:before{content:"✓";font-size:17px}
+.q .ttl{font-family:Manrope,sans-serif;font-weight:800;font-size:18px;line-height:1.3;letter-spacing:-.01em;margin:0;padding:0;float:none;width:auto;display:block}
+.q .hint{font-size:13px;color:#5B6873;margin:4px 0 0}
+.q .lab{font-family:Manrope,sans-serif;font-weight:800;font-size:18px;letter-spacing:-.01em;display:block;margin:0 0 4px}
+.q input[type=text],.q input[type=email],.q select,.q textarea{width:100%;font:inherit;font-size:16px;padding:14px 16px;border:1px solid #B9C3CC;background:#FBFCFD;color:#071626;border-radius:0;transition:border-color .2s,box-shadow .2s}
+.q textarea{min-height:110px;resize:vertical}
+.q input:focus,.q select:focus,.q textarea:focus{outline:none;border-color:#C99A2E;box-shadow:0 0 0 3px rgba(201,154,46,.25)}
 .row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-.scale{display:flex;gap:8px;flex-wrap:wrap}
-.scale label{position:relative;flex:1 1 44px;min-width:44px}
-.scale input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0}
-.scale span{display:flex;align-items:center;justify-content:center;height:48px;border:1px solid #B9C3CC;background:#fff;font-family:Manrope,sans-serif;font-weight:700;font-size:16px}
-.scale input:checked+span{background:#071626;color:#C99A2E;border-color:#071626}
-.scale input:focus-visible+span{outline:2px solid #C99A2E;outline-offset:2px}
-.ends{display:flex;justify-content:space-between;font-size:12px;color:#4E5C68;margin-top:6px}
-.err{display:none;color:#B3261E;font-size:14px;margin:10px 0 0}
+.sec{display:flex;align-items:center;gap:14px;font-family:Manrope,sans-serif;font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#4E5C68;margin:34px 0 18px}
+.sec:after{content:"";flex:1;height:1px;background:#C5CED6}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:10px}
+.opts label{position:relative;display:block}
+.opts input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0;z-index:1}
+.opts span{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:8px 10px;border:1.5px solid #C5CED6;background:#fff;color:#26323C;font-family:Manrope,sans-serif;font-weight:700;font-size:15px;text-align:center;line-height:1.25;transition:transform .12s,background .15s,border-color .15s,box-shadow .15s}
+.opts label:hover span{border-color:#071626;transform:translateY(-1px);box-shadow:0 6px 14px -8px rgba(7,22,38,.4)}
+.opts input:focus-visible+span{outline:3px solid #C99A2E;outline-offset:2px}
+.opts input:checked+span{color:#fff;border-color:transparent;box-shadow:0 8px 18px -10px rgba(7,22,38,.6)}
+.opts label[data-lv=ex] input:checked+span{background:#1F8A4C}
+.opts label[data-lv=bu] input:checked+span{background:#2A7F9E}
+.opts label[data-lv=re] input:checked+span{background:#C99A2E;color:#071626}
+.opts label[data-lv=de] input:checked+span{background:#C0392B}
+.opts label[data-lv=na] input:checked+span{background:#5B6873}
+.opts label[data-lv=mu] input:checked+span{background:#071626;color:#E4C16B}
+.opts label[data-lv=mu] input:checked+span:before{content:"✓";font-weight:800}
+.err{display:none;background:#FDECEA;border-left:4px solid #C0392B;color:#8A1F14;font-size:14px;padding:12px 14px;margin:6px 0 16px}
 .err.on{display:block}
-.send{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
-.send button{height:54px;padding:0 26px;font-family:Manrope,sans-serif;font-weight:700;font-size:15px;cursor:pointer;border:0}
-.send .wa{background:#25D366;color:#071626}
-.send .mail{background:transparent;border:1px solid #071626;color:#071626}
-.note{font-size:13px;color:#4E5C68;margin-top:14px}
-.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}.opts label{position:relative}.opts input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0}.opts span{display:flex;align-items:center;justify-content:center;height:48px;border:1px solid #B9C3CC;background:#fff;font-family:Manrope,sans-serif;font-weight:600;font-size:15px;text-align:center;padding:0 8px}.opts input:checked+span{background:#071626;color:#C99A2E;border-color:#071626}.opts input:focus-visible+span{outline:2px solid #C99A2E;outline-offset:2px}.sec{font-family:Manrope,sans-serif;font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#4E5C68;margin:28px 0 14px}</style>
+.send{display:grid;gap:12px;margin-top:10px}
+.send button{height:58px;padding:0 26px;font-family:Manrope,sans-serif;font-weight:800;font-size:16px;cursor:pointer;border:0;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .12s,box-shadow .15s,background .15s}
+.send .wa{background:#25D366;color:#071626;box-shadow:0 12px 24px -14px rgba(37,211,102,.9)}
+.send .wa:hover{background:#3BE07A;transform:translateY(-1px)}
+.send .mail{background:#fff;border:1.5px solid #071626;color:#071626}
+.send .mail:hover{background:#071626;color:#fff}
+.note{font-size:13px;color:#5B6873;margin:16px 0 0;text-align:center}
+.thanks{display:none;background:#071626;color:#F5F7F8;border-top:4px solid #C99A2E;padding:24px;margin-top:18px;text-align:center}
+.thanks.on{display:block}
+.thanks h2{font-family:Manrope,sans-serif;font-weight:800;font-size:22px;margin:0 0 8px;color:#E4C16B}
+.thanks p{margin:0;color:#C9D1D8}
+
+[hidden]{display:none!important}
+.steps{max-width:760px;margin:30px auto 24px;display:flex;align-items:center;gap:12px}
+.steps .st{display:flex;align-items:center;gap:10px;font-family:Manrope,sans-serif;font-weight:700;font-size:14px;color:#8C99A4}
+.steps .st b{width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:#DDE3E8;color:#5B6873;font-size:14px}
+.steps .st.on{color:#071626}.steps .st.on b{background:#071626;color:#E4C16B}
+.steps .st.done{color:#1F8A4C}.steps .st.done b{background:#1F8A4C;color:#fff}
+.steps .ln{flex:1;height:2px;background:#C5CED6}
+.q .req{color:#C0392B;font-weight:800}
+.q label.f{display:block;font-family:Manrope,sans-serif;font-weight:700;font-size:14px;color:#26323C;margin:0 0 6px}
+.next{height:58px;width:100%;border:0;background:#071626;color:#E4C16B;font-family:Manrope,sans-serif;font-weight:800;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 12px 24px -14px rgba(7,22,38,.8);transition:transform .12s,background .15s}
+.next:hover{background:#0B2238;transform:translateY(-1px)}
+.back{background:none;border:0;color:#4E5C68;font-family:Manrope,sans-serif;font-weight:700;font-size:14px;cursor:pointer;padding:0;margin:0 0 18px;text-decoration:underline}
+@media(min-width:640px){.send{grid-template-columns:1fr 1fr}.q{padding:26px 28px 28px}}
+</style>
 </head>
 <body>
 <header><div class="bar">
@@ -80,17 +127,24 @@ footer a{color:#F5F7F8}
 <section class="hero"><div class="wrap">
 <p class="kicker">SU OPINIÓN IMPORTA</p>
 <h1>Encuesta de satisfacción</h1>
-<p class="lead">Evalúe el servicio que recibió de nuestro equipo de trabajo y díganos qué podemos mejorar. Toma menos de dos minutos.</p>
+<p class="lead">Evalúe el servicio que recibió de nuestro equipo de trabajo y díganos qué podemos mejorar.</p>
+<div class="chips"><span>Menos de 2 minutos</span><span>2 pasos</span><span>10 preguntas</span></div>
 </div></section>
-
 <main>
+<div class="steps" id="steps"><div class="st on" id="s1"><b>1</b> Sus datos</div><div class="ln"></div><div class="st" id="s2"><b>2</b> Encuesta</div></div>
 <form class="form" id="enc" novalidate>
-<div class="q"><span class="lab">Sobre usted <span style="font-weight:400;color:#4E5C68">(opcional)</span></span>
-<p class="hint">Puede dejar estos datos en blanco si prefiere responder de forma anónima.</p>
-<div class="row2"><input type="text" id="nombre" placeholder="Nombre" autocomplete="name" maxlength="80"><input type="text" id="empresa" placeholder="Empresa" autocomplete="organization" maxlength="80"></div>
-<input type="text" id="proyecto" placeholder="Proyecto o pedido (opcional)" maxlength="100" style="margin-top:14px"></div>
-
-<div class="q"><label class="lab" for="servicio">¿Qué servicio o producto recibió?</label>
+<section id="paso1">
+<div class="q"><span class="lab">Cuéntenos quién es usted</span>
+<p class="hint" style="margin:0 0 16px">Los usamos solo para dar seguimiento a su opinión. Los campos con <span class="req">*</span> son obligatorios.</p>
+<div class="row2">
+<div><label class="f" for="nombre">Nombre <span class="req">*</span></label><input type="text" id="nombre" placeholder="Su nombre" autocomplete="name" maxlength="80"></div>
+<div><label class="f" for="empresa">Empresa <span class="req">*</span></label><input type="text" id="empresa" placeholder="Nombre de la empresa" autocomplete="organization" maxlength="80"></div>
+</div>
+<div class="row2" style="margin-top:14px">
+<div><label class="f" for="correo">Correo electrónico <span class="req">*</span></label><input type="email" id="correo" placeholder="nombre@empresa.com" autocomplete="email" inputmode="email" maxlength="100"></div>
+<div><label class="f" for="proyecto">Proyecto o pedido</label><input type="text" id="proyecto" placeholder="Opcional" maxlength="100"></div>
+</div>
+<div style="margin-top:14px"><label class="f" for="servicio">¿Qué servicio o producto recibió? <span class="req">*</span></label>
 <select id="servicio" required><option value="">Seleccione una opción</option>
 <option>Estructuras metálicas y obra civil (Duralco Constructores)</option>
 <option>Pernos de anclaje (Corebolt)</option>
@@ -98,41 +152,71 @@ footer a{color:#F5F7F8}
 <option>Repuestos y equipos industriales (Alidpart)</option>
 <option>Mobiliario urbano y playgrounds (Guacamaya Design)</option>
 <option>Otro</option></select></div>
-
-<p class="sec">Califique el servicio de nuestro equipo de trabajo</p>
-<fieldset class="q" data-name="supervision" data-label="Supervisión durante la ejecución del trabajo"><legend>Supervisión durante la ejecución del trabajo</legend><p class="hint">Presencia, orden y control del equipo en obra o taller.</p><div class="opts"><label><input type="radio" name="supervision" value="Excelente"><span>Excelente</span></label><label><input type="radio" name="supervision" value="Bueno"><span>Bueno</span></label><label><input type="radio" name="supervision" value="Regular"><span>Regular</span></label><label><input type="radio" name="supervision" value="Deficiente"><span>Deficiente</span></label><label><input type="radio" name="supervision" value="No aplica"><span>No aplica</span></label></div></fieldset>
-<fieldset class="q" data-name="calidad" data-label="Calidad del trabajo o producto entregado"><legend>Calidad del trabajo o producto entregado</legend><div class="opts"><label><input type="radio" name="calidad" value="Excelente"><span>Excelente</span></label><label><input type="radio" name="calidad" value="Bueno"><span>Bueno</span></label><label><input type="radio" name="calidad" value="Regular"><span>Regular</span></label><label><input type="radio" name="calidad" value="Deficiente"><span>Deficiente</span></label></div></fieldset>
-<fieldset class="q" data-name="coordinador" data-label="Atención del coordinador del proyecto"><legend>Atención del coordinador del proyecto</legend><p class="hint">Comunicación, disponibilidad y seguimiento.</p><div class="opts"><label><input type="radio" name="coordinador" value="Excelente"><span>Excelente</span></label><label><input type="radio" name="coordinador" value="Bueno"><span>Bueno</span></label><label><input type="radio" name="coordinador" value="Regular"><span>Regular</span></label><label><input type="radio" name="coordinador" value="Deficiente"><span>Deficiente</span></label><label><input type="radio" name="coordinador" value="No aplica"><span>No aplica</span></label></div></fieldset>
-<fieldset class="q" data-name="respuesta" data-label="Tiempo de respuesta a sus solicitudes y consultas"><legend>Tiempo de respuesta a sus solicitudes y consultas</legend><div class="opts"><label><input type="radio" name="respuesta" value="Excelente"><span>Excelente</span></label><label><input type="radio" name="respuesta" value="Bueno"><span>Bueno</span></label><label><input type="radio" name="respuesta" value="Regular"><span>Regular</span></label><label><input type="radio" name="respuesta" value="Deficiente"><span>Deficiente</span></label></div></fieldset>
-<fieldset class="q" data-name="servicio_gral" data-label="Calidad del servicio en general"><legend>Calidad del servicio en general</legend><div class="opts"><label><input type="radio" name="servicio_gral" value="Excelente"><span>Excelente</span></label><label><input type="radio" name="servicio_gral" value="Bueno"><span>Bueno</span></label><label><input type="radio" name="servicio_gral" value="Regular"><span>Regular</span></label><label><input type="radio" name="servicio_gral" value="Deficiente"><span>Deficiente</span></label></div></fieldset>
-
-<div class="q"><label class="lab" style="display:flex;gap:10px;align-items:flex-start;font-weight:600;font-size:15px"><input type="checkbox" id="contacto" style="margin-top:4px;width:18px;height:18px;flex:none"><span>Autorizo que me contacten para dar seguimiento a mis comentarios.</span></label></div>
-
-<div class="q"><label class="lab" for="comentarios">Deje sus comentarios que nos ayuden a mejorar</label>
-<textarea id="comentarios" maxlength="800" placeholder="Cuéntenos qué hicimos bien y qué podemos mejorar"></textarea></div>
-
-<p class="err" id="err" role="alert">Falta responder: <span id="faltan"></span></p>
-<div class="send">
-<button type="button" class="wa" id="bwa">Enviar por WhatsApp →</button>
-<button type="button" class="mail" id="bml">Enviar por correo</button>
 </div>
-<p class="note">Se abrirá WhatsApp (o su correo) con sus respuestas ya escritas. Solo falta presionar enviar. Gracias por su tiempo.</p>
+<p class="err" id="err1" role="alert"><b>Falta completar:</b> <span id="faltan1"></span></p>
+<button type="button" class="next" id="bnext">Continuar a la encuesta <span>→</span></button>
+</section>
+<section id="paso2" hidden>
+<button type="button" class="back" id="bback">← Volver a mis datos</button>
+<div class="prog" aria-live="polite"><div class="in"><div class="t"><span>Su progreso</span><span><b id="pn">0</b> de 10 respondidas</span></div><div class="bar2"><i id="pb"></i></div></div></div>
+<p class="sec">Califique a nuestro equipo de trabajo</p>
+<fieldset class="q" data-name="supervision" data-type="single" data-label="1. Supervisión durante la ejecución del trabajo"><div class="qh"><div class="num"><span>1</span></div><div><legend class="ttl">Supervisión durante la ejecución del trabajo</legend><p class="hint">Presencia, orden y control del equipo en obra o taller.</p></div></div><div class="opts"><label data-lv="ex"><input type="radio" name="supervision" value="Excelente"><span>Excelente</span></label><label data-lv="bu"><input type="radio" name="supervision" value="Bueno"><span>Bueno</span></label><label data-lv="re"><input type="radio" name="supervision" value="Regular"><span>Regular</span></label><label data-lv="de"><input type="radio" name="supervision" value="Deficiente"><span>Deficiente</span></label><label data-lv="na"><input type="radio" name="supervision" value="No aplica"><span>No aplica</span></label></div></fieldset>
+<fieldset class="q" data-name="calidad" data-type="single" data-label="2. Calidad del trabajo o producto entregado"><div class="qh"><div class="num"><span>2</span></div><div><legend class="ttl">Calidad del trabajo o producto entregado</legend></div></div><div class="opts"><label data-lv="ex"><input type="radio" name="calidad" value="Excelente"><span>Excelente</span></label><label data-lv="bu"><input type="radio" name="calidad" value="Bueno"><span>Bueno</span></label><label data-lv="re"><input type="radio" name="calidad" value="Regular"><span>Regular</span></label><label data-lv="de"><input type="radio" name="calidad" value="Deficiente"><span>Deficiente</span></label></div></fieldset>
+<fieldset class="q" data-name="coordinador" data-type="single" data-label="3. Atención del coordinador del proyecto"><div class="qh"><div class="num"><span>3</span></div><div><legend class="ttl">Atención del coordinador del proyecto</legend><p class="hint">Comunicación, disponibilidad y seguimiento.</p></div></div><div class="opts"><label data-lv="ex"><input type="radio" name="coordinador" value="Excelente"><span>Excelente</span></label><label data-lv="bu"><input type="radio" name="coordinador" value="Bueno"><span>Bueno</span></label><label data-lv="re"><input type="radio" name="coordinador" value="Regular"><span>Regular</span></label><label data-lv="de"><input type="radio" name="coordinador" value="Deficiente"><span>Deficiente</span></label><label data-lv="na"><input type="radio" name="coordinador" value="No aplica"><span>No aplica</span></label></div></fieldset>
+<fieldset class="q" data-name="respuesta" data-type="single" data-label="4. Tiempo de respuesta a sus solicitudes y consultas"><div class="qh"><div class="num"><span>4</span></div><div><legend class="ttl">Tiempo de respuesta a sus solicitudes y consultas</legend></div></div><div class="opts"><label data-lv="ex"><input type="radio" name="respuesta" value="Excelente"><span>Excelente</span></label><label data-lv="bu"><input type="radio" name="respuesta" value="Bueno"><span>Bueno</span></label><label data-lv="re"><input type="radio" name="respuesta" value="Regular"><span>Regular</span></label><label data-lv="de"><input type="radio" name="respuesta" value="Deficiente"><span>Deficiente</span></label></div></fieldset>
+<fieldset class="q" data-name="plazo" data-type="single" data-label="5. Cumplimiento del plazo de entrega"><div class="qh"><div class="num"><span>5</span></div><div><legend class="ttl">Cumplimiento del plazo de entrega</legend></div></div><div class="opts"><label data-lv="ex"><input type="radio" name="plazo" value="Antes de lo acordado"><span>Antes de lo acordado</span></label><label data-lv="bu"><input type="radio" name="plazo" value="En la fecha acordada"><span>En la fecha acordada</span></label><label data-lv="re"><input type="radio" name="plazo" value="Con retraso menor"><span>Con retraso menor</span></label><label data-lv="de"><input type="radio" name="plazo" value="Con retraso importante"><span>Con retraso importante</span></label><label data-lv="na"><input type="radio" name="plazo" value="No aplica"><span>No aplica</span></label></div></fieldset>
+<fieldset class="q" data-name="seguridad" data-type="single" data-label="6. Seguridad y orden en obra"><div class="qh"><div class="num"><span>6</span></div><div><legend class="ttl">Seguridad y orden en obra</legend></div></div><div class="opts"><label data-lv="ex"><input type="radio" name="seguridad" value="Excelente"><span>Excelente</span></label><label data-lv="bu"><input type="radio" name="seguridad" value="Bueno"><span>Bueno</span></label><label data-lv="re"><input type="radio" name="seguridad" value="Regular"><span>Regular</span></label><label data-lv="de"><input type="radio" name="seguridad" value="Deficiente"><span>Deficiente</span></label><label data-lv="na"><input type="radio" name="seguridad" value="No aplica"><span>No aplica</span></label></div></fieldset>
+<fieldset class="q" data-name="limpieza" data-type="single" data-label="7. Limpieza del sitio al terminar"><div class="qh"><div class="num"><span>7</span></div><div><legend class="ttl">Limpieza del sitio al terminar</legend></div></div><div class="opts"><label data-lv="ex"><input type="radio" name="limpieza" value="Excelente"><span>Excelente</span></label><label data-lv="bu"><input type="radio" name="limpieza" value="Bueno"><span>Bueno</span></label><label data-lv="re"><input type="radio" name="limpieza" value="Regular"><span>Regular</span></label><label data-lv="de"><input type="radio" name="limpieza" value="Deficiente"><span>Deficiente</span></label><label data-lv="na"><input type="radio" name="limpieza" value="No aplica"><span>No aplica</span></label></div></fieldset>
+<fieldset class="q" data-name="general" data-type="single" data-label="8. Calidad del servicio en general"><div class="qh"><div class="num"><span>8</span></div><div><legend class="ttl">Calidad del servicio en general</legend></div></div><div class="opts"><label data-lv="ex"><input type="radio" name="general" value="Excelente"><span>Excelente</span></label><label data-lv="bu"><input type="radio" name="general" value="Bueno"><span>Bueno</span></label><label data-lv="re"><input type="radio" name="general" value="Regular"><span>Regular</span></label><label data-lv="de"><input type="radio" name="general" value="Deficiente"><span>Deficiente</span></label></div></fieldset>
+<fieldset class="q" data-name="mejorar" data-type="multi" data-label="9. ¿Qué aspectos debemos mejorar?"><div class="qh"><div class="num"><span>9</span></div><div><legend class="ttl">¿Qué aspectos debemos mejorar?</legend><p class="hint">Marque todos los que apliquen.</p></div></div><div class="opts"><label data-lv="mu"><input type="checkbox" name="mejorar" value="Supervisión en la ejecución"><span>Supervisión en la ejecución</span></label><label data-lv="mu"><input type="checkbox" name="mejorar" value="Calidad del trabajo"><span>Calidad del trabajo</span></label><label data-lv="mu"><input type="checkbox" name="mejorar" value="Atención del coordinador"><span>Atención del coordinador</span></label><label data-lv="mu"><input type="checkbox" name="mejorar" value="Tiempo de respuesta"><span>Tiempo de respuesta</span></label><label data-lv="mu"><input type="checkbox" name="mejorar" value="Cumplimiento de plazos"><span>Cumplimiento de plazos</span></label><label data-lv="mu"><input type="checkbox" name="mejorar" value="Seguridad y orden en obra"><span>Seguridad y orden en obra</span></label><label data-lv="mu"><input type="checkbox" name="mejorar" value="Limpieza del sitio"><span>Limpieza del sitio</span></label><label data-lv="mu"><input type="checkbox" name="mejorar" value="Comunicación durante el proyecto"><span>Comunicación durante el proyecto</span></label><label data-lv="mu"><input type="checkbox" name="mejorar" value="Precio"><span>Precio</span></label><label data-lv="mu"><input type="checkbox" name="mejorar" value="Nada, todo estuvo muy bien" data-none="1"><span>Nada, todo estuvo muy bien</span></label></div></fieldset>
+<fieldset class="q" data-name="recomienda" data-type="single" data-label="10. ¿Nos recomendaría a otra empresa?"><div class="qh"><div class="num"><span>10</span></div><div><legend class="ttl">¿Nos recomendaría a otra empresa?</legend></div></div><div class="opts"><label data-lv="ex"><input type="radio" name="recomienda" value="Sí, definitivamente"><span>Sí, definitivamente</span></label><label data-lv="bu"><input type="radio" name="recomienda" value="Probablemente"><span>Probablemente</span></label><label data-lv="re"><input type="radio" name="recomienda" value="No estoy seguro"><span>No estoy seguro</span></label><label data-lv="de"><input type="radio" name="recomienda" value="No"><span>No</span></label></div></fieldset>
+
+<p class="sec">Un último paso</p>
+<div class="q"><label class="lab" for="comentarios">Deje sus comentarios que nos ayuden a mejorar</label>
+<textarea id="comentarios" maxlength="800" placeholder="Cuéntenos qué hicimos bien y qué podemos mejorar" style="margin-top:10px"></textarea>
+<label style="display:flex;gap:12px;align-items:flex-start;font-weight:600;font-size:15px;margin-top:16px;cursor:pointer"><input type="checkbox" id="contacto" style="margin-top:3px;width:20px;height:20px;flex:none;accent-color:#071626"><span>Autorizo que me contacten para dar seguimiento a mis comentarios.</span></label></div>
+
+<p class="err" id="err" role="alert"><b>Falta responder:</b> <span id="faltan"></span></p>
+<div class="send">
+<button type="button" class="next" id="bsend">Enviar encuesta <span>→</span></button>
+<button type="button" class="wa" id="bwa" hidden>Enviar por WhatsApp <span>→</span></button>
+<button type="button" class="mail" id="bml" hidden>Enviar por correo</button>
+</div>
+<p class="note" id="note">Al presionar enviar, sus respuestas llegan directamente a nuestro equipo.</p>
+<p class="err" id="errsend" role="alert"><b>No se pudo enviar.</b> Revise su conexión e intente de nuevo, o use una de estas opciones:</p>
+<div class="thanks" id="thanks" role="status"><h2>¡Gracias por su opinión!</h2><p id="thanksp">Recibimos sus respuestas. Con su ayuda mejoramos cada día.</p></div>
+</section>
 </form>
 </main>
 <script>
 (function(){
-  var WA='50494405644',MAIL='ventas@grupoduralco.com';
-  var f=document.getElementById('enc');
+  var WA='50494405644',MAIL='ventas@grupoduralco.com',API='https://script.google.com/macros/s/AKfycbyc2YkGdTpE1U8sClbbUZQ4Hvfm_5rA3LjvhqaVNQg7IXh9Ld_sQhie0oQN1VI1w8LNGg/exec';
+  var f=document.getElementById('enc'),sets=f.querySelectorAll('fieldset[data-name]');
   function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
-  function pick(n){var c=f.querySelector('input[name="'+n+'"]:checked');return c?c.value:'';}
+  function picks(n){return Array.prototype.map.call(f.querySelectorAll('input[name="'+n+'"]:checked'),function(c){return c.value;});}
+  function progress(){
+    var n=0;sets.forEach(function(s){var d=picks(s.getAttribute('data-name')).length>0;s.classList.toggle('done',d);if(d)n++;});
+    document.getElementById('pn').textContent=n;document.getElementById('pb').style.width=(n*10)+'%';
+  }
+  f.addEventListener('change',function(e){
+    var c=e.target;
+    if(c.type==='checkbox'&&c.name==='mejorar'&&c.checked){
+      f.querySelectorAll('input[name="mejorar"]').forEach(function(o){
+        if(c.hasAttribute('data-none')?o!==c:o.hasAttribute('data-none'))o.checked=false;
+      });
+    }
+    progress();
+  });
   function build(){
     var l=['Encuesta de satisfacción — Grupo Duralco',''];
     if(val('nombre'))l.push('Nombre: '+val('nombre'));
     if(val('empresa'))l.push('Empresa: '+val('empresa'));
+    if(val('correo'))l.push('Correo: '+val('correo'));
     if(val('proyecto'))l.push('Proyecto o pedido: '+val('proyecto'));
     l.push('Servicio: '+val('servicio'),'');
-    f.querySelectorAll('fieldset[data-name]').forEach(function(s){
-      l.push(s.getAttribute('data-label')+': '+pick(s.getAttribute('data-name')));
+    sets.forEach(function(s){
+      var p=picks(s.getAttribute('data-name'));
+      l.push(s.getAttribute('data-label')+': '+(p.length?p.join(', '):'(sin respuesta)'));
     });
     if(val('comentarios'))l.push('','Comentarios: '+val('comentarios'));
     l.push('','Autoriza contacto: '+(document.getElementById('contacto').checked?'Sí':'No'));
@@ -141,23 +225,64 @@ footer a{color:#F5F7F8}
   function check(){
     var miss=[];
     if(!val('servicio'))miss.push('servicio recibido');
-    f.querySelectorAll('fieldset[data-name]').forEach(function(s){if(!pick(s.getAttribute('data-name')))miss.push(s.getAttribute('data-label').toLowerCase());});
+    f.querySelectorAll('fieldset[data-type=single]').forEach(function(s){if(!picks(s.getAttribute('data-name')).length)miss.push(s.getAttribute('data-label').replace(/^\d+\.\s*/,'').toLowerCase());});
     var e=document.getElementById('err');
     document.getElementById('faltan').textContent=miss.join('; ');
     e.className='err'+(miss.length?' on':'');
     if(miss.length)e.scrollIntoView({behavior:'smooth',block:'center'});
     return !miss.length;
   }
+  function payload(){
+    var r=[];sets.forEach(function(s){var p=picks(s.getAttribute('data-name'));r.push({q:s.getAttribute('data-label'),a:p.length?p.join(', '):'(sin respuesta)'});});
+    return {nombre:val('nombre'),empresa:val('empresa'),correo:val('correo'),proyecto:val('proyecto'),servicio:val('servicio'),respuestas:r,comentarios:val('comentarios'),contacto:document.getElementById('contacto').checked?'Sí':'No'};
+  }
+  var bs=document.getElementById('bsend');
+  function fallback(){document.getElementById('bwa').hidden=false;document.getElementById('bml').hidden=false;}
+  if(!API){bs.hidden=true;fallback();document.getElementById('note').textContent='Se abrirá WhatsApp (o su correo) con sus respuestas ya escritas. Solo falta presionar enviar.';}
+  bs.addEventListener('click',function(){
+    if(!check())return;
+    document.getElementById('errsend').className='err';
+    bs.disabled=true;bs.firstChild.textContent='Enviando… ';
+    fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload())}).then(function(){
+      bs.hidden=true;document.getElementById('note').hidden=true;thanks();
+    }).catch(function(){
+      bs.disabled=false;bs.firstChild.textContent='Enviar encuesta ';
+      document.getElementById('errsend').className='err on';fallback();
+    });
+  });
+  function thanks(){var t=document.getElementById('thanks');t.className='thanks on';t.scrollIntoView({behavior:'smooth',block:'center'});}
   document.getElementById('bwa').addEventListener('click',function(){
     if(!check())return;
-    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(build()),'_blank','noopener');
+    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(build()),'_blank','noopener');thanks();
   });
   document.getElementById('bml').addEventListener('click',function(){
     if(!check())return;
-    location.href='mailto:'+MAIL+'?subject='+encodeURIComponent('Encuesta de satisfacción')+'&body='+encodeURIComponent(build());
+    thanks();location.href='mailto:'+MAIL+'?subject='+encodeURIComponent('Encuesta de satisfacción')+'&body='+encodeURIComponent(build());
   });
+  var p1=document.getElementById('paso1'),p2=document.getElementById('paso2');
+  function go(n){
+    p1.hidden=n!==1;p2.hidden=n!==2;
+    document.getElementById('s1').className='st'+(n===1?' on':' done');
+    document.getElementById('s2').className='st'+(n===2?' on':'');
+    window.scrollTo({top:document.getElementById('steps').getBoundingClientRect().top+window.scrollY-12,behavior:'smooth'});
+  }
+  document.getElementById('bnext').addEventListener('click',function(){
+    var m=[];
+    if(!val('nombre'))m.push('nombre');
+    if(!val('empresa'))m.push('empresa');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val('correo')))m.push('correo electrónico válido');
+    if(!val('servicio'))m.push('servicio recibido');
+    var e=document.getElementById('err1');
+    document.getElementById('faltan1').textContent=m.join(', ');
+    e.className='err'+(m.length?' on':'');
+    if(m.length){e.scrollIntoView({behavior:'smooth',block:'center'});return;}
+    go(2);
+  });
+  document.getElementById('bback').addEventListener('click',function(){go(1);});
+  progress();
 })();
 </script>
+
 <footer><div class="wrap">
 <span>© 2026 Grupo Duralco · San Pedro Sula, Honduras</span>
 <span><a href="mailto:ventas@grupoduralco.com">ventas@grupoduralco.com</a> · <a href="https://wa.me/50494405644" target="_blank" rel="noopener">WhatsApp +504 9440-5644</a></span>
