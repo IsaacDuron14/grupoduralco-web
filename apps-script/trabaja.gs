@@ -37,15 +37,25 @@ function procesar(d) {
     }
 
     // 2. Registro en la hoja (pestaña Personal o Contratistas)
+    //    Las columnas se buscan por nombre: si el formulario trae un campo nuevo,
+    //    se agrega una columna al final sin desordenar las anteriores.
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const hoja = d.prueba ? null : (ss.getSheetByName(pestaña) || ss.insertSheet(pestaña));
-    if (hoja && hoja.getLastRow() === 0) {
-      const enc = ['Fecha', ...campos.map(c => c.k), 'Archivos'];
-      hoja.appendRow(enc);
-      hoja.getRange(1, 1, 1, enc.length).setFontWeight('bold').setBackground('#071626').setFontColor('#ffffff');
-      hoja.setFrozenRows(1);
+    if (hoja) {
+      const claves = ['Fecha', ...campos.map(c => c.k), 'Archivos'];
+      let enc = hoja.getLastRow() ? hoja.getRange(1, 1, 1, hoja.getLastColumn()).getValues()[0] : [];
+      const estilo = r => r.setFontWeight('bold').setBackground('#071626').setFontColor('#ffffff');
+      if (!enc.length) {
+        enc = claves;
+        estilo(hoja.getRange(1, 1, 1, enc.length).setValues([enc]));
+        hoja.setFrozenRows(1);
+      } else {
+        claves.forEach(k => {
+          if (enc.indexOf(k) < 0) { enc.push(k); estilo(hoja.getRange(1, enc.length).setValue(k)); }
+        });
+      }
+      hoja.appendRow(enc.map(h => h === 'Fecha' ? fecha : h === 'Archivos' ? enlaces.join('\n') : limpio(v(h))));
     }
-    if (hoja) hoja.appendRow([fecha, ...campos.map(c => limpio(c.v)), enlaces.join('\n')]);
 
     // 3. Correo con PDF de resumen + archivos adjuntos
     const para = CORREOS[tipo];

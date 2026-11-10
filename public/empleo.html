@@ -218,9 +218,11 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
 <div class="q"><span class="lab">Domicilio exacto</span>
 <div><label class="f" for="direccion">Dirección (colonia, calle, número de casa o referencia) <span class="req">*</span></label><input type="text" id="direccion" maxlength="200" autocomplete="street-address"></div>
 <div class="row2" style="margin-top:14px">
-<div><label class="f" for="ciudad">Ciudad o municipio <span class="req">*</span></label><input type="text" id="ciudad" maxlength="60" autocomplete="address-level2"></div>
-<div><label class="f" for="depto">Departamento <span class="req">*</span></label><select id="depto"><option value="">Seleccione</option></select></div>
+<div><label class="f" for="pais">País <span class="req">*</span></label><select id="pais" autocomplete="country-name"><option>Honduras</option><option>Guatemala</option><option>El Salvador</option><option>Nicaragua</option><option>Otro país</option></select>
+<div id="pais_otro_w" hidden style="margin-top:10px"><input type="text" id="pais_otro" maxlength="60" placeholder="Escriba el país" aria-label="Otro país"></div></div>
+<div><label class="f" for="depto"><span id="depto_lab">Departamento</span> <span class="req">*</span></label><select id="depto"><option value="">Seleccione</option></select><input type="text" id="depto_txt" maxlength="60" hidden aria-label="Estado, provincia o región"></div>
 </div>
+<div style="margin-top:14px"><label class="f" for="ciudad_sel">Ciudad o municipio <span class="req">*</span></label><select id="ciudad_sel"><option value="">Primero elija el departamento</option></select><input type="text" id="ciudad" maxlength="60" autocomplete="address-level2" placeholder="Escriba su ciudad, municipio o aldea" hidden style="margin-top:10px"></div>
 </div>
 
 <!-- ÁREAS -->
@@ -311,7 +313,6 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
   var WA='50494405644',API='https://script.google.com/macros/s/AKfycbz-SijzVJo1WY4MIcUr5yt6UdXn3GScUJgGwTFx1W_iJuHafZDeCzWYudThxq4dzRwX/exec';
   var AREAS=['Construcción / obra civil','Estructuras metálicas','Soldadura','Pintura industrial','Montaje e izaje','Techos y cubiertas','Albañilería y acabados','Carpintería','Electricidad','Fontanería / hidráulica','Mecanizado / tornería CNC','Topografía','Dibujo / diseño CAD','Ingeniería','Supervisión de obra','Seguridad industrial (HSE)','Operador de maquinaria','Conductor / logística','Bodega y compras','Administración / ventas','Otra'];
   var CERTS=['OSHA 10 horas','OSHA 30 horas','Trabajo en alturas','Espacios confinados','Soldadura certificada (AWS u otra)','Rigger / señalero de izaje','Operador de montacargas','Operador de plataforma elevadora','Bloqueo y etiquetado (LOTO)','Ninguno'];
-  var DEPTOS=['Atlántida','Choluteca','Colón','Comayagua','Copán','Cortés','El Paraíso','Francisco Morazán','Gracias a Dios','Intibucá','Islas de la Bahía','La Paz','Lempira','Ocotepeque','Olancho','Santa Bárbara','Valle','Yoro','Fuera de Honduras'];
   var MAXF=5*1024*1024, tipo='', files=[], inicial=false;
   var $=function(id){return document.getElementById(id);};
   var frm=$('frm');
@@ -320,7 +321,6 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
   AREAS.forEach(function(t){var l=document.createElement('label');l.setAttribute('data-lv','mu');l.innerHTML='<input type="checkbox" name="areas"><span></span>';l.firstChild.value=t;l.lastChild.textContent=t;a.appendChild(l);});
   document.querySelectorAll('.certs').forEach(function(box){var n='cert_'+box.getAttribute('data-cert');CERTS.forEach(function(t){var l=document.createElement('label');l.setAttribute('data-lv','mu');l.innerHTML='<input type="checkbox"><span></span>';l.firstChild.name=n;l.firstChild.value=t;l.lastChild.textContent=t;box.appendChild(l);});});
   function certs(n,otros){var r=[];frm.querySelectorAll('input[name="'+n+'"]:checked').forEach(function(c){r.push(c.value);});if(val(otros))r.push('Otros: '+val(otros));return r.join(', ');}
-  DEPTOS.forEach(function(d){var o=document.createElement('option');o.textContent=d;$('depto').appendChild(o);});
 
   document.querySelectorAll('.pick').forEach(function(b){b.addEventListener('click',function(){
     tipo=b.getAttribute('data-tipo');
@@ -336,6 +336,53 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
 
   function val(id){var e=$(id);return e?e.value.trim():'';}
   function radio(n){var c=frm.querySelector('input[name="'+n+'"]:checked');return c?c.value:'';}
+  var GEO={
+    'Honduras':{d:'Departamento',c:{
+      'Atlántida':['La Ceiba','Tela','El Porvenir','Jutiapa','La Masica','Arizona','Esparta','San Francisco'],
+      'Choluteca':['Choluteca','San Marcos de Colón','Pespire','El Triunfo','Marcovia','Namasigüe','Orocuina','Apacilagua','Duyure','El Corpus'],
+      'Colón':['Tocoa','Trujillo','Sonaguera','Bonito Oriental','Sabá','Limón','Santa Fe','Balfate','Iriona','Santa Rosa de Aguán'],
+      'Comayagua':['Comayagua','Siguatepeque','La Libertad','Villa de San Antonio','Taulabé','Ajuterique','Lejamaní','Esquías','San Jerónimo','Minas de Oro','Las Lajas','El Rosario','Meámbar','Ojos de Agua','La Trinidad','San Luis','San Sebastián','Humuya','San José de Comayagua','Lamaní'],
+      'Copán':['Santa Rosa de Copán','Copán Ruinas','Nueva Arcadia (La Entrada)','Santa Rita','Florida','Dulce Nombre','San Jerónimo','Cucuyagua','Corquín','San Pedro de Copán','Cabañas','El Paraíso'],
+      'Cortés':['San Pedro Sula','Choloma','Puerto Cortés','Villanueva','La Lima','Omoa','Potrerillos','Pimienta','San Manuel','Santa Cruz de Yojoa','San Antonio de Cortés','San Francisco de Yojoa'],
+      'El Paraíso':['Danlí','El Paraíso','Yuscarán','Trojes','Teupasenti','San Matías','Alauca','Morocelí','Oropolí','Jacaleapa','Güinope','Potrerillos'],
+      'Francisco Morazán':['Tegucigalpa','Comayagüela','Valle de Ángeles','Santa Lucía','Talanga','Guaimaca','Ojojona','Sabanagrande','San Juan de Flores (Cantarranas)','Marale','Cedros','El Porvenir','Villa de San Francisco','Orica','Lepaterique','Santa Ana','San Antonio de Oriente','Tatumbla','Reitoca','Curarén'],
+      'Gracias a Dios':['Puerto Lempira','Brus Laguna','Ahuas','Juan Francisco Bulnes','Ramón Villeda Morales','Wampusirpi'],
+      'Intibucá':['La Esperanza','Intibucá','Jesús de Otoro','Yamaranguila','Camasca','Colomoncagua','Concepción','San Juan','San Miguelito','Masaguara','San Isidro'],
+      'Islas de la Bahía':['Roatán','José Santos Guardiola','Utila','Guanaja'],
+      'La Paz':['La Paz','Marcala','San Pedro de Tutule','Santiago de Puringla','Cane','Chinacla','Santa Ana','Opatoro','Yarula','Guajiquiro'],
+      'Lempira':['Gracias','Erandique','Lepaera','San Rafael','La Iguala','Belén','Gualcince','Cololaca','Las Flores','San Marcos de Caiquín','Valladolid','Candelaria'],
+      'Ocotepeque':['Nueva Ocotepeque','Sinuapa','San Marcos','Santa Fe','La Labor','Lucerna','Sensenti','Mercedes','Concepción','Belén Gualcho','Dolores Merendón'],
+      'Olancho':['Juticalpa','Catacamas','Campamento','San Esteban','Salamá','Guarizama','Gualaco','Dulce Nombre de Culmí','Patuca','Concordia','Guayape','Mangulile','Jano','El Rosario','Esquipulas del Norte','Yocón','Silca'],
+      'Santa Bárbara':['Santa Bárbara','Quimistán','San Marcos','Trinidad','Macuelizo','Naranjito','Gualala','Azacualpa','Las Vegas','Ilama','Nuevo Celilac','Petoa','Protección','San Nicolás','Arada','Atima'],
+      'Valle':['Nacaome','San Lorenzo','Amapala','Langue','Goascorán','Aramecina','San Francisco de Coray','Alianza','Caridad'],
+      'Yoro':['El Progreso','Yoro','Olanchito','Morazán','Santa Rita','El Negrito','Victoria','Sulaco','Arenal','Jocón','Yorito']
+    }},
+    'Guatemala':{d:'Departamento',l:['Alta Verapaz','Baja Verapaz','Chimaltenango','Chiquimula','El Progreso','Escuintla','Guatemala','Huehuetenango','Izabal','Jalapa','Jutiapa','Petén','Quetzaltenango','Quiché','Retalhuleu','Sacatepéquez','San Marcos','Santa Rosa','Sololá','Suchitepéquez','Totonicapán','Zacapa']},
+    'El Salvador':{d:'Departamento',l:['Ahuachapán','Cabañas','Chalatenango','Cuscatlán','La Libertad','La Paz','La Unión','Morazán','San Miguel','San Salvador','San Vicente','Santa Ana','Sonsonate','Usulután']},
+    'Nicaragua':{d:'Departamento',l:['Boaco','Carazo','Chinandega','Chontales','Costa Caribe Norte','Costa Caribe Sur','Estelí','Granada','Jinotega','León','Madriz','Managua','Masaya','Matagalpa','Nueva Segovia','Río San Juan','Rivas']},
+    'Otro país':{d:'Estado, provincia o región'}
+  };
+  function fillSel(sel,arr,ph){sel.innerHTML='';var o=document.createElement('option');o.value='';o.textContent=ph;sel.appendChild(o);arr.forEach(function(t){var x=document.createElement('option');x.textContent=t;sel.appendChild(x);});}
+  function onPais(){
+    var p=$('pais').value,g=GEO[p]||{},hasList=!!(g.c||g.l);
+    $('pais_otro_w').hidden=p!=='Otro país';
+    $('depto_lab').textContent=g.d||'Departamento';
+    $('depto').hidden=!hasList;$('depto_txt').hidden=hasList;
+    if(hasList)fillSel($('depto'),g.c?Object.keys(g.c):g.l,'Seleccione');
+    $('depto_txt').value='';onDepto();
+  }
+  function onDepto(){
+    var g=GEO[$('pais').value]||{},list=g.c&&g.c[$('depto').value];
+    $('ciudad_sel').hidden=!list;$('ciudad').hidden=!!list;$('ciudad').value='';
+    if(list){fillSel($('ciudad_sel'),list.concat(['Otra ciudad o aldea']),'Seleccione');}
+    else if(g.c){$('ciudad_sel').hidden=false;$('ciudad').hidden=true;fillSel($('ciudad_sel'),[],'Primero elija el departamento');}
+  }
+  function paisV(){var p=$('pais').value;return p==='Otro país'?(val('pais_otro')?val('pais_otro'):''):p;}
+  function deptoV(){return $('depto').hidden?val('depto_txt'):val('depto');}
+  function ciudadV(){if(!$('ciudad_sel').hidden){var c=$('ciudad_sel').value;return c==='Otra ciudad o aldea'?val('ciudad'):c;}return val('ciudad');}
+  $('pais').addEventListener('change',onPais);$('depto').addEventListener('change',onDepto);
+  $('ciudad_sel').addEventListener('change',function(){var o=this.value==='Otra ciudad o aldea';$('ciudad').hidden=!o;if(o)$('ciudad').focus();});
+  onPais();
   function areas(){var r=[];frm.querySelectorAll('input[name=areas]:checked').forEach(function(c){r.push(c.value==='Otra'&&val('otraarea')?'Otra: '+val('otraarea'):c.value);});return r;}
 
   frm.addEventListener('change',function(e){
@@ -373,7 +420,7 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
       add('Representante o contacto',val('nombre'));
     } else add('Nombre completo',val('nombre'));
     add('Identidad',val('identidad'));add('Teléfono / WhatsApp',val('telefono'));add('Correo',val('correo'));
-    add('Dirección',val('direccion'));add('Ciudad o municipio',val('ciudad'));add('Departamento',val('depto'));
+    add('Dirección',val('direccion'));add('Ciudad o municipio',ciudadV());add('Departamento',deptoV());add('País',paisV());
     add(tipo==='equipo'?'Áreas de interés':'Especialidades',areas().join(', '));
     if(tipo==='equipo'){
       add('Puesto u oficio',val('e_puesto'));add('Años de experiencia',val('e_anios'));add('Experiencia',val('e_exp'));
@@ -396,7 +443,7 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
     ok(val('telefono').replace(/\D/g,'').length>=8,'teléfono');
     var ce=val('correo'),cv=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(ce);
     if(tipo==='contratista')ok(cv,'correo electrónico');else if(ce)ok(cv,'correo electrónico válido');
-    ok(val('direccion'),'dirección');ok(val('ciudad'),'ciudad');ok(val('depto'),'departamento');
+    ok(val('direccion'),'dirección');ok(paisV(),'país');ok(deptoV(),($('depto_lab').textContent||'departamento').toLowerCase());ok(ciudadV(),'ciudad o municipio');
     ok(areas().length,tipo==='equipo'?'áreas de interés':'especialidades');
     if(tipo==='equipo'){
       ok(val('e_puesto'),'puesto u oficio');ok(val('e_anios'),'años de experiencia');ok(val('e_exp'),'descripción de su experiencia');
