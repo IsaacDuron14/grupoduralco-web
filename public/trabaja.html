@@ -403,7 +403,7 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
     if(!check())return;
     $('errsend').className='err';bs.disabled=true;bs.firstChild.textContent='Enviando… ';
     Promise.all(files.map(toB64)).then(function(arch){
-      return fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({tipo:tipo==='equipo'?'Equipo':'Contratista',campos:campos(),archivos:arch})});
+      return fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({tipo:tipo==='equipo'?'Personal':'Contratista',campos:campos(),archivos:arch})});
     }).then(function(){
       bs.hidden=true;$('note').hidden=true;$('errsend').className='err';thanks();
     }).catch(function(){
