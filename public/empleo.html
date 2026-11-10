@@ -155,6 +155,11 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
 .flist button{border:0;background:none;color:#8A1F14;font-weight:700;cursor:pointer;font-size:13px}
 .consent{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:#26323C;margin-top:16px;cursor:pointer}
 .consent input{margin-top:3px;width:20px;height:20px;flex:none;accent-color:#071626}
+
+.hero.ph{background-size:cover;background-position:center 30%;min-height:460px;display:flex;align-items:flex-end}
+.hero.ph .wrap{width:100%}
+.pick .im{display:block;margin:-24px -24px 6px;height:190px;background-size:cover;background-position:center 30%}
+@media(min-width:900px){.hero.ph{min-height:540px}}
 </style>
 </head>
 <body data-tipo="equipo">
@@ -162,9 +167,9 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
 <a href="/"><img src="/assets/logo-grupo-duralco.png" alt="Grupo Duralco"></a>
 <nav><a href="/pernos-de-anclaje">Pernos de anclaje</a><a href="/estructuras-metalicas">Estructuras metálicas</a><a href="/mecanizado-cnc">Mecanizado CNC</a><a href="/repuestos-industriales">Repuestos industriales</a><a href="/mobiliario-urbano">Mobiliario urbano</a><a href="/nosotros">Historia</a><a href="/#contacto">Contacto</a></nav>
 </div></header>
-<section class="hero"><div class="wrap">
-<p class="kicker">TRABAJE CON NOSOTROS</p>
-<h1>Construyamos juntos.</h1>
+<section class="hero ph" style="background-image:linear-gradient(90deg,rgba(7,22,38,.94) 0%,rgba(7,22,38,.82) 40%,rgba(7,22,38,.25) 100%),linear-gradient(0deg,rgba(7,22,38,.7),rgba(7,22,38,0) 45%),url(/assets/fotos/equipo-personal.jpg);background-position:center,center,center 30%"><div class="wrap">
+<p class="kicker">ESTAMOS CONTRATANDO</p>
+<h1>Únase a nuestro equipo.</h1>
 <p class="lead">Buscamos personas y contratistas comprometidos con la calidad y la seguridad para nuestros proyectos de construcción, estructuras metálicas y manufactura en Honduras y Centroamérica.</p>
 <div class="chips"><span>Construcción</span><span>Estructuras metálicas</span><span>Soldadura</span><span>Pintura</span><span>Mecanizado</span></div>
 </div></section>
@@ -173,9 +178,9 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
 <p class="sec" style="margin-top:40px">¿Cómo quiere trabajar con nosotros?</p>
 <div class="choose" role="radiogroup" aria-label="Tipo de registro">
 <button type="button" class="pick" data-tipo="equipo" role="radio" aria-checked="false">
-<span class="pk">01</span><b>¿Quiere ser parte de nuestro equipo?</b><span>Para soldadores, armadores, pintores, técnicos, ingenieros, operadores, personal administrativo y más.</span><i>Postularme →</i></button>
+<span class="im" style="background-image:url(/assets/fotos/equipo-personal.jpg)" aria-hidden="true"></span><span class="pk">01</span><b>¿Quiere ser parte de nuestro equipo?</b><span>Para soldadores, armadores, pintores, técnicos, ingenieros, operadores, personal administrativo y más.</span><i>Postularme →</i></button>
 <button type="button" class="pick" data-tipo="contratista" role="radio" aria-checked="false">
-<span class="pk">02</span><b>¿Quiere ser parte de nuestro perfil de contratistas?</b><span>Para empresas y personas que ejecutan obras o servicios especializados como subcontratistas.</span><i>Registrarme →</i></button>
+<span class="im" style="background-image:url(/assets/fotos/equipo-contratistas.jpg)" aria-hidden="true"></span><span class="pk">02</span><b>¿Quiere ser parte de nuestro portafolio de contratistas?</b><span>Para empresas y personas que ejecutan obras o servicios especializados como subcontratistas.</span><i>Registrarme →</i></button>
 </div>
 </div>
 
