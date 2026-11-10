@@ -241,6 +241,7 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
 <div><label class="f" for="e_disp">¿Cuándo puede empezar? <span class="req">*</span></label><select id="e_disp"><option value="">Seleccione</option><option>De inmediato</option><option>En 15 días</option><option>En 30 días o más</option></select></div>
 <div><label class="f" for="e_lic">Licencia de conducir</label><select id="e_lic"><option>No tiene</option><option>Liviana</option><option>Pesada</option><option>Motocicleta</option></select></div>
 </div>
+<div style="margin-top:14px"><label class="f" for="e_salario">Pretensión salarial</label><input type="text" id="e_salario" maxlength="60" inputmode="text" placeholder="Ej.: L 15,000 mensuales o L 600 por día"></div>
 <div style="margin-top:14px"><label class="f">¿Puede trabajar fuera de su ciudad o viajar? <span class="req">*</span></label>
 <div class="opts two"><label data-lv="mu"><input type="radio" name="e_viajar" value="Sí"><span>Sí</span></label><label data-lv="mu"><input type="radio" name="e_viajar" value="No"><span>No</span></label></div></div>
 </div>
@@ -297,7 +298,7 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
 (function(){
   var WA='50494405644',API='';
   var AREAS=['Construcción / obra civil','Estructuras metálicas','Soldadura','Pintura industrial','Montaje e izaje','Techos y cubiertas','Albañilería y acabados','Carpintería','Electricidad','Fontanería / hidráulica','Mecanizado / tornería CNC','Topografía','Dibujo / diseño CAD','Ingeniería','Supervisión de obra','Seguridad industrial (HSE)','Operador de maquinaria','Conductor / logística','Bodega y compras','Administración / ventas','Otra'];
-  var CERTS=['OSHA 10 horas','OSHA 30 horas','Trabajo en alturas','Espacios confinados','Soldadura certificada (AWS u otra)','Rigger / señalero de izaje','Operador de montacargas','Operador de plataforma elevadora','Bloqueo y etiquetado (LOTO)','Riesgo eléctrico','Primeros auxilios','Prevención y combate de incendios','Manejo defensivo','Ninguno'];
+  var CERTS=['OSHA 10 horas','OSHA 30 horas','Trabajo en alturas','Espacios confinados','Soldadura certificada (AWS u otra)','Rigger / señalero de izaje','Operador de montacargas','Operador de plataforma elevadora','Bloqueo y etiquetado (LOTO)','Ninguno'];
   var DEPTOS=['Atlántida','Choluteca','Colón','Comayagua','Copán','Cortés','El Paraíso','Francisco Morazán','Gracias a Dios','Intibucá','Islas de la Bahía','La Paz','Lempira','Ocotepeque','Olancho','Santa Bárbara','Valle','Yoro','Fuera de Honduras'];
   var MAXF=5*1024*1024, tipo='', files=[];
   var $=function(id){return document.getElementById(id);};
@@ -365,7 +366,7 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
     if(tipo==='equipo'){
       add('Puesto u oficio',val('e_puesto'));add('Años de experiencia',val('e_anios'));add('Experiencia',val('e_exp'));
       add('Nivel de estudios',val('e_nivel'));add('Tiene título',radio('e_titulo'));add('Título',radio('e_titulo')==='Sí'?val('e_titulo_cual'):'');
-      add('Cursos y certificaciones',certs('cert_e','e_cert_otros'));add('Disponibilidad',val('e_disp'));add('Licencia de conducir',val('e_lic'));add('Puede viajar',radio('e_viajar'));
+      add('Cursos y certificaciones',certs('cert_e','e_cert_otros'));add('Disponibilidad',val('e_disp'));add('Licencia de conducir',val('e_lic'));add('Pretensión salarial',val('e_salario'));add('Puede viajar',radio('e_viajar'));
     } else {
       add('Años de experiencia',val('c_anios'));add('Personal disponible',val('c_personal'));add('Proyectos ejecutados',val('c_proy'));
       add('Equipo y herramienta',val('c_equipo'));add('Certificaciones del personal',certs('cert_c','c_cert_otros'));add('Zonas de trabajo',val('c_zona'));add('Emite factura',radio('c_factura'));
