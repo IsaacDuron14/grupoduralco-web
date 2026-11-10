@@ -8,7 +8,10 @@
 <link rel="canonical" href="https://www.grupoduralco.com/trabaja">
 <meta property="og:title" content="Trabaje con nosotros | Grupo Duralco">
 <meta property="og:description" content="Únase a nuestro equipo o regístrese como contratista.">
-<meta property="og:image" content="https://www.grupoduralco.com/assets/fotos/mont-2.jpeg">
+<meta property="og:image" content="https://www.grupoduralco.com/assets/og-empleo.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#071626">
 <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -300,7 +303,7 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
   var AREAS=['Construcción / obra civil','Estructuras metálicas','Soldadura','Pintura industrial','Montaje e izaje','Techos y cubiertas','Albañilería y acabados','Carpintería','Electricidad','Fontanería / hidráulica','Mecanizado / tornería CNC','Topografía','Dibujo / diseño CAD','Ingeniería','Supervisión de obra','Seguridad industrial (HSE)','Operador de maquinaria','Conductor / logística','Bodega y compras','Administración / ventas','Otra'];
   var CERTS=['OSHA 10 horas','OSHA 30 horas','Trabajo en alturas','Espacios confinados','Soldadura certificada (AWS u otra)','Rigger / señalero de izaje','Operador de montacargas','Operador de plataforma elevadora','Bloqueo y etiquetado (LOTO)','Ninguno'];
   var DEPTOS=['Atlántida','Choluteca','Colón','Comayagua','Copán','Cortés','El Paraíso','Francisco Morazán','Gracias a Dios','Intibucá','Islas de la Bahía','La Paz','Lempira','Ocotepeque','Olancho','Santa Bárbara','Valle','Yoro','Fuera de Honduras'];
-  var MAXF=5*1024*1024, tipo='', files=[];
+  var MAXF=5*1024*1024, tipo='', files=[], inicial=false;
   var $=function(id){return document.getElementById(id);};
   var frm=$('frm');
 
@@ -319,7 +322,7 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
     $('note').textContent='Al presionar enviar, sus datos llegan directamente a nuestro equipo'+(tipo==='equipo'?' de recursos humanos.':' de proyectos.');
     if(tipo==='equipo'&&files.length>1){files=files.slice(0,1);renderFiles();}
     frm.hidden=false;
-    window.scrollTo({top:frm.getBoundingClientRect().top+window.scrollY-12,behavior:'smooth'});
+    if(!inicial)window.scrollTo({top:frm.getBoundingClientRect().top+window.scrollY-12,behavior:'smooth'});
   });});
 
   function val(id){var e=$(id);return e?e.value.trim():'';}
@@ -426,8 +429,8 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
   });
 
   // Enlace directo: /trabaja#equipo o /trabaja#contratista
-  var h=location.hash.replace('#','');
-  if(h==='equipo'||h==='contratista'){var b=document.querySelector('.pick[data-tipo="'+h+'"]');if(b)b.click();}
+  var h=location.hash.replace('#','')||document.body.getAttribute('data-tipo')||'';
+  if(h==='equipo'||h==='contratista'){var b=document.querySelector('.pick[data-tipo="'+h+'"]');if(b){inicial=true;b.click();inicial=false;}}
 })();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d0ade7acc1494fb68388a378ce63b9bd"}'></script><!-- End Cloudflare Web Analytics -->
