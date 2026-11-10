@@ -133,7 +133,7 @@ main{padding:0 20px 56px}
 .pick[aria-checked=true] b,.pick[aria-checked=true] i{color:#E4C16B}
 .pick[aria-checked=true] span:not(.pk){color:#C9D1D8}
 .opts.two{grid-template-columns:1fr 1fr}
-.opts.areas{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.opts.areas{grid-template-columns:repeat(auto-fit,minmax(136px,1fr))}
 .opts.areas span{justify-content:flex-start;text-align:left;font-size:14px;padding:10px 12px}
 .opts input[type=radio]:checked+span{background:#071626;color:#E4C16B;border-color:transparent}
 body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
@@ -231,7 +231,9 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
 <div class="opts two"><label data-lv="mu"><input type="radio" name="e_titulo" value="Sí"><span>Sí</span></label><label data-lv="mu"><input type="radio" name="e_titulo" value="No"><span>No</span></label></div></div>
 </div>
 <div id="e_titulo_w" hidden style="margin-top:14px"><label class="f" for="e_titulo_cual">¿Qué título tiene?</label><input type="text" id="e_titulo_cual" maxlength="120" placeholder="Ej.: Ingeniero civil, Técnico en soldadura"></div>
-<div style="margin-top:14px"><label class="f" for="e_cert">Cursos o certificaciones</label><input type="text" id="e_cert" maxlength="200" placeholder="Ej.: soldadura AWS, trabajo en alturas, primeros auxilios"></div>
+<div style="margin-top:18px"><label class="f">Cursos y certificaciones <span style="font-weight:500;color:#5B6873">(marque todos los que tenga)</span></label>
+<div class="opts areas certs" data-cert="e"></div>
+<div style="margin-top:12px"><label class="f" for="e_cert_otros">Otros cursos</label><input type="text" id="e_cert_otros" maxlength="200" placeholder="Ej.: curso de pintura epóxica, INFOP electricidad"></div></div>
 </div>
 
 <div class="q only-e"><span class="lab">Disponibilidad</span>
@@ -251,6 +253,9 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
 </div>
 <div style="margin-top:14px"><label class="f" for="c_proy">Proyectos ejecutados <span class="req">*</span></label><textarea id="c_proy" maxlength="2000" placeholder="Para cada proyecto: nombre, cliente, ciudad, año y monto aproximado.&#10;Ej.: Nave industrial 1,200 m², Empresa X, San Pedro Sula, 2025, L 2.5 millones"></textarea></div>
 <div style="margin-top:14px"><label class="f" for="c_equipo">Equipo y herramienta propia</label><textarea id="c_equipo" maxlength="1000" style="min-height:80px" placeholder="Ej.: 3 soldadoras, andamios, plataforma de elevación, compresor, equipo de pintura airless"></textarea></div>
+<div style="margin-top:18px"><label class="f">Certificaciones de su personal <span style="font-weight:500;color:#5B6873">(marque todas las que apliquen)</span></label>
+<div class="opts areas certs" data-cert="c"></div>
+<div style="margin-top:12px"><label class="f" for="c_cert_otros">Otras certificaciones</label><input type="text" id="c_cert_otros" maxlength="200"></div></div>
 <div style="margin-top:14px"><label class="f" for="c_zona">Zonas donde puede trabajar <span class="req">*</span></label><input type="text" id="c_zona" maxlength="200" placeholder="Ej.: Cortés, Atlántida, Yoro, todo Honduras"></div>
 <div class="row2" style="margin-top:14px">
 <div><label class="f">¿Emite factura? <span class="req">*</span></label>
@@ -292,6 +297,7 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
 (function(){
   var WA='50494405644',API='';
   var AREAS=['Construcción / obra civil','Estructuras metálicas','Soldadura','Pintura industrial','Montaje e izaje','Techos y cubiertas','Albañilería y acabados','Carpintería','Electricidad','Fontanería / hidráulica','Mecanizado / tornería CNC','Topografía','Dibujo / diseño CAD','Ingeniería','Supervisión de obra','Seguridad industrial (HSE)','Operador de maquinaria','Conductor / logística','Bodega y compras','Administración / ventas','Otra'];
+  var CERTS=['OSHA 10 horas','OSHA 30 horas','Trabajo en alturas','Espacios confinados','Soldadura certificada (AWS u otra)','Rigger / señalero de izaje','Operador de montacargas','Operador de plataforma elevadora','Bloqueo y etiquetado (LOTO)','Riesgo eléctrico','Primeros auxilios','Prevención y combate de incendios','Manejo defensivo','Ninguno'];
   var DEPTOS=['Atlántida','Choluteca','Colón','Comayagua','Copán','Cortés','El Paraíso','Francisco Morazán','Gracias a Dios','Intibucá','Islas de la Bahía','La Paz','Lempira','Ocotepeque','Olancho','Santa Bárbara','Valle','Yoro','Fuera de Honduras'];
   var MAXF=5*1024*1024, tipo='', files=[];
   var $=function(id){return document.getElementById(id);};
@@ -299,6 +305,8 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
 
   var a=$('areas');
   AREAS.forEach(function(t){var l=document.createElement('label');l.setAttribute('data-lv','mu');l.innerHTML='<input type="checkbox" name="areas"><span></span>';l.firstChild.value=t;l.lastChild.textContent=t;a.appendChild(l);});
+  document.querySelectorAll('.certs').forEach(function(box){var n='cert_'+box.getAttribute('data-cert');CERTS.forEach(function(t){var l=document.createElement('label');l.setAttribute('data-lv','mu');l.innerHTML='<input type="checkbox"><span></span>';l.firstChild.name=n;l.firstChild.value=t;l.lastChild.textContent=t;box.appendChild(l);});});
+  function certs(n,otros){var r=[];frm.querySelectorAll('input[name="'+n+'"]:checked').forEach(function(c){r.push(c.value);});if(val(otros))r.push('Otros: '+val(otros));return r.join(', ');}
   DEPTOS.forEach(function(d){var o=document.createElement('option');o.textContent=d;$('depto').appendChild(o);});
 
   document.querySelectorAll('.pick').forEach(function(b){b.addEventListener('click',function(){
@@ -319,6 +327,7 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
 
   frm.addEventListener('change',function(e){
     if(e.target.name==='areas'&&e.target.value==='Otra')$('otraarea_w').hidden=!e.target.checked;
+    if(/^cert_/.test(e.target.name)&&e.target.checked){var nm=e.target.name,none=e.target.value==='Ninguno';frm.querySelectorAll('input[name="'+nm+'"]').forEach(function(o){if(o!==e.target&&(none||o.value==='Ninguno'))o.checked=false;});}
     if(e.target.name==='e_titulo')$('e_titulo_w').hidden=e.target.value!=='Sí';
   });
   $('identidad').addEventListener('input',function(e){
@@ -356,10 +365,10 @@ body.t-equipo .only-c,body.t-contratista .only-e{display:none!important}
     if(tipo==='equipo'){
       add('Puesto u oficio',val('e_puesto'));add('Años de experiencia',val('e_anios'));add('Experiencia',val('e_exp'));
       add('Nivel de estudios',val('e_nivel'));add('Tiene título',radio('e_titulo'));add('Título',radio('e_titulo')==='Sí'?val('e_titulo_cual'):'');
-      add('Cursos o certificaciones',val('e_cert'));add('Disponibilidad',val('e_disp'));add('Licencia de conducir',val('e_lic'));add('Puede viajar',radio('e_viajar'));
+      add('Cursos y certificaciones',certs('cert_e','e_cert_otros'));add('Disponibilidad',val('e_disp'));add('Licencia de conducir',val('e_lic'));add('Puede viajar',radio('e_viajar'));
     } else {
       add('Años de experiencia',val('c_anios'));add('Personal disponible',val('c_personal'));add('Proyectos ejecutados',val('c_proy'));
-      add('Equipo y herramienta',val('c_equipo'));add('Zonas de trabajo',val('c_zona'));add('Emite factura',radio('c_factura'));
+      add('Equipo y herramienta',val('c_equipo'));add('Certificaciones del personal',certs('cert_c','c_cert_otros'));add('Zonas de trabajo',val('c_zona'));add('Emite factura',radio('c_factura'));
       add('Personal asegurado',radio('c_seguro'));add('Referencias',val('c_ref'));
     }
     add('Comentarios',val('extra'));
