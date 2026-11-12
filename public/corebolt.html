@@ -179,6 +179,8 @@ footer a{color:#D3DAE0}
 .ph2 svg{width:44px;height:44px;flex:none}
 .ph2 h3{margin:0;font-family:Manrope,sans-serif;font-weight:800;font-size:18px;color:var(--ink)}
 .ph2 span{font-size:13px;color:var(--mut)}
+@media(max-width:560px){#datos .grid2{grid-template-columns:1fr}}
+.telw{display:flex}.telw span{display:flex;align-items:center;padding:0 12px;border:1px solid #B9C3CC;border-right:0;background:#EEF3F6;font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--ink)}.telw span:empty{display:none}.telw input{flex:1;min-width:0}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 </head>
@@ -346,12 +348,12 @@ footer a{color:#D3DAE0}
 <h2 style="margin-top:30px">Sus datos</h2>
 <div class="grid2" style="margin-top:12px">
 <div class="full"><label class="f" for="c-nom">Nombre o empresa <span class="req">*</span></label><input type="text" id="c-nom" maxlength="120" autocomplete="organization"></div>
-<div><label class="f" for="c-tel">WhatsApp <span class="req">*</span></label><input type="text" id="c-tel" maxlength="20" inputmode="tel" autocomplete="tel" placeholder="9999-9999"></div>
-<div><label class="f" for="c-mail">Correo electrónico <span class="req">*</span></label><input type="email" id="c-mail" maxlength="100" inputmode="email" autocomplete="email" placeholder="nombre@empresa.com"></div>
 <div><label class="f" for="pais">País de entrega <span class="req">*</span></label><select id="pais"><option>Honduras</option><option>Guatemala</option><option>El Salvador</option><option>Nicaragua</option><option>Otro país</option></select>
 <div id="pais_otro_w" hidden style="margin-top:8px"><input type="text" id="pais_otro" maxlength="60" placeholder="Escriba el país" aria-label="Otro país"></div></div>
 <div><label class="f" for="depto"><span id="depto_lab">Departamento</span> <span class="req">*</span></label><select id="depto"><option value="">Seleccione</option></select><input type="text" id="depto_txt" maxlength="60" hidden aria-label="Estado, provincia o región"></div>
 <div class="full"><label class="f" for="ciudad_sel">Ciudad de entrega <span class="req">*</span></label><select id="ciudad_sel"><option value="">Primero elija el departamento</option></select><input type="text" id="ciudad" maxlength="60" hidden style="margin-top:8px" placeholder="Escriba la ciudad, municipio o aldea"></div>
+<div><label class="f" for="c-tel">WhatsApp <span class="req">*</span></label><div class="telw"><span id="c-pre">+504</span><input type="text" id="c-tel" maxlength="20" inputmode="tel" autocomplete="tel" placeholder="9999-9999"></div></div>
+<div><label class="f" for="c-mail">Correo electrónico <span class="req">*</span></label><input type="email" id="c-mail" maxlength="100" inputmode="email" autocomplete="email" placeholder="nombre@empresa.com"></div>
 <div class="full"><label class="f" for="c-obs">Observaciones <small>(opcional)</small></label><textarea id="c-obs" maxlength="800" placeholder="Ej.: fecha requerida, proyecto, entrega en obra"></textarea></div>
 <div class="full"><label class="f">Planos o especificaciones <small>(opcional · PDF, DWG, DXF, JPG, PNG o Excel · hasta 3 archivos de 10 MB)</small></label>
 <label class="drop" id="drop"><input type="file" id="files" accept=".pdf,.dwg,.dxf,.jpg,.jpeg,.png,.xls,.xlsx" multiple><b>＋ Adjuntar archivos</b><span>o tome una foto desde su celular</span></label>
@@ -697,7 +699,10 @@ footer a{color:#D3DAE0}
     $('depto').hidden=!hasList;$('depto_txt').hidden=hasList;
     if(hasList)fillSel($('depto'),g.c?Object.keys(g.c):g.l,'Seleccione');
     $('depto_txt').value='';onDepto();
+    $('c-pre').textContent={'Honduras':'+504','Guatemala':'+502','El Salvador':'+503','Nicaragua':'+505'}[p]||'';
+    $('c-tel').placeholder=p==='Otro país'?'Con código de país, ej. +1 555 123 4567':'9999-9999';
   }
+  function telV(){var t=val('c-tel'),pre=$('c-pre').textContent;if(!t)return '';if(/^\+/.test(t)||!pre)return t;return pre+' '+t.replace(new RegExp('^'+pre.slice(1)+'\\s*'),'');}
   function onDepto(){
     var g=GEO[$('pais').value]||{},list=g.c&&g.c[$('depto').value];
     $('ciudad_sel').hidden=!list;$('ciudad').hidden=!!list;$('ciudad').value='';
@@ -733,12 +738,12 @@ footer a{color:#D3DAE0}
     return !m.length;
   }
   function campos(){var c=[],add=function(k,v){c.push({k:k,v:v||''});};
-    add('Folio',FOLIO);add('Nombre o empresa',val('c-nom'));add('WhatsApp',val('c-tel'));add('Correo',val('c-mail'));
+    add('Folio',FOLIO);add('Nombre o empresa',val('c-nom'));add('WhatsApp',telV());add('Correo',val('c-mail'));
     add('País',paisV());add('Departamento',deptoV());add('Ciudad de entrega',ciudadV());add('Observaciones',val('c-obs'));
     add('Productos',cart.length+'');return c;}
   function texto(){var l=['*SOLICITUD DE COTIZACIÓN · COREBOLT*','Folio: '+FOLIO,'','*Productos*'];
     cart.forEach(function(it,i){var d=it.desc.split(' · Incluye: ');l.push('','*'+(i+1)+'. '+it.prod+'* — '+it.qty.toLocaleString('es-HN')+' pzas',d[0]);if(d[1])l.push('Incluye: '+d[1].replace(/; /g,' + '));});
-    l.push('','*Datos del cliente*','Nombre o empresa: '+val('c-nom'),'WhatsApp: '+val('c-tel'),'Correo: '+val('c-mail'),'Entrega: '+[ciudadV(),deptoV(),paisV()].filter(Boolean).join(', '));
+    l.push('','*Datos del cliente*','Nombre o empresa: '+val('c-nom'),'WhatsApp: '+telV(),'Correo: '+val('c-mail'),'Entrega: '+[ciudadV(),deptoV(),paisV()].filter(Boolean).join(', '));
     if(val('c-obs'))l.push('Observaciones: '+val('c-obs'));if(files.length)l.push('','(Tengo planos para enviar por este medio)');return l.join('\n');}
   var VIA='';
   function fin(){$('folio').textContent=FOLIO;$('done-via').textContent=VIA==='WhatsApp'?'Complete el envío en WhatsApp. ':'';$('done').className='done on';$('sendrow').hidden=true;$('done').scrollIntoView({behavior:'smooth',block:'center'});}
