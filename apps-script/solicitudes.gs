@@ -54,7 +54,7 @@ function procesar(d) {
     if (CORREOS) {
       const asunto = (via === 'WhatsApp' ? '[WhatsApp] ' : '[Correo] ') + 'Cotización ' + div.toUpperCase() + ' · ' + quien +
                      (v('Ciudad de entrega') ? ' · ' + v('Ciudad de entrega') : '') +
-                     ' · ' + items.length + ' producto(s) · ' + folio;
+                     ' · ' + items.length + ' producto(s)' + (v('Plazo requerido') ? ' · Plazo: ' + v('Plazo requerido').replace(/ \(.*\)/, '') : '') + ' · ' + folio;
       const pdf = crearPdf(div, campos, items, fecha, enlaces, folio, quien);
       const adjuntar = peso < 18 * 1024 * 1024;
       MailApp.sendEmail({
