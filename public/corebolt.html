@@ -55,8 +55,8 @@ main{max-width:1240px;margin:0 auto;padding:28px 20px 60px}
 @media(min-width:640px){.pane{padding:28px}}
 .pane h2{font-family:Manrope,sans-serif;font-weight:800;font-size:22px;margin:0 0 4px;color:var(--ink)}
 .pane .sub{color:var(--mut);font-size:14px;margin:0 0 18px}
-.types{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:22px}
-@media(min-width:640px){.types{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.types{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:22px}
+@media(min-width:640px){.types{grid-template-columns:repeat(7,minmax(0,1fr))}}
 .types.p5{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(min-width:640px){.types.p5{grid-template-columns:repeat(5,minmax(0,1fr))}}
 .ty{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;border:2px solid var(--line);background:#fff;padding:10px 6px 10px;text-align:center;font-family:Manrope,sans-serif;font-weight:700;font-size:13px;line-height:1.2;color:var(--ink);transition:border-color .15s,background .15s}
@@ -68,7 +68,8 @@ main{max-width:1240px;margin:0 auto;padding:28px 20px 60px}
 .cfg{display:grid;gap:22px}
 @media(min-width:760px){.cfg{grid-template-columns:260px minmax(0,1fr);align-items:start}}
 .draw{background:linear-gradient(#F7FAFC,#EEF3F6);border:1px solid var(--line);padding:10px;position:relative}
-.draw svg{display:block;width:100%;height:auto}
+.draw svg{display:block;width:100%;height:auto;max-height:340px;margin:0 auto}
+@media(min-width:760px){.draw svg{max-height:none}}
 .draw .cap{position:absolute;top:8px;left:10px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--mut)}
 .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .grid3{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
@@ -212,7 +213,7 @@ footer a{color:#D3DAE0}
 <div id="w-r2"><label class="f" for="b-r2">Rosca 2 <small>(pulg)</small> <span class="req">*</span></label><input type="text" id="b-r2" inputmode="decimal" placeholder="Ej.: 4"></div>
 <div id="w-hook"><label class="f" for="b-hook">Gancho (G) <small>(pulg)</small> <span class="req">*</span></label><input type="text" id="b-hook" inputmode="decimal" placeholder="Ej.: 4"></div>
 <div id="w-rosca"><label class="f">Rosca</label><div class="fixed"><b>UNC</b> · estándar</div></div>
-<div><label class="f" for="b-qty">Cantidad de pernos <span class="req">*</span></label><input type="number" id="b-qty" min="1" step="1" inputmode="numeric" placeholder="Ej.: 120"></div>
+<div><label class="f" for="b-qty"><span id="lab-qty">Cantidad de pernos</span> <span class="req">*</span></label><input type="number" id="b-qty" min="1" step="1" inputmode="numeric" placeholder="Ej.: 120"></div>
 </div>
 <p class="hint" id="b-mhint" style="background:#EEF5FA;border-left:3px solid var(--cb2);padding:8px 10px;margin-top:12px"></p>
 <div id="w-placa" class="acc" style="margin-top:14px">
@@ -374,7 +375,8 @@ footer a{color:#D3DAE0}
     {k:'Recto',n:'Perno recto',ic:'<path d="M23 4v50"/>',r:1},
     {k:'Doble rosca',n:'Doble rosca',ic:'<path d="M23 4v50"/><path d="M19 8h8M19 12h8M19 46h8M19 50h8"/>',r:2},
     {k:'Con placa',n:'Perno con placa',ic:'<path d="M23 4v44"/><path d="M11 48h24v5H11z"/>',r:1,plate:1},
-    {k:'Stud',n:'Perno Stud',ic:'<path d="M23 12v40"/><path d="M15 8h16v4H15z"/>',r:0,stud:1}
+    {k:'Stud',n:'Perno Stud',ic:'<path d="M23 12v40"/><path d="M15 8h16v4H15z"/>',r:0,stud:1},
+    {k:'Varilla',n:'Varilla tensora',ic:'<path d="M23 3v52"/><path d="M19 6h8M19 10h8M19 14h8M19 44h8M19 48h8M19 52h8"/>',r:2,rod:1}
   ];
   var bt=BT[0];
   BT.forEach(function(t,i){var b=document.createElement('button');b.type='button';b.className='ty';b.setAttribute('aria-pressed',i===0?'true':'false');
@@ -385,13 +387,14 @@ footer a{color:#D3DAE0}
   function boltUI(){
     $('w-r1').hidden=!bt.r;$('w-r2').hidden=bt.r!==2;$('w-hook').hidden=!bt.hook;$('w-placa').hidden=!bt.plate;
     $('w-grado').hidden=!!bt.stud;$('w-rosca').hidden=!!bt.stud;
-    $('lab-r1').textContent=bt.r===2?'Rosca 1':'Largo de rosca';
+    $('lab-qty').textContent=bt.rod?'Cantidad de varillas':'Cantidad de pernos';$('lab-r1').textContent=bt.r===2?'Rosca 1':'Largo de rosca';
     var H={J:'<b>L</b>: desde la punta roscada hasta la parte más baja de la curva. <b>G</b>: ancho total del gancho, medido por fuera. <b>R</b>: largo roscado desde la punta.',
       L:'<b>L</b>: desde la punta roscada hasta la cara inferior de la pata. <b>G</b>: largo de la pata horizontal, medido por fuera. <b>R</b>: largo roscado desde la punta.',
       'Recto':'<b>L</b>: largo total de punta a punta. <b>R</b>: largo roscado desde la punta.',
       'Doble rosca':'<b>L</b>: largo total de punta a punta. <b>R1</b> y <b>R2</b>: largo roscado en cada extremo.',
       'Con placa':'<b>L</b>: desde la punta roscada hasta la cara inferior de la placa (o del extremo inferior, si lleva tuerca abajo). <b>P</b>: largo × ancho × espesor de la placa o arandela cuadrada.',
-      'Stud':'<b>L</b>: largo total, incluida la cabeza.'};
+      'Stud':'<b>L</b>: largo total, incluida la cabeza.',
+      'Varilla':'Varilla a la medida con rosca en las puntas, para colgar lámparas, bandejas de cable o canal tipo Unistrut. <b>L</b>: largo total de punta a punta. <b>R1</b> y <b>R2</b>: largo roscado en cada punta.'};
     showErr('b-err',[]);document.querySelectorAll('#p-pernos .bad').forEach(function(e){e.classList.remove('bad');});
     $('b-mhint').innerHTML='¿Cómo medir? '+H[bt.k];
     drawBolt();accTotals();
@@ -449,8 +452,8 @@ footer a{color:#D3DAE0}
         var pl=[val('bp-l'),val('bp-a')].map(fmt).filter(Boolean).join(' × ')||'?',pe=val('bp-e');
         s+=dimH(X-55,X+55,bot+26,'P = '+pl+(pe?' × '+pe:''));
       }
-      var t1=top+80;s+=thr(top,t1);s+=nut(top+22);
-      if(bt.r===2){var t2=rodBot-80;s+=thr(t2,rodBot);s+=nut(rodBot-40);
+      var t1=top+80;s+=thr(top,t1);if(!bt.rod)s+=nut(top+22);
+      if(bt.r===2){var t2=rodBot-80;s+=thr(t2,rodBot);if(!bt.rod)s+=nut(rodBot-40);
         s+=dimV(196,t2,196,rodBot,'R2 = '+(fmt(r2)||'?'),'r');}
       s+=dimV(190,top,190,t1,(bt.r===2?'R1 = ':'R = ')+(fmt(r1)||'?'),'r');
       var Lbot=bt.k==='J'?bot+10:(bt.k==='Con placa'?(sold?pY+12:bot):rodBot);
