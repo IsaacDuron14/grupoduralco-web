@@ -164,6 +164,7 @@ footer{background:var(--navy);color:#9FB0BD;font-size:14px}
 footer .wrap{max-width:1240px;margin:0 auto;padding:26px 20px 90px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
 @media(min-width:1000px){footer .wrap{padding-bottom:26px}}
 footer a{color:#D3DAE0}
+[hidden]{display:none!important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 </head>
@@ -209,16 +210,21 @@ footer a{color:#D3DAE0}
 <div><label class="f" for="b-L">Largo total <small>(pulg)</small> <span class="req">*</span></label><input type="text" id="b-L" inputmode="decimal" placeholder="Ej.: 24"></div>
 <div id="w-r1"><label class="f" for="b-r1"><span id="lab-r1">Largo de rosca</span> <small>(pulg)</small> <span class="req">*</span></label><input type="text" id="b-r1" inputmode="decimal" placeholder="Ej.: 6"></div>
 <div id="w-r2"><label class="f" for="b-r2">Rosca 2 <small>(pulg)</small> <span class="req">*</span></label><input type="text" id="b-r2" inputmode="decimal" placeholder="Ej.: 4"></div>
-<div id="w-hook"><label class="f" for="b-hook">Largo del gancho <small>(pulg, opcional)</small></label><input type="text" id="b-hook" inputmode="decimal" placeholder="Ej.: 4"></div>
+<div id="w-hook"><label class="f" for="b-hook">Gancho (G) <small>(pulg)</small> <span class="req">*</span></label><input type="text" id="b-hook" inputmode="decimal" placeholder="Ej.: 4"></div>
 <div id="w-rosca"><label class="f">Rosca</label><div class="fixed"><b>UNC</b> · estándar</div></div>
 <div><label class="f" for="b-qty">Cantidad de pernos <span class="req">*</span></label><input type="number" id="b-qty" min="1" step="1" inputmode="numeric" placeholder="Ej.: 120"></div>
 </div>
+<p class="hint" id="b-mhint" style="background:#EEF5FA;border-left:3px solid var(--cb2);padding:8px 10px;margin-top:12px"></p>
 <div id="w-placa" class="acc" style="margin-top:14px">
-<div class="chk" style="cursor:default">Placa del perno <small style="font-family:Inter;font-weight:500;color:var(--mut)">(opcional)</small></div>
+<div class="chk" style="cursor:default">Placa del perno <span class="req">*</span></div>
+<div class="seg body" role="radiogroup" aria-label="Tipo de placa del perno">
+<label><input type="radio" name="bpt" value="Placa soldada" checked><span>Placa soldada</span></label>
+<label><input type="radio" name="bpt" value="Arandela cuadrada"><span>Arandela cuadrada con tuerca</span></label>
+</div>
 <div class="grid3 body">
-<div><label class="f" for="bp-l">Largo <small>(pulg)</small></label><input type="text" id="bp-l" inputmode="decimal" placeholder="4"></div>
-<div><label class="f" for="bp-a">Ancho <small>(pulg)</small></label><input type="text" id="bp-a" inputmode="decimal" placeholder="4"></div>
-<div><label class="f" for="bp-e">Espesor</label><select id="bp-e"></select></div>
+<div><label class="f" for="bp-l">Largo <small>(pulg)</small> <span class="req">*</span></label><input type="text" id="bp-l" inputmode="decimal" placeholder="Ej.: 4"></div>
+<div><label class="f" for="bp-a">Ancho <small>(pulg)</small> <span class="req">*</span></label><input type="text" id="bp-a" inputmode="decimal" placeholder="Ej.: 4"></div>
+<div><label class="f" for="bp-e">Espesor <span class="req">*</span></label><select id="bp-e"></select></div>
 </div>
 </div>
 <div class="acc" style="margin-top:14px">
@@ -352,7 +358,7 @@ footer a{color:#D3DAE0}
   var DIAS=['1/2"','5/8"','3/4"','7/8"','1"','1-1/8"','1-1/4"','1-1/2"'];
   var ESP=['1/4"','5/16"','3/8"','1/2"','5/8"','3/4"','7/8"','1"','1-1/4"','1-1/2"','2"'];
   function fill(sel,arr,ph){sel.innerHTML='';if(ph){var o=document.createElement('option');o.value='';o.textContent=ph;sel.appendChild(o);}arr.forEach(function(t){var x=document.createElement('option');x.textContent=t;sel.appendChild(x);});}
-  fill($('b-dia'),DIAS,'Seleccione');fill($('x-dia'),DIAS,'Seleccione');fill($('p-e'),ESP,'Seleccione');fill($('bp-e'),ESP,'—');
+  fill($('b-dia'),DIAS,'Seleccione');fill($('x-dia'),DIAS,'Seleccione');fill($('p-e'),ESP,'Seleccione');fill($('bp-e'),ESP,'Seleccione');
 
   // Medidas: acepta 24, 24.5, 24 1/2, 24-1/2, 13/16
   function num(s){s=String(s||'').trim().replace(/["”]/g,'').replace(',','.');if(!s)return NaN;
@@ -380,9 +386,18 @@ footer a{color:#D3DAE0}
     $('w-r1').hidden=!bt.r;$('w-r2').hidden=bt.r!==2;$('w-hook').hidden=!bt.hook;$('w-placa').hidden=!bt.plate;
     $('w-grado').hidden=!!bt.stud;$('w-rosca').hidden=!!bt.stud;
     $('lab-r1').textContent=bt.r===2?'Rosca 1':'Largo de rosca';
+    var H={J:'<b>L</b>: desde la punta roscada hasta la parte más baja de la curva. <b>G</b>: ancho total del gancho, medido por fuera. <b>R</b>: largo roscado desde la punta.',
+      L:'<b>L</b>: desde la punta roscada hasta la cara inferior de la pata. <b>G</b>: largo de la pata horizontal, medido por fuera. <b>R</b>: largo roscado desde la punta.',
+      'Recto':'<b>L</b>: largo total de punta a punta. <b>R</b>: largo roscado desde la punta.',
+      'Doble rosca':'<b>L</b>: largo total de punta a punta. <b>R1</b> y <b>R2</b>: largo roscado en cada extremo.',
+      'Con placa':'<b>L</b>: desde la punta roscada hasta la cara inferior de la placa (o del extremo inferior, si lleva tuerca abajo). <b>P</b>: largo × ancho × espesor de la placa o arandela cuadrada.',
+      'Stud':'<b>L</b>: largo total, incluida la cabeza.'};
+    showErr('b-err',[]);document.querySelectorAll('#p-pernos .bad').forEach(function(e){e.classList.remove('bad');});
+    $('b-mhint').innerHTML='¿Cómo medir? '+H[bt.k];
     drawBolt();accTotals();
   }
   ['b-dia','b-L','b-r1','b-r2','b-hook','b-qty','bp-l','bp-a','bp-e','b-nut-q','b-wsh-q','b-nut-n'].forEach(function(id){$(id).addEventListener('input',function(){drawBolt();accTotals();this.classList.remove('bad');});$(id).addEventListener('change',function(){drawBolt();accTotals();});});
+  document.querySelectorAll('input[name=bpt]').forEach(function(r){r.addEventListener('change',drawBolt);});
   $('b-nut').addEventListener('change',function(){$('b-nut-w').hidden=!this.checked;accTotals();});
   $('b-wsh').addEventListener('change',function(){$('b-wsh-w').hidden=!this.checked;accTotals();});
   function accTotals(){
@@ -422,16 +437,23 @@ footer a{color:#D3DAE0}
       var rodBot=bot;
       if(bt.k==='J'){rodBot=bot-28;}
       if(bt.k==='L'){rodBot=bot;}
-      if(bt.k==='Con placa'){rodBot=bot-6;}
+      var bpt=(document.querySelector('input[name=bpt]:checked')||{}).value,sold=bpt!=='Arandela cuadrada',pY=sold?bot-12:bot-34;
+      if(bt.k==='Con placa'){rodBot=sold?pY:bot;}
       s+='<rect x="'+x0+'" y="'+top+'" width="'+W+'" height="'+(rodBot-top)+'" fill="url(#stl)" stroke="#2E4250" stroke-width="1.4"/>';
       if(bt.k==='J'){s+='<path d="M'+x0+' '+rodBot+'a'+(W+18)+' '+(W+18)+' 0 0 0 '+(2*W+36)+' 0v-40h-'+W+'v40a18 18 0 0 1 -'+(36)+' 0z" fill="url(#stl)" stroke="#2E4250" stroke-width="1.4"/>';}
       if(bt.k==='L'){s+='<path d="M'+x0+' '+(rodBot-W)+'v'+W+'h80v-'+W+'z" fill="url(#stl)" stroke="#2E4250" stroke-width="1.4"/>';s+='<rect x="'+x0+'" y="'+top+'" width="'+W+'" height="'+(rodBot-top-W)+'" fill="url(#stl)" stroke="#2E4250" stroke-width="1.4"/>';}
-      if(bt.k==='Con placa'){s+='<rect x="'+(X-55)+'" y="'+rodBot+'" width="110" height="12" fill="#9DB4C0" stroke="#2E4250" stroke-width="1.4"/>';s+='<rect x="'+(X-18)+'" y="'+(rodBot-14)+'" width="36" height="14" fill="#5B7A8C" stroke="#2E4250"/>';}
+      if(bt.k==='Con placa'){
+        s+='<rect x="'+(X-55)+'" y="'+pY+'" width="110" height="12" fill="#9DB4C0" stroke="#2E4250" stroke-width="1.4"/>';
+        if(sold){s+='<path d="M'+x0+' '+pY+'l-9 0l9 -9z M'+(x0+W)+' '+pY+'l9 0l-9 -9z" fill="#C2A15A" stroke="#7A5A12"/>';}
+        else{s+=thr(bot-26,bot)+'<rect x="'+(X-18)+'" y="'+(pY-14)+'" width="36" height="14" fill="#5B7A8C" stroke="#2E4250"/><rect x="'+(X-18)+'" y="'+(pY+12)+'" width="36" height="14" fill="#5B7A8C" stroke="#2E4250"/>';}
+        var pl=[val('bp-l'),val('bp-a')].map(fmt).filter(Boolean).join(' × ')||'?',pe=val('bp-e');
+        s+=dimH(X-55,X+55,bot+26,'P = '+pl+(pe?' × '+pe:''));
+      }
       var t1=top+80;s+=thr(top,t1);s+=nut(top+22);
       if(bt.r===2){var t2=rodBot-80;s+=thr(t2,rodBot);s+=nut(rodBot-40);
         s+=dimV(196,t2,196,rodBot,'R2 = '+(fmt(r2)||'?'),'r');}
       s+=dimV(190,top,190,t1,(bt.r===2?'R1 = ':'R = ')+(fmt(r1)||'?'),'r');
-      var Lbot=bt.k==='J'?bot+10:(bt.k==='Con placa'?rodBot+12:rodBot);
+      var Lbot=bt.k==='J'?bot+10:(bt.k==='Con placa'?(sold?pY+12:bot):rodBot);
       s+=dimV(56,top,56,Lbot,'L = '+(fmt(L)||'?'),'l');
       s+=dimH(x0,x0+W,top-14,'Ø '+d);
       if(bt.hook&&hk){var hy=bt.k==='J'?bot+30:bot+20;s+=dimH(x0,bt.k==='J'?x0+2*W+36:x0+80,hy,'G = '+fmt(hk));}
@@ -517,8 +539,13 @@ footer a{color:#D3DAE0}
     if(bt.r===2&&!(r2>0)){m.push('rosca 2');B.push('b-r2');}
     if(L>0&&bt.r===1&&r1>0&&r1>=L){m.push('la rosca debe ser menor que el largo total');B.push('b-r1');}
     if(L>0&&bt.r===2&&r1>0&&r2>0&&r1+r2>=L){m.push('rosca 1 + rosca 2 debe ser menor que el largo total');B.push('b-r1','b-r2');}
-    if(hk&&!(num(hk)>0)){m.push('largo del gancho');B.push('b-hook');}
-    if(bt.plate&&(val('bp-l')||val('bp-a'))&&!(num(val('bp-l'))>0&&num(val('bp-a'))>0)){m.push('medidas de la placa');B.push('bp-l','bp-a');}
+    if(bt.hook&&!(num(hk)>0)){m.push('gancho (G)');B.push('b-hook');}
+    if(bt.hook&&num(hk)>0&&L>0&&num(hk)>=L){m.push('el gancho debe ser menor que el largo total');B.push('b-hook');}
+    if(bt.plate){var pl_=num(val('bp-l')),pa_=num(val('bp-a')),dn=num(val('b-dia').replace('"',''));
+      if(!(pl_>0&&pl_<=48)){m.push('largo de la placa');B.push('bp-l');}
+      if(!(pa_>0&&pa_<=48)){m.push('ancho de la placa');B.push('bp-a');}
+      if(pl_>0&&pa_>0&&dn>0&&Math.min(pl_,pa_)<=dn*2){m.push('la placa debe ser mayor que 2 veces el diámetro');B.push('bp-l','bp-a');}
+      if(!val('bp-e')){m.push('espesor de la placa');B.push('bp-e');}}
     if(!(q>=1&&q<=1000000)){m.push('cantidad');B.push('b-qty');}
     bad(B);showErr('b-err',m);if(m.length)return;
     var d=val('b-dia'),parts=['Ø '+d,'L = '+fmt(val('b-L'))];
@@ -526,7 +553,7 @@ footer a{color:#D3DAE0}
     if(bt.r===2)parts.push('rosca 1: '+fmt(val('b-r1')),'rosca 2: '+fmt(val('b-r2')));
     if(bt.hook&&hk)parts.push('gancho '+fmt(hk));
     if(!bt.stud)parts.push('UNC',$('b-grado').value);
-    if(bt.plate&&val('bp-l'))parts.push('placa '+fmt(val('bp-l'))+' × '+fmt(val('bp-a'))+(val('bp-e')?' × '+val('bp-e'):''));
+    if(bt.plate)parts.push(document.querySelector('input[name=bpt]:checked').value.toLowerCase()+' '+fmt(val('bp-l'))+' × '+fmt(val('bp-a'))+(val('bp-e')?' × '+val('bp-e'):''));
     var desc=parts.join(' · ');
     var extras=[];
     if($('b-nut').checked)extras.push((q*+$('b-nut-q').value)+' tuercas '+$('b-nut-n').value+' Ø '+d+' ('+$('b-nut-q').value+' por perno)');
@@ -561,12 +588,12 @@ footer a{color:#D3DAE0}
   }
   var FIELDS={pernos:['b-dia','b-grado','b-L','b-r1','b-r2','b-hook','b-qty','bp-l','bp-a','bp-e','b-nut-n','b-nut-q','b-wsh-q','b-obs'],placas:['p-l','p-a','p-e','p-np','p-dp','p-qty','p-obs'],prod:['x-dia','x-norma','x-qty']};
   function snap(k){var o={};FIELDS[k].forEach(function(id){o[id]=$(id).value;});
-    if(k==='pernos'){o.type=bt.k;o.nut=$('b-nut').checked;o.wsh=$('b-wsh').checked;}
+    if(k==='pernos'){o.bpt=document.querySelector('input[name=bpt]:checked').value;o.type=bt.k;o.nut=$('b-nut').checked;o.wsh=$('b-wsh').checked;}
     if(k==='placas')o.type=pt.k;
     if(k==='prod')o.type=document.querySelector('input[name=prod]:checked').value;
     return o;}
   function restore(k,o){FIELDS[k].forEach(function(id){$(id).value=o[id]||'';});
-    if(k==='pernos'){var i=BT.findIndex(function(t){return t.k===o.type;});document.querySelectorAll('#bolt-types .ty')[i].click();$('b-nut').checked=!!o.nut;$('b-wsh').checked=!!o.wsh;$('b-nut-w').hidden=!o.nut;$('b-wsh-w').hidden=!o.wsh;boltUI();}
+    if(k==='pernos'){document.querySelector('input[name=bpt][value="'+(o.bpt||'Placa soldada')+'"]').checked=true;var i=BT.findIndex(function(t){return t.k===o.type;});document.querySelectorAll('#bolt-types .ty')[i].click();$('b-nut').checked=!!o.nut;$('b-wsh').checked=!!o.wsh;$('b-nut-w').hidden=!o.nut;$('b-wsh-w').hidden=!o.wsh;boltUI();}
     if(k==='placas'){var j=PT.findIndex(function(t){return t.k===o.type;});document.querySelectorAll('#plate-types .ty')[j].click();}
     if(k==='prod'){document.querySelector('input[name=prod][value="'+o.type+'"]').checked=true;prodUI();}
   }
