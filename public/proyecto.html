@@ -185,6 +185,9 @@ main{padding-bottom:40px}
 .done b{color:#E4C16B;font-family:'JetBrains Mono',monospace}
 .done .wa{display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 24px;background:#25D366;color:#071626;font-family:Manrope,sans-serif;font-weight:800;text-decoration:none}
 .hero h1 em{font-style:normal;color:#E4C16B}
+.lc{display:inline-flex;background:#fff;padding:14px 18px;margin-bottom:26px;box-shadow:0 14px 30px -18px rgba(0,0,0,.6);border-bottom:3px solid #C99A2E}
+.lc img{display:block;width:190px;height:auto}
+@media(min-width:960px){.hgrid{display:grid;grid-template-columns:1fr auto;gap:56px;align-items:center}.hgrid .lc{order:2;margin:0;padding:26px 30px}.hgrid .lc img{width:300px}.hgrid .hc{order:1}}
 </style>
 </head>
 <body>
@@ -192,11 +195,14 @@ main{padding-bottom:40px}
 <a href="/"><img src="/assets/logo-grupo-duralco.png" alt="Grupo Duralco"></a>
 <nav><a href="/estructuras-metalicas">Estructuras metálicas</a><a href="/pernos-de-anclaje">Pernos de anclaje</a><a href="/mecanizado-cnc">Mecanizado CNC</a><a href="/nosotros">Historia</a><a href="/#contacto">Contacto</a></nav>
 </div></header>
-<section class="hero"><div class="wrap">
-<p class="kicker">DURALCO CONSTRUCTORES · DESDE 2018</p>
+<section class="hero"><div class="wrap hgrid">
+<div class="lc"><img src="/assets/logo-duralco-constructores.png" alt="Duralco · Ingenieros Estructuristas y Constructores" width="640" height="259"></div>
+<div class="hc">
+<p class="kicker">INGENIERÍA Y CONSTRUCCIÓN · DESDE 2018</p>
 <h1>No es solo una obra.<br><em>Es el siguiente paso de su empresa.</em></h1>
 <p class="lead">Una nave para crecer, una línea de producción que no puede detenerse, una calle que une a una comunidad. Entendemos lo que significa para usted, y por eso lo construimos con ingeniería, honestidad y trabajo bien hecho.</p>
 <div class="chips"><span>Visita técnica sin costo</span><span>Honduras y Centroamérica</span></div>
+</div>
 </div></section>
 <main>
 <form class="form wiz" id="frm" novalidate>
