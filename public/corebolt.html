@@ -370,7 +370,7 @@ footer a{color:#D3DAE0}
   // ===== Pernos =====
   var BT=[
     {k:'J',n:'Perno J',ic:'<path d="M23 4v38a9 9 0 0 0 18 0v-6"/>',r:1,hook:1},
-    {k:'L',n:'Perno L',ic:'<path d="M23 4v46h16"/>',r:1,hook:1},
+    {k:'L',n:'Perno L',ic:'<path d="M23 4v36a10 10 0 0 0 10 10h7"/>',r:1,hook:1},
     {k:'Recto',n:'Perno recto',ic:'<path d="M23 4v50"/>',r:1},
     {k:'Doble rosca',n:'Doble rosca',ic:'<path d="M23 4v50"/><path d="M19 8h8M19 12h8M19 46h8M19 50h8"/>',r:2},
     {k:'Con placa',n:'Perno con placa',ic:'<path d="M23 4v44"/><path d="M11 48h24v5H11z"/>',r:1,plate:1},
@@ -439,9 +439,9 @@ footer a{color:#D3DAE0}
       if(bt.k==='L'){rodBot=bot;}
       var bpt=(document.querySelector('input[name=bpt]:checked')||{}).value,sold=bpt!=='Arandela cuadrada',pY=sold?bot-12:bot-34;
       if(bt.k==='Con placa'){rodBot=sold?pY:bot;}
-      s+='<rect x="'+x0+'" y="'+top+'" width="'+W+'" height="'+(rodBot-top)+'" fill="url(#stl)" stroke="#2E4250" stroke-width="1.4"/>';
+      if(bt.k!=='L')s+='<rect x="'+x0+'" y="'+top+'" width="'+W+'" height="'+(rodBot-top)+'" fill="url(#stl)" stroke="#2E4250" stroke-width="1.4"/>';
       if(bt.k==='J'){s+='<path d="M'+x0+' '+rodBot+'a'+(W+18)+' '+(W+18)+' 0 0 0 '+(2*W+36)+' 0v-40h-'+W+'v40a18 18 0 0 1 -'+(36)+' 0z" fill="url(#stl)" stroke="#2E4250" stroke-width="1.4"/>';}
-      if(bt.k==='L'){s+='<path d="M'+x0+' '+(rodBot-W)+'v'+W+'h80v-'+W+'z" fill="url(#stl)" stroke="#2E4250" stroke-width="1.4"/>';s+='<rect x="'+x0+'" y="'+top+'" width="'+W+'" height="'+(rodBot-top-W)+'" fill="url(#stl)" stroke="#2E4250" stroke-width="1.4"/>';}
+      if(bt.k==='L'){var ri=14,Ro=ri+W,yb=rodBot-Ro,xe=x0+80;s+='<path d="M'+x0+' '+top+'V'+yb+'A'+Ro+' '+Ro+' 0 0 0 '+(x0+Ro)+' '+rodBot+'H'+xe+'V'+(rodBot-W)+'H'+(x0+Ro)+'A'+ri+' '+ri+' 0 0 1 '+(x0+W)+' '+yb+'V'+top+'Z" fill="url(#stl)" stroke="#2E4250" stroke-width="1.4"/>';}
       if(bt.k==='Con placa'){
         s+='<rect x="'+(X-55)+'" y="'+pY+'" width="110" height="12" fill="#9DB4C0" stroke="#2E4250" stroke-width="1.4"/>';
         if(sold){s+='<path d="M'+x0+' '+pY+'l-9 0l9 -9z M'+(x0+W)+' '+pY+'l9 0l-9 -9z" fill="#C2A15A" stroke="#7A5A12"/>';}
