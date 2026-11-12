@@ -150,7 +150,9 @@ table.res th.q{text-align:right}
 .consent{display:flex;gap:12px;align-items:flex-start;font-size:14px;margin-top:16px;cursor:pointer}
 .consent input{width:20px;height:20px;margin-top:2px;accent-color:var(--cb);flex:none}
 .sendrow{display:grid;gap:12px;margin-top:20px}
-@media(min-width:640px){.sendrow{grid-template-columns:1fr 1fr}}
+@media(min-width:640px){.sendrow{grid-template-columns:1fr 1fr}.sendrow .full{grid-column:1 / -1}}
+.sendrow .sendh{grid-column:1 / -1;margin:0;font-size:14px;color:var(--mut)}
+.btn.wa{flex-direction:column;gap:0;line-height:1.2;padding:8px 18px}.btn.wa small{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:13px;opacity:.85}
 .done{display:none;background:var(--ink);color:#fff;border-top:4px solid var(--cb2);padding:26px;margin-top:20px}
 .done.on{display:block}
 .done h3{font-family:Manrope,sans-serif;font-weight:800;font-size:24px;margin:0 0 8px}
@@ -356,10 +358,12 @@ footer a{color:#D3DAE0}
 <label class="consent"><input type="checkbox" id="acepto"><span>Autorizo a Grupo Duralco a usar estos datos para atender mi solicitud y contactarme por teléfono, WhatsApp o correo. <span class="req">*</span></span></label>
 <p class="err" id="c-err" role="alert"></p>
 <div class="sendrow" id="sendrow">
-<button type="button" class="btn wa" id="send-wa">Cotizar por WhatsApp</button>
-<button type="button" class="btn prim" id="send">Cotizar por correo →</button>
+<p class="sendh">Envíe su solicitud por WhatsApp a cualquiera de nuestros números, o por correo:</p>
+<button type="button" class="btn wa" id="send-wa" data-n="50494405644"><span>Cotizar por WhatsApp</span><small>+504 9440-5644</small></button>
+<button type="button" class="btn wa" id="send-wa2" data-n="50487610994"><span>Cotizar por WhatsApp</span><small>+504 8761-0994</small></button>
+<button type="button" class="btn prim full" id="send">Cotizar por correo →</button>
 </div>
-<p class="err" id="send-err" role="alert"><b>No se pudo enviar.</b> Revise su conexión e intente de nuevo, o use el botón Cotizar por WhatsApp.</p>
+<p class="err" id="send-err" role="alert"><b>No se pudo enviar.</b> Revise su conexión e intente de nuevo, o use un botón de WhatsApp.</p>
 <div class="done" id="done" role="status"><h3>¡Solicitud recibida!</h3><p><span id="done-via"></span>Su número de folio es <b id="folio"></b>. El equipo de Corebolt le enviará su cotización pronto.</p></div>
 </div>
 </section>
@@ -369,7 +373,7 @@ footer a{color:#D3DAE0}
 
 <footer><div class="wrap">
 <span>Grupo Duralco desde 2018 · Corebolt · San Pedro Sula, Honduras</span>
-<span><a href="mailto:ventas@grupoduralco.com">ventas@grupoduralco.com</a> · <a href="https://wa.me/50494405644" target="_blank" rel="noopener">WhatsApp +504 9440-5644</a></span>
+<span><a href="mailto:ventas@grupoduralco.com">ventas@grupoduralco.com</a> · <a href="https://wa.me/50494405644" target="_blank" rel="noopener">WhatsApp +504 9440-5644</a> · <a href="https://wa.me/50487610994" target="_blank" rel="noopener">+504 8761-0994</a></span>
 </div></footer>
 
 <script>
@@ -738,19 +742,20 @@ footer a{color:#D3DAE0}
   var VIA='';
   function fin(){$('folio').textContent=FOLIO;$('done-via').textContent=VIA==='WhatsApp'?'Complete el envío en WhatsApp. ':'';$('done').className='done on';$('sendrow').hidden=true;$('done').scrollIntoView({behavior:'smooth',block:'center'});}
   // Registro en la hoja + correo (siempre, por WhatsApp o por correo)
+  var WAN='';
   function registrar(via){
     if(!API)return Promise.resolve();
     return Promise.all(files.map(toB64)).then(function(arch){
-      var c=campos();c.push({k:'Enviado por',v:via});
+      var c=campos();c.push({k:'Enviado por',v:via});if(via==='WhatsApp')c.push({k:'Enviado a',v:'+'+WAN.slice(0,3)+' '+WAN.slice(3,7)+'-'+WAN.slice(7)});
       return fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({division:'Corebolt',folio:FOLIO,via:via,campos:c,items:cart.map(function(it){return {producto:it.prod,categoria:it.cat,descripcion:it.desc,cantidad:it.qty};}),archivos:arch})});
     });
   }
-  function busy(on){['send','send-wa'].forEach(function(id){$(id).disabled=on;});$('send').textContent=on&&VIA==='Correo'?'Enviando…':'Cotizar por correo →';}
-  $('send-wa').addEventListener('click',function(){
-    if(!checkClient())return;VIA='WhatsApp';
-    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(texto()),'_blank','noopener');
+  function busy(on){['send','send-wa','send-wa2'].forEach(function(id){$(id).disabled=on;});$('send').textContent=on&&VIA==='Correo'?'Enviando…':'Cotizar por correo →';}
+  ['send-wa','send-wa2'].forEach(function(id){$(id).addEventListener('click',function(){
+    if(!checkClient())return;VIA='WhatsApp';WAN=this.getAttribute('data-n');
+    window.open('https://wa.me/'+WAN+'?text='+encodeURIComponent(texto()),'_blank','noopener');
     busy(true);registrar('WhatsApp').then(fin).catch(fin);
-  });
+  });});
   $('send').addEventListener('click',function(){
     if(!checkClient())return;VIA='Correo';
     if(!API){$('send-wa').click();return;}

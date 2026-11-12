@@ -62,7 +62,7 @@ function procesar(d) {
         replyTo: /@/.test(v('Correo')) ? v('Correo') : 'ventas@grupoduralco.com',
         subject: asunto,
         body: 'Nueva solicitud de cotización ' + div + ' desde www.grupoduralco.com (enviada por ' + via + ')\n' +
-              (via === 'WhatsApp' ? 'El cliente también la envió por WhatsApp al +504 9440-5644.\n' : '') + '\n' +
+              (via === 'WhatsApp' ? 'El cliente también la envió por WhatsApp' + (v('Enviado a') ? ' al ' + v('Enviado a') : '') + '.\n' : '') + '\n' +
               items.map((it, i) => (i + 1) + '. ' + it.producto + ' × ' + it.cantidad + '\n   ' + it.descripcion).join('\n') +
               '\n\n' + campos.filter(c => c.v).map(c => c.k + ': ' + c.v).join('\n') +
               (enlaces.length ? '\n\nArchivos en Drive:\n' + enlaces.join('\n') : '') +
