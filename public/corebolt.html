@@ -207,7 +207,7 @@ footer a{color:#D3DAE0}
 <div>
 <div class="grid2">
 <div><label class="f" for="b-dia">Diámetro <span class="req">*</span></label><select id="b-dia"></select></div>
-<div id="w-grado"><label class="f" for="b-grado">Grado <span class="req">*</span></label><select id="b-grado"><option value="ASTM F1554 Grado 36">ASTM F1554 Gr. 36</option><option value="ASTM F1554 Grado 55">ASTM F1554 Gr. 55</option></select></div>
+<div id="w-grado"><label class="f" for="b-grado">Material <span class="req">*</span></label><select id="b-grado"><option value="ASTM F1554 Grado 36">ASTM F1554 Gr. 36</option><option value="ASTM F1554 Grado 55">ASTM F1554 Gr. 55</option><option value="Varilla lisa">Varilla lisa</option><option value="Varilla corrugada">Varilla corrugada</option></select></div>
 <div><label class="f" for="b-L">Largo total <small>(pulg)</small> <span class="req">*</span></label><input type="text" id="b-L" inputmode="decimal" placeholder="Ej.: 24"></div>
 <div id="w-r1"><label class="f" for="b-r1"><span id="lab-r1">Largo de rosca</span> <small>(pulg)</small> <span class="req">*</span></label><input type="text" id="b-r1" inputmode="decimal" placeholder="Ej.: 6"></div>
 <div id="w-r2"><label class="f" for="b-r2">Rosca 2 <small>(pulg)</small> <span class="req">*</span></label><input type="text" id="b-r2" inputmode="decimal" placeholder="Ej.: 4"></div>
@@ -399,7 +399,7 @@ footer a{color:#D3DAE0}
     $('b-mhint').innerHTML='¿Cómo medir? '+H[bt.k];
     drawBolt();accTotals();
   }
-  ['b-dia','b-L','b-r1','b-r2','b-hook','b-qty','bp-l','bp-a','bp-e','b-nut-q','b-wsh-q','b-nut-n'].forEach(function(id){$(id).addEventListener('input',function(){drawBolt();accTotals();this.classList.remove('bad');});$(id).addEventListener('change',function(){drawBolt();accTotals();});});
+  ['b-grado','b-dia','b-L','b-r1','b-r2','b-hook','b-qty','bp-l','bp-a','bp-e','b-nut-q','b-wsh-q','b-nut-n'].forEach(function(id){$(id).addEventListener('input',function(){drawBolt();accTotals();this.classList.remove('bad');});$(id).addEventListener('change',function(){drawBolt();accTotals();});});
   document.querySelectorAll('input[name=bpt]').forEach(function(r){r.addEventListener('change',drawBolt);});
   $('b-nut').addEventListener('change',function(){$('b-nut-w').hidden=!this.checked;accTotals();});
   $('b-wsh').addEventListener('change',function(){$('b-wsh-w').hidden=!this.checked;accTotals();});
@@ -422,7 +422,7 @@ footer a{color:#D3DAE0}
       '<text x="'+((x1+x2)/2)+'" y="'+(y-7)+'" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="#0B2A40" font-weight="600">'+esc(label)+'</text></g>';
   }
   var DEFS='<defs><marker id="a1" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M10 0L0 5l10 5z" fill="#1E6A98"/></marker><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0l10 5-10 5z" fill="#1E6A98"/></marker>'+
-    '<pattern id="thr" width="12" height="6" patternUnits="userSpaceOnUse"><path d="M0 6L12 0" stroke="#5B7A8C" stroke-width="1.3"/></pattern>'+
+    '<pattern id="rib" width="22" height="11" patternUnits="userSpaceOnUse"><path d="M0 3L11 8L22 3" fill="none" stroke="#3E5866" stroke-width="2.4"/></pattern><pattern id="thr" width="12" height="6" patternUnits="userSpaceOnUse"><path d="M0 6L12 0" stroke="#5B7A8C" stroke-width="1.3"/></pattern>'+
     '<linearGradient id="stl" x1="0" x2="1"><stop offset="0" stop-color="#8FA9B6"/><stop offset=".45" stop-color="#E4EDF2"/><stop offset="1" stop-color="#7E97A4"/></linearGradient></defs>';
   function drawBolt(){
     var d=val('b-dia')||'Ø',L=val('b-L'),r1=val('b-r1'),r2=val('b-r2'),hk=val('b-hook');
@@ -452,7 +452,7 @@ footer a{color:#D3DAE0}
         var pl=[val('bp-l'),val('bp-a')].map(fmt).filter(Boolean).join(' × ')||'?',pe=val('bp-e');
         s+=dimH(X-55,X+55,bot+26,'P = '+pl+(pe?' × '+pe:''));
       }
-      var t1=top+80;s+=thr(top,t1);if(!bt.rod)s+=nut(top+22);
+      var t1=top+80;if($('b-grado').value==='Varilla corrugada'){var re=bt.r===2?rodBot-80:(bt.k==='J'?rodBot:(bt.k==='L'?rodBot-36:(bt.k==='Con placa'?pY-14:rodBot)));if(re>t1)s+='<rect x="'+x0+'" y="'+t1+'" width="'+W+'" height="'+(re-t1)+'" fill="url(#stl)"/><rect x="'+x0+'" y="'+t1+'" width="'+W+'" height="'+(re-t1)+'" fill="url(#rib)" stroke="#2E4250" stroke-width="1.2"/>';}s+=thr(top,t1);if(!bt.rod)s+=nut(top+22);
       if(bt.r===2){var t2=rodBot-80;s+=thr(t2,rodBot);if(!bt.rod)s+=nut(rodBot-40);
         s+=dimV(196,t2,196,rodBot,'R2 = '+(fmt(r2)||'?'),'r');}
       s+=dimV(190,top,190,t1,(bt.r===2?'R1 = ':'R = ')+(fmt(r1)||'?'),'r');
