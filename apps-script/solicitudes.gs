@@ -21,6 +21,7 @@ function procesar(d) {
     const v = k => { const c = campos.find(x => x.k === k); return c ? c.v : ''; };
     const folio = v('Folio') || d.folio || (div.slice(0, 2).toUpperCase() + '-' + fecha.getTime());
     const quien = v('Nombre o empresa') || 'sin nombre';
+    const via = d.via || v('Enviado por') || 'Web';   // WhatsApp o Correo
 
     // 1. Planos a Drive
     const blobs = [], enlaces = [];
@@ -51,7 +52,7 @@ function procesar(d) {
 
     // 3. Correo con PDF + planos
     if (CORREOS) {
-      const asunto = 'Cotización ' + div.toUpperCase() + ' · ' + quien +
+      const asunto = (via === 'WhatsApp' ? '[WhatsApp] ' : '[Correo] ') + 'Cotización ' + div.toUpperCase() + ' · ' + quien +
                      (v('Ciudad de entrega') ? ' · ' + v('Ciudad de entrega') : '') +
                      ' · ' + items.length + ' producto(s) · ' + folio;
       const pdf = crearPdf(div, campos, items, fecha, enlaces, folio, quien);
@@ -60,7 +61,8 @@ function procesar(d) {
         to: CORREOS,
         replyTo: /@/.test(v('Correo')) ? v('Correo') : 'ventas@grupoduralco.com',
         subject: asunto,
-        body: 'Nueva solicitud de cotización ' + div + ' desde www.grupoduralco.com\n\n' +
+        body: 'Nueva solicitud de cotización ' + div + ' desde www.grupoduralco.com (enviada por ' + via + ')\n' +
+              (via === 'WhatsApp' ? 'El cliente también la envió por WhatsApp al +504 9440-5644.\n' : '') + '\n' +
               items.map((it, i) => (i + 1) + '. ' + it.producto + ' × ' + it.cantidad + '\n   ' + it.descripcion).join('\n') +
               '\n\n' + campos.filter(c => c.v).map(c => c.k + ': ' + c.v).join('\n') +
               (enlaces.length ? '\n\nArchivos en Drive:\n' + enlaces.join('\n') : '') +
@@ -147,7 +149,7 @@ function crearPdf(div, campos, items, fecha, enlaces, folio, quien) {
 // Ejecútela una vez desde el editor para dar permisos y probar (no escribe en la hoja)
 function probar() {
   procesar({
-    prueba: true, division: 'Corebolt',
+    prueba: true, division: 'Corebolt', via: 'WhatsApp',
     campos: [{k: 'Folio', v: 'CB-PRUEBA'}, {k: 'Nombre o empresa', v: 'PRUEBA'}, {k: 'Ciudad de entrega', v: 'San Pedro Sula'}],
     items: [{categoria: 'Pernos', producto: 'Perno J', descripcion: 'Ø 3/4" · L = 24" · rosca 6" · UNC · ASTM F1554 Grado 36', cantidad: 40}],
     archivos: [{nombre: 'plano-prueba.txt', tipo: 'text/plain', datos: Utilities.base64Encode('Plano de prueba')}]

@@ -355,12 +355,12 @@ footer a{color:#D3DAE0}
 </div>
 <label class="consent"><input type="checkbox" id="acepto"><span>Autorizo a Grupo Duralco a usar estos datos para atender mi solicitud y contactarme por teléfono, WhatsApp o correo. <span class="req">*</span></span></label>
 <p class="err" id="c-err" role="alert"></p>
-<div class="sendrow">
-<button type="button" class="btn prim" id="send">Solicitar cotización →</button>
-<button type="button" class="btn wa" id="send-wa">Enviar por WhatsApp</button>
+<div class="sendrow" id="sendrow">
+<button type="button" class="btn wa" id="send-wa">Cotizar por WhatsApp</button>
+<button type="button" class="btn prim" id="send">Cotizar por correo →</button>
 </div>
-<p class="err" id="send-err" role="alert"><b>No se pudo enviar.</b> Revise su conexión e intente de nuevo, o use el botón Enviar por WhatsApp.</p>
-<div class="done" id="done" role="status"><h3>¡Solicitud recibida!</h3><p>Su número de folio es <b id="folio"></b>. El equipo de Corebolt le enviará su cotización pronto.</p></div>
+<p class="err" id="send-err" role="alert"><b>No se pudo enviar.</b> Revise su conexión e intente de nuevo, o use el botón Cotizar por WhatsApp.</p>
+<div class="done" id="done" role="status"><h3>¡Solicitud recibida!</h3><p><span id="done-via"></span>Su número de folio es <b id="folio"></b>. El equipo de Corebolt le enviará su cotización pronto.</p></div>
 </div>
 </section>
 </main>
@@ -735,15 +735,27 @@ footer a{color:#D3DAE0}
     cart.forEach(function(it,i){var d=it.desc.split(' · Incluye: ');l.push('','*'+(i+1)+'. '+it.prod+'* — '+it.qty.toLocaleString('es-HN')+' pzas',d[0]);if(d[1])l.push('Incluye: '+d[1].replace(/; /g,' + '));});
     l.push('','*Datos del cliente*','Nombre o empresa: '+val('c-nom'),'WhatsApp: '+val('c-tel'),'Correo: '+val('c-mail'),'Entrega: '+[ciudadV(),deptoV(),paisV()].filter(Boolean).join(', '));
     if(val('c-obs'))l.push('Observaciones: '+val('c-obs'));if(files.length)l.push('','(Tengo planos para enviar por este medio)');return l.join('\n');}
-  function fin(){$('folio').textContent=FOLIO;$('done').className='done on';$('send').hidden=true;$('done').scrollIntoView({behavior:'smooth',block:'center'});}
-  $('send-wa').addEventListener('click',function(){if(!checkClient())return;window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(texto()),'_blank','noopener');fin();});
+  var VIA='';
+  function fin(){$('folio').textContent=FOLIO;$('done-via').textContent=VIA==='WhatsApp'?'Complete el envío en WhatsApp. ':'';$('done').className='done on';$('sendrow').hidden=true;$('done').scrollIntoView({behavior:'smooth',block:'center'});}
+  // Registro en la hoja + correo (siempre, por WhatsApp o por correo)
+  function registrar(via){
+    if(!API)return Promise.resolve();
+    return Promise.all(files.map(toB64)).then(function(arch){
+      var c=campos();c.push({k:'Enviado por',v:via});
+      return fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({division:'Corebolt',folio:FOLIO,via:via,campos:c,items:cart.map(function(it){return {producto:it.prod,categoria:it.cat,descripcion:it.desc,cantidad:it.qty};}),archivos:arch})});
+    });
+  }
+  function busy(on){['send','send-wa'].forEach(function(id){$(id).disabled=on;});$('send').textContent=on&&VIA==='Correo'?'Enviando…':'Cotizar por correo →';}
+  $('send-wa').addEventListener('click',function(){
+    if(!checkClient())return;VIA='WhatsApp';
+    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(texto()),'_blank','noopener');
+    busy(true);registrar('WhatsApp').then(fin).catch(fin);
+  });
   $('send').addEventListener('click',function(){
-    if(!checkClient())return;
+    if(!checkClient())return;VIA='Correo';
     if(!API){$('send-wa').click();return;}
-    var b=this;b.disabled=true;b.textContent='Enviando…';$('send-err').className='err';
-    Promise.all(files.map(toB64)).then(function(arch){
-      return fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({division:'Corebolt',folio:FOLIO,campos:campos(),items:cart.map(function(it){return {producto:it.prod,categoria:it.cat,descripcion:it.desc,cantidad:it.qty};}),archivos:arch})});
-    }).then(fin).catch(function(){b.disabled=false;b.textContent='Solicitar cotización →';$('send-err').className='err on';});
+    busy(true);$('send-err').className='err';
+    registrar('Correo').then(fin).catch(function(){busy(false);$('send-err').className='err on';});
   });
   ['c-nom','c-tel','c-mail'].forEach(function(id){$(id).addEventListener('input',function(){this.classList.remove('bad');});});
 
