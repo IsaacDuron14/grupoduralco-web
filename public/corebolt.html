@@ -166,6 +166,15 @@ footer .wrap{max-width:1240px;margin:0 auto;padding:26px 20px 90px;display:flex;
 @media(min-width:1000px){footer .wrap{padding-bottom:26px}}
 footer a{color:#D3DAE0}
 [hidden]{display:none!important}
+.pgrid{display:grid;gap:18px}
+@media(min-width:760px){.pgrid{grid-template-columns:1fr 1fr}}
+.pbox{border:1px solid var(--line);background:#FAFCFD;padding:18px;display:flex;flex-direction:column}
+.pbox .btn.add{margin-top:auto}
+.pbox .grid2{margin-bottom:18px}
+.ph2{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.ph2 svg{width:44px;height:44px;flex:none}
+.ph2 h3{margin:0;font-family:Manrope,sans-serif;font-weight:800;font-size:18px;color:var(--ink)}
+.ph2 span{font-size:13px;color:var(--mut)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 </head>
@@ -285,20 +294,31 @@ footer a{color:#D3DAE0}
 <div class="editing" id="ed-prod"><span>Editando un producto de su cotización.</span><button type="button" data-cancel>Cancelar edición</button></div>
 <h2>Tuercas y arandelas</h2>
 <p class="sub">Para pedirlas sueltas. Si las necesita con sus pernos, agréguelas desde la pestaña Pernos.</p>
-<div class="seg" style="margin-bottom:18px" role="radiogroup" aria-label="Producto">
-<label><input type="radio" name="prod" value="Tuerca" checked><span>Tuercas</span></label>
-<label><input type="radio" name="prod" value="Arandela"><span>Arandelas</span></label>
-</div>
+<div class="pgrid">
+<div class="pbox">
+<div class="ph2"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 6h20l10 18-10 18H14L4 24z" fill="#C9D8E2" stroke="#0B2A40" stroke-width="2.4"/><circle cx="24" cy="24" r="8" fill="#fff" stroke="#0B2A40" stroke-width="2.4"/></svg><div><h3>Tuercas</h3><span>Hexagonal pesada · rosca UNC</span></div></div>
 <div class="grid2">
 <div><label class="f" for="x-dia">Diámetro <span class="req">*</span></label><select id="x-dia"></select></div>
-<div id="w-xn"><label class="f" for="x-norma">Norma <span class="req">*</span></label><select id="x-norma"><option value="ASTM A563">ASTM A563</option><option value="ASTM A194 Grado 2H">ASTM A194 Gr. 2H</option></select></div>
-<div id="w-xf" hidden><label class="f">Norma</label><div class="fixed"><b>ASTM F436</b></div></div>
-<div id="w-xr"><label class="f">Rosca</label><div class="fixed"><b>UNC</b> · estándar</div></div>
+<div><label class="f" for="x-norma">Norma <span class="req">*</span></label><select id="x-norma"><option value="ASTM A563">ASTM A563</option><option value="ASTM A194 Grado 2H">ASTM A194 Gr. 2H</option></select></div>
+<div><label class="f">Rosca</label><div class="fixed"><b>UNC</b> · estándar</div></div>
 <div><label class="f" for="x-qty">Cantidad <span class="req">*</span></label><input type="number" id="x-qty" min="1" step="1" inputmode="numeric" placeholder="Ej.: 200"></div>
 </div>
 <p class="err" id="x-err" role="alert"></p>
-<button type="button" class="btn add" id="x-add">+ Agregar a mi cotización</button>
+<button type="button" class="btn add" id="x-add">+ Agregar tuercas</button>
 <p class="okmsg" id="x-ok" role="status"></p>
+</div>
+<div class="pbox">
+<div class="ph2"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="19" fill="#C9D8E2" stroke="#0B2A40" stroke-width="2.4"/><circle cx="24" cy="24" r="8" fill="#fff" stroke="#0B2A40" stroke-width="2.4"/></svg><div><h3>Arandelas</h3><span>Planas endurecidas</span></div></div>
+<div class="grid2">
+<div><label class="f" for="y-dia">Diámetro <span class="req">*</span></label><select id="y-dia"></select></div>
+<div><label class="f">Norma</label><div class="fixed"><b>ASTM F436</b></div></div>
+<div class="full"><label class="f" for="y-qty">Cantidad <span class="req">*</span></label><input type="number" id="y-qty" min="1" step="1" inputmode="numeric" placeholder="Ej.: 200"></div>
+</div>
+<p class="err" id="y-err" role="alert"></p>
+<button type="button" class="btn add" id="y-add">+ Agregar arandelas</button>
+<p class="okmsg" id="y-ok" role="status"></p>
+</div>
+</div>
 </section>
 </div>
 </div>
@@ -359,7 +379,7 @@ footer a{color:#D3DAE0}
   var DIAS=['1/2"','5/8"','3/4"','7/8"','1"','1-1/8"','1-1/4"','1-1/2"'];
   var ESP=['1/4"','5/16"','3/8"','1/2"','5/8"','3/4"','7/8"','1"','1-1/4"','1-1/2"','2"'];
   function fill(sel,arr,ph){sel.innerHTML='';if(ph){var o=document.createElement('option');o.value='';o.textContent=ph;sel.appendChild(o);}arr.forEach(function(t){var x=document.createElement('option');x.textContent=t;sel.appendChild(x);});}
-  fill($('b-dia'),DIAS,'Seleccione');fill($('x-dia'),DIAS,'Seleccione');fill($('p-e'),ESP,'Seleccione');fill($('bp-e'),ESP,'Seleccione');
+  fill($('b-dia'),DIAS,'Seleccione');fill($('x-dia'),DIAS,'Seleccione');fill($('y-dia'),DIAS,'Seleccione');fill($('p-e'),ESP,'Seleccione');fill($('bp-e'),ESP,'Seleccione');
 
   // Medidas: acepta 24, 24.5, 24 1/2, 24-1/2, 13/16
   function num(s){s=String(s||'').trim().replace(/["”]/g,'').replace(',','.');if(!s)return NaN;
@@ -520,8 +540,6 @@ footer a{color:#D3DAE0}
   function gridHoles(n,cx,cy,w,h){var p=[],c=Math.ceil(Math.sqrt(n*w/h)),r=Math.ceil(n/c);for(var i=0;i<n&&i<36;i++){var col=i%c,row=Math.floor(i/c);p.push([cx-w/2+w*(col+1)/(c+1),cy-h/2+h*(row+1)/(r+1)]);}return p;}
 
   // ===== Productos =====
-  document.querySelectorAll('input[name=prod]').forEach(function(r){r.addEventListener('change',prodUI);});
-  function prodUI(){var t=document.querySelector('input[name=prod]:checked').value;$('w-xn').hidden=t!=='Tuerca';$('w-xr').hidden=t!=='Tuerca';$('w-xf').hidden=t==='Tuerca';}
 
   // ===== Pestañas =====
   var TABS=[['t-pernos','p-pernos'],['t-placas','p-placas'],['t-prod','p-prod']];
@@ -581,24 +599,24 @@ footer a{color:#D3DAE0}
     if(val('p-obs'))desc+=' · Obs.: '+val('p-obs');
     put({cat:'Placas',prod:pt.k==='Placa base'?'Placa base':'Placa '+pt.k.toLowerCase(),desc:desc,qty:q,unit:'pzas',form:snap('placas')},'p-ok');
   }
-  function addProd(){
-    var t=document.querySelector('input[name=prod]:checked').value,m=[],B=[],q=parseInt(val('x-qty'),10);
-    if(!val('x-dia')){m.push('diámetro');B.push('x-dia');}
-    if(!(q>=1&&q<=1000000)){m.push('cantidad');B.push('x-qty');}
-    bad(B);showErr('x-err',m);if(m.length)return;
-    var desc=t==='Tuerca'?('Ø '+val('x-dia')+' · '+$('x-norma').value+' · UNC'):('Ø '+val('x-dia')+' · ASTM F436');
-    put({cat:'Productos',prod:t==='Tuerca'?'Tuercas':'Arandelas',desc:desc,qty:q,unit:'pzas',form:snap('prod')},'x-ok');
+  function addProd(t){
+    var p=t==='Tuerca'?'x':'y',m=[],B=[],q=parseInt(val(p+'-qty'),10);
+    if(!val(p+'-dia')){m.push('diámetro');B.push(p+'-dia');}
+    if(!(q>=1&&q<=1000000)){m.push('cantidad');B.push(p+'-qty');}
+    bad(B);showErr(p+'-err',m);if(m.length)return;
+    var desc=t==='Tuerca'?('Ø '+val('x-dia')+' · '+$('x-norma').value+' · UNC'):('Ø '+val('y-dia')+' · ASTM F436');
+    var f=snap('prod');f.type=t;
+    put({cat:'Productos',prod:t==='Tuerca'?'Tuercas':'Arandelas',desc:desc,qty:q,unit:'pzas',form:f},p+'-ok');
   }
-  var FIELDS={pernos:['b-dia','b-grado','b-L','b-r1','b-r2','b-hook','b-qty','bp-l','bp-a','bp-e','b-nut-n','b-nut-q','b-wsh-q','b-obs'],placas:['p-l','p-a','p-e','p-np','p-dp','p-qty','p-obs'],prod:['x-dia','x-norma','x-qty']};
+
+  var FIELDS={pernos:['b-dia','b-grado','b-L','b-r1','b-r2','b-hook','b-qty','bp-l','bp-a','bp-e','b-nut-n','b-nut-q','b-wsh-q','b-obs'],placas:['p-l','p-a','p-e','p-np','p-dp','p-qty','p-obs'],prod:['x-dia','x-norma','x-qty','y-dia','y-qty']};
   function snap(k){var o={};FIELDS[k].forEach(function(id){o[id]=$(id).value;});
     if(k==='pernos'){o.bpt=document.querySelector('input[name=bpt]:checked').value;o.type=bt.k;o.nut=$('b-nut').checked;o.wsh=$('b-wsh').checked;}
     if(k==='placas')o.type=pt.k;
-    if(k==='prod')o.type=document.querySelector('input[name=prod]:checked').value;
     return o;}
   function restore(k,o){FIELDS[k].forEach(function(id){$(id).value=o[id]||'';});
     if(k==='pernos'){document.querySelector('input[name=bpt][value="'+(o.bpt||'Placa soldada')+'"]').checked=true;var i=BT.findIndex(function(t){return t.k===o.type;});document.querySelectorAll('#bolt-types .ty')[i].click();$('b-nut').checked=!!o.nut;$('b-wsh').checked=!!o.wsh;$('b-nut-w').hidden=!o.nut;$('b-wsh-w').hidden=!o.wsh;boltUI();}
     if(k==='placas'){var j=PT.findIndex(function(t){return t.k===o.type;});document.querySelectorAll('#plate-types .ty')[j].click();}
-    if(k==='prod'){document.querySelector('input[name=prod][value="'+o.type+'"]').checked=true;prodUI();}
   }
   function clearForm(k){FIELDS[k].forEach(function(id){var e=$(id);if(e.tagName==='SELECT'){if(['b-grado','b-nut-n','x-norma'].indexOf(id)>=0)e.selectedIndex=0;else if(id==='b-nut-q')e.value='2';else if(id==='b-wsh-q')e.value='1';else e.value='';}else e.value='';});
     if(k==='pernos'){$('b-nut').checked=false;$('b-wsh').checked=false;$('b-nut-w').hidden=true;$('b-wsh-w').hidden=true;drawBolt();accTotals();}
@@ -608,15 +626,15 @@ footer a{color:#D3DAE0}
     var k=key(item.cat);
     if(editIdx>=0){cart[editIdx]=item;editIdx=-1;ok(okId,'✓ Producto actualizado en su cotización.');}
     else{cart.push(item);ok(okId,'✓ Agregado a su cotización. Puede seguir agregando productos.');}
-    clearForm(k);endEdit();render();
+    clearForm(k);endEdit();render();document.querySelectorAll('#conf .bad').forEach(function(e){e.classList.remove('bad');});
   }
-  function endEdit(){editIdx=-1;['ed-pernos','ed-placas','ed-prod'].forEach(function(id){$(id).className='editing';});$('b-add').textContent='+ Agregar a mi cotización';$('p-add').textContent='+ Agregar a mi cotización';$('x-add').textContent='+ Agregar a mi cotización';}
+  function endEdit(){editIdx=-1;['ed-pernos','ed-placas','ed-prod'].forEach(function(id){$(id).className='editing';});$('b-add').textContent='+ Agregar a mi cotización';$('p-add').textContent='+ Agregar a mi cotización';$('x-add').textContent='+ Agregar tuercas';$('y-add').textContent='+ Agregar arandelas';}
   document.querySelectorAll('[data-cancel]').forEach(function(b){b.addEventListener('click',function(){var k=['pernos','placas','prod'][['ed-pernos','ed-placas','ed-prod'].indexOf(b.parentNode.id)];clearForm(k);endEdit();});});
   function edit(i){
     var it=cart[i],k=key(it.cat);editIdx=i;
     showTab(k==='pernos'?'t-pernos':k==='placas'?'t-placas':'t-prod');restore(k,it.form);
     var ed=$(k==='prod'?'ed-prod':'ed-'+k);ed.className='editing on';
-    $(k==='pernos'?'b-add':k==='placas'?'p-add':'x-add').textContent='Guardar cambios';
+    $(k==='pernos'?'b-add':k==='placas'?'p-add':(it.form.type==='Tuerca'?'x-add':'y-add')).textContent='Guardar cambios';
     $('conf').scrollIntoView({behavior:'smooth',block:'start'});
   }
   function render(){
@@ -634,7 +652,7 @@ footer a{color:#D3DAE0}
       tr.children[0].innerHTML='<b></b>';tr.children[0].firstChild.textContent=it.prod;tr.children[1].textContent=it.desc;tr.children[2].textContent=it.qty.toLocaleString('es-HN')+' '+it.unit;tb.appendChild(tr);});
     $('res').hidden=!cart.length;$('res-empty').hidden=cart.length>0;
   }
-  $('b-add').addEventListener('click',addBolt);$('p-add').addEventListener('click',addPlate);$('x-add').addEventListener('click',addProd);
+  $('b-add').addEventListener('click',addBolt);$('p-add').addEventListener('click',addPlate);$('x-add').addEventListener('click',function(){addProd('Tuerca');});$('y-add').addEventListener('click',function(){addProd('Arandela');});
 
   // ===== Ubicación =====
   var GEO={
@@ -728,7 +746,8 @@ footer a{color:#D3DAE0}
   });
   ['c-nom','c-tel','c-mail'].forEach(function(id){$(id).addEventListener('input',function(){this.classList.remove('bad');});});
 
-  boltUI();plateUI();prodUI();render();
+  ['input','change'].forEach(function(ev){document.addEventListener(ev,function(e){if(e.target.classList)e.target.classList.remove('bad');});});
+  boltUI();plateUI();render();
 })();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d0ade7acc1494fb68388a378ce63b9bd"}'></script><!-- End Cloudflare Web Analytics -->
