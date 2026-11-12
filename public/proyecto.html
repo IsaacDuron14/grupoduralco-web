@@ -4,15 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>¿Tiene un proyecto? | Duralco Constructores</title>
-<meta name="description" content="Cuéntenos su proyecto de montaje de equipo, obra civil, estructuras metálicas o pavimentación y adoquinado. Visita técnica sin costo en Honduras y Centroamérica.">
+<meta name="description" content="Cuéntenos su proyecto de construcción y obras civiles, estructuras metálicas, montajes industriales y electromecánicos o pavimentación y adoquinados. Visita técnica sin costo en Honduras y Centroamérica.">
 <link rel="canonical" href="https://www.grupoduralco.com/proyecto">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.grupoduralco.com/proyecto">
 <meta property="og:site_name" content="Grupo Duralco">
 <meta property="og:locale" content="es_HN">
 <meta property="og:title" content="¿Tiene un proyecto? Visita técnica sin costo | Duralco Constructores">
-<meta property="og:description" content="Montaje de equipo, obra civil, estructuras metálicas y pavimentación. Cuéntenos su proyecto en 2 minutos.">
-<meta property="og:image" content="https://www.grupoduralco.com/assets/proyectos/nave-1.jpeg">
+<meta property="og:description" content="Construcción y obras civiles, estructuras metálicas, montajes industriales y pavimentación. Cuéntenos su proyecto en 2 minutos.">
+<meta property="og:image" content="https://www.grupoduralco.com/assets/og-proyecto.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#071626">
 <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon.png">
@@ -133,7 +135,12 @@ main{padding-bottom:40px}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .step .qh{font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(22px,3vw,28px);line-height:1.2;letter-spacing:-.02em;color:#071626;margin:0 0 6px;display:block}
 .step .hint{font-size:14px;color:#5B6873;margin:0 0 16px}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:12px}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tile b{overflow-wrap:break-word;font-size:14px;padding:12px 10px 14px}
+.tile.other{grid-column:1 / -1;flex-direction:row;align-items:center}
+.tile.other .ph{width:72px;height:58px;flex:none}
+.tile.other b{padding:0 16px}
+@media(min-width:640px){.tile .ph{height:150px}.tile b{font-size:16px}}
 .tile{position:relative;display:flex;flex-direction:column;border:2px solid #DDE3E8;background:#fff;cursor:pointer;transition:border-color .15s,transform .15s,box-shadow .15s}
 .tile input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:2}
 .tile .ph{display:block;height:120px;background:#0B2238 center/cover no-repeat;position:relative}
@@ -187,7 +194,7 @@ main{padding-bottom:40px}
 <section class="hero"><div class="wrap">
 <p class="kicker">DURALCO CONSTRUCTORES</p>
 <h1>¿Tiene un proyecto?<br>Cuéntenos en 2 minutos.</h1>
-<p class="lead">Montaje de equipo, obra civil, estructuras metálicas y pavimentación. Si lo desea, lo visitamos sin costo para evaluar su proyecto.</p>
+<p class="lead">Construcción y obras civiles, estructuras metálicas, montajes industriales y electromecánicos, y pavimentación. Si lo desea, lo visitamos sin costo para evaluar su proyecto.</p>
 <div class="chips"><span>Visita técnica sin costo</span><span>Honduras y Centroamérica</span></div>
 </div></section>
 <main>
@@ -200,10 +207,10 @@ main{padding-bottom:40px}
 <h2 class="qh">¿Qué tipo de proyecto tiene?</h2>
 <p class="hint">Puede elegir varios.</p>
 <div class="tiles" id="tiles">
-<label class="tile"><input type="checkbox" name="tipo" value="Montaje de equipo"><span class="ph" style="background-image:url(/assets/fotos/nosotros-hero-hd.jpeg)"></span><b>Montaje de equipo</b></label>
-<label class="tile"><input type="checkbox" name="tipo" value="Obra civil"><span class="ph" style="background-image:url(/assets/proyectos/mixta-1.jpeg)"></span><b>Obra civil</b></label>
-<label class="tile"><input type="checkbox" name="tipo" value="Estructuras metálicas"><span class="ph" style="background-image:url(/assets/proyectos/nave-1.jpeg)"></span><b>Estructuras metálicas</b></label>
-<label class="tile"><input type="checkbox" name="tipo" value="Pavimentación y adoquinado"><span class="ph" style="background-image:url(/assets/proyectos/vial-3.jpeg);background-position:center 40%"></span><b>Pavimentación y adoquinado</b></label>
+<label class="tile"><input type="checkbox" name="tipo" value="Construcción y obras civiles"><span class="ph" style="background-image:url(/assets/proyecto/obra-civil.jpg)"></span><b>Construcción y obras civiles</b></label>
+<label class="tile"><input type="checkbox" name="tipo" value="Estructuras metálicas"><span class="ph" style="background-image:url(/assets/proyecto/estructuras.jpg)"></span><b>Fabricación y montaje de estructuras metálicas</b></label>
+<label class="tile"><input type="checkbox" name="tipo" value="Montajes industriales y electromecánicos"><span class="ph" style="background-image:url(/assets/proyecto/montaje.jpg)"></span><b>Montajes industriales y electro&shy;mecánicos</b></label>
+<label class="tile"><input type="checkbox" name="tipo" value="Pavimentación y adoquinados"><span class="ph" style="background-image:url(/assets/proyecto/pavimentacion.jpg)"></span><b>Pavimentación y adoquinados</b></label>
 <label class="tile other"><input type="checkbox" name="tipo" value="Otro"><span class="ph"><i>＋</i></span><b>Otro</b></label>
 </div>
 <div id="tipo_otro_w" hidden style="margin-top:14px"><label class="f" for="tipo_otro">¿Qué tipo de proyecto?</label><input type="text" id="tipo_otro" maxlength="100"></div>
@@ -224,14 +231,14 @@ main{padding-bottom:40px}
 <section class="step q" data-step="3" hidden>
 <h2 class="qh">¿De qué tamaño es aproximadamente?</h2>
 <p class="hint">Un aproximado es suficiente. Si no lo sabe, elija "No sé".</p>
-<div class="sz" data-for="Montaje de equipo"><label class="f">Montaje de equipo: ¿qué equipo y de qué peso?</label>
-<input type="text" id="sz_equipo" maxlength="150" placeholder="Ej.: banda transportadora, tanque, caldera, maquinaria de planta">
+<div class="sz" data-for="Montajes industriales y electromecánicos"><label class="f">Montaje industrial o electromecánico: ¿qué equipo y de qué peso?</label>
+<input type="text" id="sz_equipo" maxlength="150" placeholder="Ej.: bombas, tuberías, banda transportadora, tanque, caldera">
 <div class="opts row" style="margin-top:10px"><label><input type="radio" name="sz_m" value="Menos de 5 t"><span>Menos de 5 t</span></label><label><input type="radio" name="sz_m" value="5 a 20 t"><span>5 a 20 t</span></label><label><input type="radio" name="sz_m" value="Más de 20 t"><span>Más de 20 t</span></label><label><input type="radio" name="sz_m" value="No sé"><span>No sé</span></label></div></div>
-<div class="sz" data-for="Obra civil"><label class="f">Obra civil: área aproximada</label>
+<div class="sz" data-for="Construcción y obras civiles"><label class="f">Construcción y obras civiles: área aproximada</label>
 <div class="opts row"><label><input type="radio" name="sz_o" value="Menos de 200 m²"><span>Menos de 200 m²</span></label><label><input type="radio" name="sz_o" value="200 a 1,000 m²"><span>200 a 1,000 m²</span></label><label><input type="radio" name="sz_o" value="1,000 a 5,000 m²"><span>1,000 a 5,000 m²</span></label><label><input type="radio" name="sz_o" value="Más de 5,000 m²"><span>Más de 5,000 m²</span></label><label><input type="radio" name="sz_o" value="No sé"><span>No sé</span></label></div></div>
 <div class="sz" data-for="Estructuras metálicas"><label class="f">Estructuras metálicas: área aproximada</label>
 <div class="opts row"><label><input type="radio" name="sz_e" value="Menos de 200 m²"><span>Menos de 200 m²</span></label><label><input type="radio" name="sz_e" value="200 a 1,000 m²"><span>200 a 1,000 m²</span></label><label><input type="radio" name="sz_e" value="1,000 a 5,000 m²"><span>1,000 a 5,000 m²</span></label><label><input type="radio" name="sz_e" value="Más de 5,000 m²"><span>Más de 5,000 m²</span></label><label><input type="radio" name="sz_e" value="No sé"><span>No sé</span></label></div></div>
-<div class="sz" data-for="Pavimentación y adoquinado"><label class="f">Pavimentación y adoquinado: área aproximada</label>
+<div class="sz" data-for="Pavimentación y adoquinados"><label class="f">Pavimentación y adoquinados: área aproximada</label>
 <div class="opts row"><label><input type="radio" name="sz_p" value="Menos de 500 m²"><span>Menos de 500 m²</span></label><label><input type="radio" name="sz_p" value="500 a 2,000 m²"><span>500 a 2,000 m²</span></label><label><input type="radio" name="sz_p" value="2,000 a 10,000 m²"><span>2,000 a 10,000 m²</span></label><label><input type="radio" name="sz_p" value="Más de 10,000 m²"><span>Más de 10,000 m²</span></label><label><input type="radio" name="sz_p" value="No sé"><span>No sé</span></label></div></div>
 <div style="margin-top:18px"><label class="f" for="desc">Cuéntenos brevemente su proyecto <span style="font-weight:500;color:#5B6873">(opcional)</span></label><textarea id="desc" maxlength="1500" placeholder="Ej.: nave de 30 × 50 m para bodega, con cubierta de lámina y portones"></textarea></div>
 </section>
@@ -388,10 +395,10 @@ main{padding-bottom:40px}
   }
   function tam(){
     var r=[],t=tipos();
-    if(t.indexOf('Montaje de equipo')>=0){var s=[val('sz_equipo'),radio('sz_m')].filter(Boolean).join(', ');if(s)r.push('Montaje: '+s);}
-    if(t.indexOf('Obra civil')>=0&&radio('sz_o'))r.push('Obra civil: '+radio('sz_o'));
+    if(t.indexOf('Montajes industriales y electromecánicos')>=0){var s=[val('sz_equipo'),radio('sz_m')].filter(Boolean).join(', ');if(s)r.push('Montaje: '+s);}
+    if(t.indexOf('Construcción y obras civiles')>=0&&radio('sz_o'))r.push('Obra civil: '+radio('sz_o'));
     if(t.indexOf('Estructuras metálicas')>=0&&radio('sz_e'))r.push('Estructuras: '+radio('sz_e'));
-    if(t.indexOf('Pavimentación y adoquinado')>=0&&radio('sz_p'))r.push('Pavimentación: '+radio('sz_p'));
+    if(t.indexOf('Pavimentación y adoquinados')>=0&&radio('sz_p'))r.push('Pavimentación: '+radio('sz_p'));
     return r.join(' · ');
   }
 
