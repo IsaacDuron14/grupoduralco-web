@@ -712,9 +712,9 @@ footer a{color:#D3DAE0}
     add('Folio',FOLIO);add('Nombre o empresa',val('c-nom'));add('WhatsApp',val('c-tel'));add('Correo',val('c-mail'));
     add('País',paisV());add('Departamento',deptoV());add('Ciudad de entrega',ciudadV());add('Observaciones',val('c-obs'));
     add('Productos',cart.length+'');return c;}
-  function texto(){var l=['Solicitud de cotización COREBOLT — Folio '+FOLIO,''];
-    cart.forEach(function(it,i){l.push((i+1)+'. '+it.prod+' × '+it.qty+' pzas','   '+it.desc);});
-    l.push('','Nombre o empresa: '+val('c-nom'),'WhatsApp: '+val('c-tel'),'Correo: '+val('c-mail'),'Entrega: '+[ciudadV(),deptoV(),paisV()].filter(Boolean).join(', '));
+  function texto(){var l=['*SOLICITUD DE COTIZACIÓN · COREBOLT*','Folio: '+FOLIO,'','*Productos*'];
+    cart.forEach(function(it,i){var d=it.desc.split(' · Incluye: ');l.push('','*'+(i+1)+'. '+it.prod+'* — '+it.qty.toLocaleString('es-HN')+' pzas',d[0]);if(d[1])l.push('Incluye: '+d[1].replace(/; /g,' + '));});
+    l.push('','*Datos del cliente*','Nombre o empresa: '+val('c-nom'),'WhatsApp: '+val('c-tel'),'Correo: '+val('c-mail'),'Entrega: '+[ciudadV(),deptoV(),paisV()].filter(Boolean).join(', '));
     if(val('c-obs'))l.push('Observaciones: '+val('c-obs'));if(files.length)l.push('','(Tengo planos para enviar por este medio)');return l.join('\n');}
   function fin(){$('folio').textContent=FOLIO;$('done').className='done on';$('send').hidden=true;$('done').scrollIntoView({behavior:'smooth',block:'center'});}
   $('send-wa').addEventListener('click',function(){if(!checkClient())return;window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(texto()),'_blank','noopener');fin();});
