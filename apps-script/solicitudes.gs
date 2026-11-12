@@ -1,6 +1,6 @@
 // ==== Grupo Duralco — Cotizadores por división (www.grupoduralco.com/corebolt, etc.) ====
 // Una sola hoja "Solicitudes Grupo Duralco": una pestaña por división (resumen) y otra con el detalle de productos.
-const CORREOS = 'gerente.operaciones@grupoduralco.com, ventas@grupoduralco.com, Ever.duron@grupoduralco.com';
+const CORREOS = 'ventas@grupoduralco.com, Ever.duron@grupoduralco.com';
 const CARPETA = 'Solicitudes Grupo Duralco';          // carpeta en Google Drive para planos
 const ESTADOS = ['Nuevo', 'Contactado', 'Cotizado', 'Ganado', 'Perdido'];
 const COLORES = {'Nuevo':'#FFF2CC','Contactado':'#CFE2F3','Cotizado':'#FCE5CD','Ganado':'#D9EAD3','Perdido':'#EFEFEF'};
