@@ -214,7 +214,7 @@ a:hover{color:inherit;opacity:.8}
                   <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#D3DAE0;margin-bottom:18px"><span style="width:10px;height:10px;background:{{ d.accent }}"></span>{{ d.cat }}</div>
                   <h3 style="margin:0;font-family:Manrope,sans-serif;font-weight:700;font-size:clamp(36px,3.8vw,60px);letter-spacing:-.035em;line-height:1">{{ d.name }}</h3>
                   <p style="margin:20px 0 0;max-width:460px;font-size:17px;line-height:1.55;color:#D3DAE0;text-wrap:pretty">{{ d.desc }}</p>
-                  <a href="#cotizar" onClick="{{ d.quote }}" style="pointer-events:auto;margin-top:28px;height:52px;padding:0 24px;display:inline-flex;align-items:center;gap:12px;white-space:nowrap;background:#C99A2E;color:#071626;font-family:Manrope,sans-serif;font-weight:700;font-size:14px"><span>Cotizar con {{ d.short }}</span><span>→</span></a>
+                  <a href="{{ d.qhref }}" onClick="{{ d.quote }}" style="pointer-events:auto;margin-top:28px;height:52px;padding:0 24px;display:inline-flex;align-items:center;gap:12px;white-space:nowrap;background:#C99A2E;color:#071626;font-family:Manrope,sans-serif;font-weight:700;font-size:14px"><span>Cotizar con {{ d.short }}</span><span>→</span></a>
             <a href="{{ d.fb }}" target="_blank" rel="noopener" style="pointer-events:auto;margin-top:16px;width:fit-content;display:flex;text-shadow:0 1px 6px rgba(0,0,0,.7);filter:drop-shadow(0 1px 4px rgba(0,0,0,.5));color:#D3DAE0;font-family:Manrope,sans-serif;font-weight:700;font-size:13px;text-decoration:underline;text-underline-offset:4px;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex:none"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg><span>Síguenos en Facebook</span><span>↗</span></a>
                 </div>
                 <sc-if value="{{ d.showFocus }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-direction:column;border-top:1px solid rgba(245,247,248,.25)">
@@ -251,7 +251,7 @@ a:hover{color:inherit;opacity:.8}
                     <span style="padding:8px 12px;border:1px solid #26323C;font-size:13px;color:#D3DAE0">{{ f }}</span>
                   </sc-for>
                 </div>
-                <a href="#cotizar" onClick="{{ d.quote }}" style="height:52px;display:flex;align-items:center;justify-content:center;background:#C99A2E;color:#071626;font-family:Manrope,sans-serif;font-weight:700;font-size:15px;white-space:nowrap;gap:10px"><span>Cotizar con {{ d.short }}</span><span>→</span></a>
+                <a href="{{ d.qhref }}" onClick="{{ d.quote }}" style="height:52px;display:flex;align-items:center;justify-content:center;background:#C99A2E;color:#071626;font-family:Manrope,sans-serif;font-weight:700;font-size:15px;white-space:nowrap;gap:10px"><span>Cotizar con {{ d.short }}</span><span>→</span></a>
                 <a href="{{ d.fb }}" target="_blank" rel="noopener" style="display:flex;justify-content:center;color:#D3DAE0;font-family:Manrope,sans-serif;font-weight:700;font-size:13px;text-decoration:underline;text-underline-offset:4px;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex:none"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg><span>Síguenos en Facebook</span><span>↗</span></a>
               </div>
             </sc-if>
@@ -786,6 +786,7 @@ class Component extends DCLogic {
         selectAndClose: () => this.setState({ active: i, menu: false }),
         toggle: () => this.setState({ active: isActive ? -1 : i }),
         quote: () => this.setState({ formDiv: d.key, submitted: false }),
+        qhref: d.key === 'cb' ? '/corebolt' : '#cotizar',
       };
       byKey[d.key] = o;
       return o;
